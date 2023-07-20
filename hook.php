@@ -11,8 +11,5 @@ function list_menu() {
 function list_menu_2(){
     include_once 'view/setting.php';
 }
-
-// ADD MENU
-add_action('admin_menu','ListMenu');
 ?>
 
