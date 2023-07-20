@@ -11,6 +11,19 @@ function list_menu() {
 function list_menu_2(){
     include('view/setting.php');
 }
+function add_bootstrap_css() {
+   
+    wp_enqueue_style('bootstrap', get_template_directory_uri() . 'vendor/bootstrap/css/bootstrap.min.css');
+}
+function add_bootstrap_js() {
+  
+    wp_enqueue_style('bootstrap', get_template_directory_uri() . 'vendor/bootstrap/js/bootstrap.min.js');
+}
+
+add_action('wp_enqueue_scripts', 'add_bootstrap_js');
+add_action('wp_enqueue_scripts', 'add_bootstrap_css');
+
+
 // ADD MENU
 add_action('admin_menu','ListMenu');
 ?>
