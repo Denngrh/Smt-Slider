@@ -10,13 +10,8 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-//Prevent unauthorized access
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
-}
-
 // Include file hook
-require_once plugin_dir_path( __FILE__ ) . 'hook.php';
+include('hook.php');
 
 // Insert table slider
 function smt_slider_table() {
