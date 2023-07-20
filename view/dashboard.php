@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <?php wp_head(); ?>
+
+<!-- Panggil file CSS Bootstrap -->
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>../assets/css/bootstrap.min.css">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
@@ -13,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 pt-5">
-                    <h3> Welcome To SMT Banner</h3>
+                    <h3 style="color:#F87474;"> Welcome To SMT Banner</h3>
                 </div>
                 <div class="card col-md-11 ms-2 mt-3">
                    <h4> Description : </h4>
@@ -62,21 +65,22 @@
 </html>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+body{
+background-color:#F9F2ED;    
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
 .search{
 position: relative;
 box-shadow: 0 0 40px rgba(51, 51, 51, .1);
-  
 }
 
 .search input{
-
  height: 40px;
  border: 2px solid #d6d4d4;
 }
 
 .search input:focus{
-
  box-shadow: none;
  border: 2px solid blue;
 
@@ -88,7 +92,6 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
 }
 
 .search button{
-
  position: absolute;
  top: 5px;
  right: 5px;
@@ -96,14 +99,13 @@ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
  width: 30px;
  background: white;
  border:none;
-
 }
 
 /* CSS */
 .button-32 {
-  background-color: #fff000;
+  background-color: #F87474;
   border-radius: 12px;
-  color: #000;
+  color: #ffffff;
   cursor: pointer;
   font-weight: bold;
   padding: 10px 15px;

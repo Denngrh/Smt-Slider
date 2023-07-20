@@ -9,8 +9,9 @@ function list_menu() {
     include('view/dashboard.php');
 }
 function list_menu_2(){
-    include('view/setting.php');
+    include_once 'view/setting.php';
 }
+
 // ADD MENU
 add_action('admin_menu','ListMenu');
 ?>
