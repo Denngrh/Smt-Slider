@@ -81,6 +81,38 @@ function smt_style_table() {
     }
 }
 
+// Insert table type slider
+function smt_type_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'smt_type';
+    // check if the table already exists
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") !== $table_name) {
+        $charset_collate = $wpdb->get_charset_collate();
+        // Skema tabel
+        $sql = "CREATE TABLE $table_name (
+            id_type INT(11) NOT NULL AUTO_INCREMENT,
+            type VARCHAR(100) NOT NULL,
+            PRIMARY KEY (id_type)
+        ) $charset_collate;";
+        //Proses crete table
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+        // Fill in the fields in the table
+        $type = array(
+            array('type' => 'Paralax'),
+            array('type' => 'Square'),
+        );
+        //Prosess insert
+        foreach ($type as $icon) {
+            $wpdb->insert(
+                $table_name,
+                $icon,
+                array('%s', '%s')
+            );
+        }
+    }
+}
+
 
 //delete table when uninstalled
 function delete_smt_slider() {
@@ -88,6 +120,7 @@ function delete_smt_slider() {
     $smt_slider = $wpdb->prefix . 'smt_slider'; //table smt_slider
     $smt_img = $wpdb->prefix . 'smt_img'; //table smt_img
     $smt_style = $wpdb->prefix . 'smt_style'; //table smt_style
+    $smt_type = $wpdb->prefix . 'smt_type'; //table smt_style
 
     // delete table smt slider
     $wpdb->query("DROP TABLE IF EXISTS $smt_slider");
@@ -95,7 +128,12 @@ function delete_smt_slider() {
     $wpdb->query("DROP TABLE IF EXISTS $smt_img");
      // delete table smt style
      $wpdb->query("DROP TABLE IF EXISTS $smt_style");
+      // delete table smt type
+     $wpdb->query("DROP TABLE IF EXISTS $smt_type");
 }
+
+//crete table smt type
+register_activation_hook(__FILE__, "smt_type_table");
 
 //crete table smt slider
 register_activation_hook(__FILE__, "smt_slider_table");

@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 mt-3 offset-md-6">
-                <button class="button-32" role="button">Add New</button>
+                <button class="button-32" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add New</button>
                 </div>
                 <div class="col-md-11 pt-4">
                     <table class="table table-bordered table-hover">
@@ -58,6 +58,58 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Banner</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     <form action="" method="post">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Title:&nbsp;</label>
+                    <input type="text" class="form-control" id="recipient-name" name="title" required placeholder="Title Slider"  autocomplete="off">
+                  </div>
+                 <div class="select d-flex">
+                 <label for="recipient-name" class="col-form-label">Title:&nbsp;</label>
+                    <select name="class" >
+                        <option value="">Choose Type</option>
+                        <?php
+                        global $wpdb;
+                        $table_name = $wpdb->prefix . 'smt_type'; 
+                        $query = "SELECT * FROM $table_name";
+                        $results = $wpdb->get_results($query);
+                        if ($results) {
+                        ob_start();  
+                        ?>
+                         <?php foreach ($results as $result) { ?>
+                        <option value="<?php echo $result->type; ?>">-- <?php echo $result->type; ?> -- </option> 
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    </div>
+                    <?php
+                                    $output = ob_get_clean();
+                                    echo $output;
+                                    } else {
+                                    echo 'Tidak ada data,Coba mulailah untuk menambahkan!!';
+                                    }
+                                    ?>
+                                    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+        <button type="submit" class="btn btn-primary" id="simpan" name="simpan">Tambah</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
