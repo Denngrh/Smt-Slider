@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 <body>
     <div class="container-fluid">
@@ -45,9 +46,9 @@
                                 <td> 1 </td>
                                 <td> Projek 1 </td>
                                 <td> Parallax </td>
-                                <td> Parallax "1"</td>
+                                <td class="shortcode"> Parallax "2"</td>
                                 <td class="text-center"> 
-                                    <box-icon type='solid' name='copy' color="#3AB0FF"></box-icon> 
+                                    <button class="copy-button" style="border: none; background: transparent;"><box-icon type='solid' name='copy' color="#3AB0FF"></box-icon></button>
                                     <box-icon type='solid' name='message-square-edit' color="#FFB562"></box-icon>
                                     <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon>
                                 </td>
@@ -110,6 +111,45 @@
   </div>
 </div>
 </body>
+<script>
+jQuery(document).ready(function($) {
+    $('.copy-button').click(function() {
+        var shortcodeText = $(this).closest('tr').find('.shortcode').text();
+        copyToClipboard(shortcodeText);
+        // Show colored toast SweetAlert2
+        showColoredToast('success', 'Text successfully copied:' + shortcodeText);
+    });
+    // funcition copy to clipbord
+    function copyToClipboard(text) {
+        var tempInput = $('<input>');
+           $('body').append(tempInput);
+        tempInput.val(text).select();
+        document.execCommand('copy');
+        tempInput.remove();
+    }
+
+    // Fungsi untuk menampilkan colored toast dengan SweetAlert2
+    function showColoredToast(type, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+            width: 400,
+            customClass: {
+                popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+        });
+
+        Toast.fire({
+            icon: type,
+            title: message
+        });
+    }
+});
+</script>
 </html>
 
 <style>
@@ -123,6 +163,13 @@ font-family:FUTURA MD BT;
 position: relative;
 box-shadow: 0 0 40px rgba(51, 51, 51, .1);
 
+}
+
+.colored-toast.swal2-icon-success {
+  background-color: #FFB562 !important;
+}
+.colored-toast {
+    margin-top: 35px;
 }
 
 .search input{
