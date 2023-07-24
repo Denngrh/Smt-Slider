@@ -24,10 +24,9 @@ function smt_slider_table() {
         $sql = "CREATE TABLE $table_name (
             id INT(11) NOT NULL AUTO_INCREMENT,
             name VARCHAR(255) NOT NULL,
-            icon_name VARCHAR(30) NOT NULL,
             type VARCHAR(30) NOT NULL,   
             short_code VARCHAR(30) NOT NULL,
-            created_add datetime NOT NULL,
+            created_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             created_modified datetime NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";

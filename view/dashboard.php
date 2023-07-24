@@ -38,23 +38,42 @@
                                 <th scope="col"> Title </th>
                                 <th scope="col"> Type </th>
                                 <th scope="col"> Shortcode</th>
-                                <th scope="col"> Action</th>
+                                <th scope="col" class="text-center"> Action</th>
                             </tr>
                         </thead>
+                         <?php
+                      global $wpdb;
+                      $table_name = $wpdb->prefix . 'smt_slider'; 
+                      $query = "SELECT * FROM $table_name";
+                      $results = $wpdb->get_results($query);
+                      if ($results) {
+                      $no = 1 ;
+                      ob_start();  
+                      ?>
                         <tbody>
+                        <?php foreach ($results as $result) { ?>
                             <tr scope="row">
-                                <td> 1 </td>
-                                <td> Projek 1 </td>
-                                <td> Parallax </td>
-                                <td class="shortcode"> Parallax "2"</td>
+                            <?php $id = $result->id;?>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $result->name; ?></td>
+                                <td><?php echo $result->type; ?></td>
+                                <td class="shortcode"><?php echo $result->short_code; ?></td>
                                 <td class="text-center"> 
                                     <button class="copy-button" style="border: none; background: transparent;"><box-icon type='solid' name='copy' color="#3AB0FF"></box-icon></button>
                                     <box-icon type='solid' name='message-square-edit' color="#FFB562"></box-icon>
-                                    <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon>
+                                   <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"> <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon></a>
                                 </td>
                             </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
+                      <?php
+                        $output = ob_get_clean();
+                        echo $output;
+                        } else {
+                        echo 'Tidak ada data,Coba mulailah untuk menambahkan!!';
+                        }
+                        ?>
                 </div>
             </div>
         </div>
@@ -111,6 +130,41 @@
   </div>
 </div>
 </body>
+<!-- sweet alert delete comfirm -->
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+  const deleteLinks = document.querySelectorAll(".delete-link");
+  deleteLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const url = this.getAttribute("href");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setTimeout(function () {
+            window.location.href = url;
+          }, 1000);
+          // Show success alert immediately
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
+        }
+      });
+    });
+  });
+});
+</script>
+
+<!-- toasts copy to clipboard -->
 <script>
 jQuery(document).ready(function($) {
     $('.copy-button').click(function() {

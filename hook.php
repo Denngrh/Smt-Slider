@@ -12,6 +12,23 @@ function list_menu_2(){
     include_once 'view/setting.php';
 }
 
+// Delete data
+function delete_data_callback() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'smt_slider';
+    $id = $_GET['id'];
+    // Delete by id
+    $result = $wpdb->delete($table_name, array('id' => $id));
+    if ($result) {
+        wp_redirect(admin_url('admin.php?page=dashboard'));
+        exit;
+    } else {
+        echo 'Terjadi kesalahan saat menghapus data.';
+    }
+}
+
+// action delete
+add_action('admin_post_delete_data', 'delete_data_callback');
 // ADD MENU
 add_action('admin_menu','ListMenu');
 ?>
