@@ -204,8 +204,13 @@ jQuery(document).ready(function($) {
   new DataTable('#example');
 </script>
 </html>
-
 <style>
+    .colored-toast.swal2-icon-success {
+  background-color: #FFB562 !important;
+}
+.colored-toast {
+    margin-top: 35px;
+}
 body{
 background-color:#F9F2ED;    
 font-family:FUTURA MD BT;
@@ -242,51 +247,51 @@ font-family:FUTURA MD BT;
   cursor: not-allowed;
 }
 
-select {
-   -webkit-appearance:none;
-   -moz-appearance:none;
-   -ms-appearance:none;
-   appearance:none;
-   outline:0;
-   box-shadow:none;
-   border:0!important;
-   background-image: none;
-   padding-left: 10px;
-   margin-top: -3px;
-   flex: 1;
-   color:#F87474;
-   cursor:pointer;
-   font-size: 1em;
-   font-family: Futura MD BT;
-   font-weight: 500;
-}
-select::-ms-expand {
-   display: none;
-}
-.select {
-   position: relative;
-   display: flex;
-   width: 15em;
-   height: 40px;
-   line-height: 3;
-   background-color: black;
-   overflow: hidden;
-   border-radius: .25em;
-}
-.select::after {
-   content: '\25BC';
-   position: absolute;
-   margin-top: -3px;
-   right: 0;
-   padding: 0 10px;
-   background: #F87474;
-   cursor:pointer;
-   pointer-events:none;
-   transition:.25s all ease;
-}
-.select:hover::after {
-   color: #FFB562;
-}
+  select {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+    border:0!important;
+    background-image: none;
+    padding-left: 10px;
+    margin-top: -3px;
+    flex: 1;
+    color:#F87474;
+    cursor:pointer;
+    font-size: 1em;
+    font-family: Futura MD BT;
+    font-weight: 500;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  .select {
+    position: relative;
+    display: flex;
+    width: 15em;
+    height: 40px;
+    line-height: 3;
+    background-color: black;
+    overflow: hidden;
+    border-radius: .25em;
+  }
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    margin-top: -3px;
+    right: 0;
+    padding: 0 10px;
+    background: #F87474;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+  }
+  .select:hover::after {
+    color: #FFB562;
+  }
 .form-field {
         display: block;
         width: 100%;
