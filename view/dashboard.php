@@ -62,16 +62,9 @@
                                      <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"> <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon></a>
                                 </td>
                             </tr>
-                            <?php } ?>
+                            <?php }} ?>
                         </tbody>
                     </table>
-                      <?php
-                        $output = ob_get_clean();
-                        echo $output;
-                        } else {
-                        echo 'Tidak ada data,Coba mulailah untuk menambahkan!!';
-                        }
-                        ?>
                 </div>
             </div>
         </div>
