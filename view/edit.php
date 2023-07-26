@@ -95,7 +95,10 @@
                                 // We set multiple to false so only get one image from the uploader
                                 attachment = file_frame.state().get('selection').first().toJSON();
                                 // Do something with attachment.id and/or attachment.url here
-                                $( '#image-preview' ).attr( 'src', attachment.url ).css( 'width', 'auto' );
+                                $('#image-preview').attr('src', attachment.url).css({
+                                width: '',
+                                opacity: '0.2' // Ubah nilai 0.5 sesuai dengan tingkat transparansi yang Anda inginkan (dari 0 hingga 1)
+                                });
                                 $( '#image_attachment_id' ).val( attachment.id );
                                 // Restore the main post ID
                                 wp.media.model.settings.post.id = wp_media_post_id;
@@ -138,7 +141,7 @@
         </div>
         <div class="row">
             <div class="card col-md-8 offset-md-4" style="background-color:#fafafa;">
-
+                <?php include 'parallax.php'?>
             </div>
         </div>
     </div>
