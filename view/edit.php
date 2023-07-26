@@ -20,6 +20,14 @@
             </div>
         </div>
         <div class="row">
+            <?php
+            // Ambil nilai ID dari permintaan
+            $id = $_GET['id'];
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'smt_slider';
+            $data = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $id");
+            if ($data) {
+            ?>
             <div class="card col-md-3 border-0">
                 <div class="mt-3 ms-3">
                     <h4> Settings </h4>
@@ -27,17 +35,15 @@
                 <div class="card-body">
                     <!-- Form Style -->
                     <div class="form-group">
-                        <input class="form-field" type="text" placeholder="Title">
+                        <input class="form-field" type="text" value="<?php echo $data->name; ?>" required="true">
                     </div>
-                <div class="form-group my-3">
-                    <div class="select">
-                        <select name="format" id="format">
-                           <option selected disabled>Choose Type</option>
-                           <option value="pdf">Parallax</option>
-                           <option value="txt">Square</option>
-                        </select>
-                     </div>
-                </div>
+                    <div class="form-group my-2">
+                        <input class="form-field" type="text" value="<?php echo $data->type; ?>" required="true">
+                    </div>
+               
+                <?php
+                    }
+                ?>
                 <div class="row">
                     <div class="form-group justify-content-between" style="width: 50%;">
                         <input class="form-field" type="text" placeholder="Width">
@@ -140,8 +146,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="card col-md-8 offset-md-4" style="background-color:#fafafa;">
-                <?php include 'parallax.php'?>
+            <div class="card col-md-8 ms-auto" style="margin-top:-780px; background-color:#fafafa; border:5px solid black">
+            <?php include 'slider.php'?>
             </div>
         </div>
     </div>

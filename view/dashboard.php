@@ -49,7 +49,9 @@
                       ob_start();  
                       ?>
                         <tbody>
-                        <?php foreach ($results as $result) { ?>
+                        <?php foreach ($results as $result) {
+                          $id = $result->id;
+                          $update_url = admin_url('admin.php?page=edit&id=' . $id); ?>
                             <tr scope="row">
                             <?php $id = $result->id;?>
                                 <td><?php echo $no++; ?></td>
@@ -58,7 +60,7 @@
                                 <td class="shortcode"><?php echo $result->short_code; ?></td>
                                 <td class="text-center"> 
                                     <button class="copy-button" style="border: none; background: transparent;"><box-icon type='solid' name='copy' color="#3AB0FF"></box-icon></button>
-                                    <a href="<?php echo esc_url(admin_url('admin.php?page=edit')); ?>"target="_blank"><box-icon type='solid' name='message-square-edit' color="#FFB562"></box-icon></a>
+                                    <a href="<?php echo esc_url($update_url); ?>"target="_blank"><box-icon type='solid' name='message-square-edit' color="#FFB562"></box-icon></a>
                                      <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"> <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon></a>
                                 </td>
                             </tr>
