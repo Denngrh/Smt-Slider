@@ -80,13 +80,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="" method="post">
+      <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+      <input type="hidden" name="action" value="insert_slide_callback">
      <div class="form-group " style="width: 70%;">
           <span>Title</span>
-          <input class="form-field" type="text" placeholder="Title" style="border-color:#F87474;">
+          <input class="form-field" type="text" name="title" placeholder="Title" required style="border-color:#F87474;">
       </div>
           <div class="select my-3">
-            <select name="format" id="format" style="background:#FFB562;">
+            <select id="type" name="type" style="background:#FFB562;" required>
                 <option selected disabled>Choose Type</option>
                 <?php
                 global $wpdb;
@@ -111,8 +112,8 @@
             ?>
           </div>
       <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal" style="background:#F87474;color:white;">Kembali</button>
-        <button type="submit" class="btn" id="simpan" name="simpan" style="background:#FFB562;color:white;">Tambah</button>
+        <button type="button" class="btn" data-bs-dismiss="modal" style="background:#F87474;color:white;">Back</button>
+        <button type="submit" class="btn" id="submit" name="submit" style="background:#FFB562;color:white;">Create</button>
       </div>
       </form>
     </div>
