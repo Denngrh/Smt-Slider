@@ -3,6 +3,7 @@ function ListMenu(){
     add_menu_page ('Plugin Slider', 'Smt Slider','','list', 'list_menu','dashicons-slides','20');
     add_submenu_page('list','Dashboard','Dashboard','manage_options','dashboard','list_menu');
     add_submenu_page('list','List_sub_menu','Setting','manage_options','setting','list_menu_2');
+    add_submenu_page('','List_sub_menu','Edit','manage_options','edit','list_menu_3');
 }
 
 function list_menu() {
@@ -10,6 +11,9 @@ function list_menu() {
 }
 function list_menu_2(){
     include_once 'view/setting.php';
+}
+function list_menu_3(){
+    include_once 'view/edit.php';
 }
 // Insert Data
 function insert_slide_callback() {
