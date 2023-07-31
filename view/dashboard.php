@@ -13,13 +13,14 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
 <body>
     <div class="container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 pt-5">
-                    <h3 style="color:#F87474"> Welcome To SMT Banner</h3>
+                    <h3 style="color:#4fb359"> Welcome To SMT Banner</h3>
                 </div>
                 <div class="card col-md-11 ms-2 mt-3">
                    <h4> Description : </h4>
@@ -32,7 +33,7 @@
                     <table class="table table-bordered table-hover" id="example">
                     <thead class="table-light">
                             <tr>
-                                <th scope="col"> No </th>
+                                <th scope="col" style="padding:3px;" class="text-center"> No </th>
                                 <th scope="col"> Title </th>
                                 <th scope="col"> Type </th>
                                 <th scope="col"> Shortcode</th>
@@ -54,14 +55,14 @@
                           $update_url = admin_url('admin.php?page=edit&id=' . $id); ?>
                             <tr scope="row">
                             <?php $id = $result->id;?>
-                                <td><?php echo $no++; ?></td>
+                                <td class="text-center"><?php echo $no++; ?></td>
                                 <td><?php echo $result->name; ?></td>
                                 <td><?php echo $result->type; ?></td>
                                 <td class="shortcode"><?php echo $result->short_code; ?></td>
                                 <td class="text-center"> 
-                                    <button class="copy-button" style="border: none; background: transparent;"><box-icon type='solid' name='copy' color="#3AB0FF"></box-icon></button>
-                                    <a href="<?php echo esc_url($update_url); ?>"target="_blank"><box-icon type='solid' name='message-square-edit' color="#FFB562"></box-icon></a>
-                                     <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"> <box-icon type='solid' name='message-square-minus' color="#F87474"></box-icon></a>
+                                    <button class="copy-button" style="border: none; background: transparent;"><i class="fa-solid fa-copy" style="color: white;background-color:blue; padding:5px;border-radius:5px;"></i></button>
+                                    <a href="<?php echo esc_url($update_url); ?>"target="_blank"><i class="fa-solid fa-pen-to-square" style="color: white;background-color:#c9dd00; padding:5px;border-radius:5px;"></i></a>
+                                     <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"><i class="fa-solid fa-trash-can" style="color: white;background-color:red; padding:5px;border-radius:5px;"></i></a>
                                 </td>
                             </tr>
                             <?php }} ?>
@@ -76,7 +77,7 @@
     <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered  role="document">
-    <div class="modal-content" style="background:#F9F2ED;">
+    <div class="modal-content" style="background:#ffffff;">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Banner</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -86,10 +87,10 @@
       <input type="hidden" name="action" value="insert_slide_callback">
      <div class="form-group " style="width: 70%;">
           <span>Title</span>
-          <input class="form-field" type="text" name="title" placeholder="Title" required style="border-color:#F87474;">
+          <input class="form-field" type="text" name="title" placeholder="..." required style="border:1px solid #c9dd00;background-color:#F5F5F5;">
       </div>
           <div class="select my-3">
-            <select id="type" name="type" style="background:#FFB562;" required>
+            <select id="type" name="type" style="background:#F5F5F5;" required>
                 <option selected disabled>Choose Type</option>
                 <?php
                 global $wpdb;
@@ -114,8 +115,8 @@
             ?>
           </div>
       <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal" style="background:#F87474;color:white;">Back</button>
-        <button type="submit" class="btn" id="submit" name="submit" style="background:#FFB562;color:white;">Create</button>
+        <button type="button" class="btn" data-bs-dismiss="modal" style="background:white;border:2px solid #4fb359;color:#4fb359;">Back</button>
+        <button type="submit" class="btn" id="submit" name="submit" style="background:#4fb359;color:white;">Create</button>
       </div>
       </form>
     </div>
@@ -202,18 +203,18 @@ jQuery(document).ready(function($) {
 </html>
 <style>
     .colored-toast.swal2-icon-success {
-  background-color: #FFB562 !important;
+  background-color: #c9dd00 !important;
 }
 .colored-toast {
     margin-top: 35px;
 }
 body{
-background-color:#F9F2ED;    
+background-color:#ffffff;    
 font-family:FUTURA MD BT;
 }
 /* CSS */
 .button-32 {
-  background-color: #F87474;
+  background-color:#c9dd00;
   border-radius: 12px;
   color: #ffffff;
   cursor: pointer;
@@ -233,7 +234,7 @@ font-family:FUTURA MD BT;
 .button-32:not(:disabled):hover,
 .button-32:not(:disabled):focus {
   outline: 0;
-  background: #FFB562;
+  background: #4fb359;
   box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
 
@@ -255,7 +256,7 @@ font-family:FUTURA MD BT;
     padding-left: 10px;
     margin-top: -3px;
     flex: 1;
-    color:#F87474;
+    color:#ffffff;
     cursor:pointer;
     font-size: 1em;
     font-family: Futura MD BT;
@@ -270,9 +271,10 @@ font-family:FUTURA MD BT;
     width: 15em;
     height: 40px;
     line-height: 3;
-    background-color: black;
+    background-color: #4fb359;
     overflow: hidden;
     border-radius: .25em;
+    border : 1px solid #c9dd00;
   }
   .select::after {
     content: '\25BC';
@@ -280,13 +282,14 @@ font-family:FUTURA MD BT;
     margin-top: -3px;
     right: 0;
     padding: 0 10px;
-    background: #F87474;
+    background:#4fb359;
+    color:#c9dd00;
     cursor:pointer;
     pointer-events:none;
     transition:.25s all ease;
   }
   .select:hover::after {
-    color: #FFB562;
+    color: #F5F5F5;
   }
 .form-field {
         display: block;
@@ -360,19 +363,19 @@ font-family:FUTURA MD BT;
         }
     }
     :root {
-        --input-color: #F87474;
-        --input-border: #F87474 ;
-        --input-placeholder: #F87474;
+        --input-color: #c9dd00;
+        --input-border: #c9dd00 ;
+        --input-placeholder: #c9dd00;
 
-        --input-border-focus: #F87474;
+        --input-border-focus: #c9dd00;
 
         --group-color: var(--input-color);
         --group-border: var(--input-border);
-        --group-background: #FFB562;
+        --group-background: #4fb359;
 
-        --group-color-focus: #FFB562;
+        --group-color-focus: #4fb359;
         --group-border-focus: var(--input-border-focus);
-        --group-background-focus: #F87474;
+        --group-background-focus: #c9dd00;
     }
     table.dataTable thead th {
       background-color: #f2f2f2;
@@ -401,7 +404,7 @@ font-family:FUTURA MD BT;
     div.dataTables_length select {
       font-size: 14px;
       border-radius: 5px;
-      border :2px solid #3AB0FF !important;
+      border :2px solid #4fb359 !important;
       background-color:transparent;
     }
     div.dataTables_length select:hover {
@@ -432,7 +435,7 @@ font-family:FUTURA MD BT;
       .dataTables_paginate .paginate_button {
         padding: 6px 12px;
         margin: 2px;
-        background-color: #007bff;
+        background-color: #4fb359;
         color: #fff;
         border-radius: 5px;
         text-decoration: none;
@@ -443,12 +446,12 @@ font-family:FUTURA MD BT;
 
       /* Gaya untuk tombol "Prev" dan "Next" ketika dihover */
       .dataTables_paginate .paginate_button:hover {
-        background-color: #0056b3;
+        background-color: #c9dd00;
       }
 
       /* Gaya untuk tombol "Prev" dan "Next" ketika sedang aktif (current) */
       .dataTables_paginate .paginate_button.current {
-        background-color: #0056b3;
+        background-color: #c9dd00;
       }
 
 
