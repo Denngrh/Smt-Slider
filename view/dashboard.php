@@ -23,8 +23,8 @@
                     <h3 style="color:#4fb359"> Welcome To SMT Banner</h3>
                 </div>
                 <div class="card col-md-11 ms-2 mt-3">
-                   <h4> Description : </h4>
-                   <p> Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                   <h4> Guide: </h4>
+                   <p style="font-size: 17px;"> In this guide, we will exemplify the use of shortcodes in blog posts. First, click <b> Posts > Add New</b> on the WordPress Dashboard. Then click the + icon to add a new block. Select the <b> Shortcode </b> block. then copy the  Shortcode in the table and paste it in the block.</p>
                 </div>
                 <div class="col-md-2 mt-3 ">
                   <button class="button-32" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add New</button>
@@ -139,6 +139,8 @@
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        iconHtml: '<i class="fa fa-trash"></i>', 
       }).then((result) => {
         if (result.isConfirmed) {
           setTimeout(function () {
