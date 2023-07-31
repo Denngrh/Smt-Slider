@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Slider Smooets
- * Plugin URI: By Tim
- * Description: kiwwww
+ * Plugin URI: https://www.smooets.com/
+ * Description: Smooets Slider is an easy-to-use slider plugin for WordPress, allowing you to create stunning image sliders that grab the attention of your website visitors. With this Smooth Slider, you can easily display images and other content in a responsive and customizable slider.
  * Version: 1.0.0
- * Author: Smkn 1 Katapang
- * Author URI:
+ * Author: Baden And Dafa
+ * Author URI: https://github.com/Denngrh/smt-slider
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
