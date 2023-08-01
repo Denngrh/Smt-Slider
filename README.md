@@ -9,5 +9,9 @@
     </table>
    </div>
    
-## 	:crossed_swords: About
+##  About
 Smooets Slider is an easy-to-use slider plugin for WordPress, allowing you to create stunning image sliders that grab the attention of your website visitors. With this Smooth Slider, you can easily display images and other content in a responsive and customizable slider.
+## Instalasi
+
+## License
+[MIT license](https://opensource.org/licenses/MIT)
