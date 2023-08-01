@@ -48,7 +48,7 @@ function smt_img_table() {
             id_img INT(11) NOT NULL AUTO_INCREMENT,
             img INT(11) NOT NULL,
             title VARCHAR(100) NOT NULL,
-            desc LONGTEXT NOT NULL,
+            `desc` LONGTEXT NOT NULL,
             link VARCHAR(100) NOT NULL,
             PRIMARY KEY (id_img)
         ) $charset_collate;";
