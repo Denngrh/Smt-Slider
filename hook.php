@@ -40,7 +40,6 @@ function insert_slide_callback() {
                 });
             </script>";
             exit;
-          exit;
         }
           // Select id where tabel smt_slider
         $id = $wpdb->get_var("SELECT id FROM $table_slider ORDER BY id DESC LIMIT 1");
@@ -57,8 +56,11 @@ function insert_slide_callback() {
           )
         );
             if ($result) {
-                wp_redirect(admin_url('admin.php?page=dashboard'));
-                exit;
+            // Gets the ID of the row that was just inserted
+            $inserted_id = $wpdb->insert_id;
+            $edit_url = admin_url("admin.php?page=edit&id=$inserted_id");
+            wp_redirect($edit_url);
+            exit;
             } else {
                 echo 'Terjadi kesalahan saat insert data.';
             }
