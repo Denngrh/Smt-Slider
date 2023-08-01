@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Square</title>
-    <style>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+<style>
      .carousel-indicators [data-bs-target] {
     width: 7px;
     height: 7px;
@@ -62,8 +62,9 @@
   }
 }
     </style>
-</head>
 <body>
+<form method='post'>
+         <div class="card col-md-5 mx-auto">
         <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"  aria-current="true" aria-label="Slide 1"></button>
@@ -73,14 +74,14 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="1000">
-                <img src="<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>" class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                <img  id='image-preview' src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                 <div class="d-md-block text-center mb-5 mt-4">
                 <h3>Buka fitur meet premium</h3>
                   <p>Nikmati panggilan video grup yang lebih lama, peredam bising<span id="dots">...</span><span id="readMore"> Read More »</span><span id="moreText">  dan fitur menarik lainnya dengan paket Google One Premium. </span><span id="readLess"> « Read Less</span></p>
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <img src="https://www.gstatic.com/meet/user_edu_get_a_link_light_90698cd7b4ca04d3005c962a3756c42d.svg"  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                <img  id='image-preview' src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                 <div class="d-md-block text-center mb-5 mt-4">
                   <h3>Dapatkan link yang bisa anda bagikan</h3>
                 <p>Klik <strong>Rapat Baru</strong> untuk dapatkan link yang bisa dikirim kepada orang yang ingin diajak rapat</p>
@@ -110,19 +111,7 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+    </div>
+    </form>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-<script>
-  $(document).ready(function(){
-     $('#readMore').click(function(){
-       $("#dots,#readMore").css("display","none");
-       $("#moreText,#readLess").css("display","inline");
-     });
-     $('#readLess').click(function(){
-       $("#dots,#readMore").css("display","inline");
-       $("#moreText,#readLess").css("display","none");
-     });
-  });
-  </script>
 </html>

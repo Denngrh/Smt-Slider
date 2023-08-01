@@ -35,11 +35,12 @@
                 <div class="card-body">
                     <!-- Form Style -->
                     <div class="form-group">
-                        <input class="form-field" type="text" value="<?php echo $data->name; ?>" readonly>
+                        <input class="form-field" type="text" value="<?php echo $data->name; ?>" required="true">
                     </div>
                     <div class="form-group my-2">
-                        <input class="form-field" type="text" value="<?php echo $data->type; ?>" readonly>
-                    </div>     
+                        <input class="form-field" type="text" value="<?php echo $data->type; ?>" required="true">
+                    </div>
+               
                 <?php
                     }
                 ?>
@@ -60,6 +61,7 @@
                     wp_enqueue_media();
                     ?><div class="mt-3 ">
                         <form method='post'>
+                        
                         <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
                         <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
                         <input type="submit" name="submit_image_selector" value="Save" class="button-primary">
@@ -116,72 +118,25 @@
                         });
                     });
             </script>
-                 <div class="container-fluid">
-        <!-- Tombol Tambah Form Image -->
-        <button class="add-image-form">Tambah Form</button>
-
-        <!-- Container untuk menampilkan form yang ditambahkan -->
-        <div id="form-container"></div>
-
-        <!-- Script jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var formIndex = 0;
-
-                // Fungsi untuk menambahkan form image baru
-                function addImageForm() {
-                    formIndex++;
-                    var formHTML = `
-                    <div class="col border my-3 form-image">
+                <!-- Form Image -->
+                <div class="col border my-3">
+                        <div class='image-preview-wrapper mt-3  offset-md-1'>
+                            <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
+                        </div>
+                        <div class="my-3 d-flex justify-content-center">
+                            <img src="images.jpeg" alt="" srcset="" width="80%">
+                        </div>
                         <div class="form-group mx-auto" style="width: 70%;">
-                            <input class="form-field" type="text" name="title_${formIndex}" placeholder="Title">
+                            <input class="form-field" type="text" placeholder="Title">
                         </div>
                         <div class="form-group justify-content-center my-2">
-                            <textarea name="desc_${formIndex}" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                            <textarea name="" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                         </div>
                         <div class="form-group mx-auto mb-3" style="width: 70%;">
                             <span>Https</span>
-                            <input class="form-field" type="text" name="link_${formIndex}" placeholder="Link">
+                            <input class="form-field" type="text" placeholder="Link">
                         </div>
-                        <!-- Input untuk mengunggah gambar -->
-                        <input type="file" name="image_${formIndex}" accept="image/*">
-                        <!-- Tempat untuk menampilkan gambar yang diunggah -->
-                        <div class="image-preview-wrapper mt-3  offset-md-1">
-                            <img id="image-preview_${formIndex}" style="border: 2px solid black;" width="200">
-                        </div>
-                        <button type="button" class="delete-image-form">Hapus Form</button>
-                    </div>
-                    `;
-                    $('#form-container').append(formHTML);
-                }
-
-                // Tambahkan form pertama secara otomatis saat halaman dimuat
-                addImageForm();
-
-                // Tambahkan form image ketika tombol "Tambah Form" diklik
-                $('.add-image-form').on('click', function () {
-                    addImageForm();
-                });
-
-                // Hapus form image ketika tombol "Hapus Form" diklik
-                $(document).on('click', '.delete-image-form', function () {
-                    $(this).closest('.form-image').remove();
-                });
-
-                // Tampilkan gambar yang diunggah di bawah form image
-                $(document).on('change', 'input[type="file"]', function (e) {
-                    var formIndex = $(this).attr('name').split('_')[1];
-                    var file = e.target.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function (event) {
-                        $('#image-preview_' + formIndex).attr('src', event.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            });
-        </script>
-    </div>
+                </div>
                 <hr class="my-4">
                 <div class="col justify-content-between d-flex">
                         <a href="" class="back">Back</a>
@@ -191,7 +146,7 @@
             </div>
         </div>
         <div class="row">
-            <div style="margin-top:-570px; width: -2000px; background-color:#fff;">
+            <div style="margin-top:-530px;">
             <?php include 'slider.php'?>
             </div>
         </div>
