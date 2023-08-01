@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="" alt="Logo-Smooets" style="width: 100px;">
+  <img src="https://github.com/Denngrh/smt-slider/assets/112230212/6cf04d3c-c81f-4fcc-9174-5222e5265cf9" alt="Logo-Smooets" style="width: 130px;">
 </p>
   <div align="center">
     <table>
