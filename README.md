@@ -18,7 +18,7 @@ There are two ways to do it:
 1. [Installing via ZIP](#installing-via-zip)
 1. [Installing via Git](#installing-via-git)
 
-### Installing via ZIP
+## Installing via ZIP
 
 1. Click the **Download ZIP** button or click the download link:
 [Link Download zip](https://github.com/Denngrh/Smt-Slider/archive/refs/heads/main.zip) <br>
@@ -36,6 +36,19 @@ There are two ways to do it:
 6. Click **Activate Plugin**:  
 ![image](https://user-images.githubusercontent.com/134745/78461730-1f0b0800-76bb-11ea-81f0-1f4f28e49df1.png)
 
+## Installing via Git
+
+1. Click the **code** dropdown and select **Clone via SSH** (or **Clone via HTTPS**):  
+![Screenshot from 2023-08-02 09-44-16](https://github.com/Denngrh/Smt-Slider/assets/112230212/fd05c16b-0cbb-4087-a421-570089911c74)
+
+2. Click the button to copy to the clipboard:  
+![Screenshot from 2023-08-02 09-46-44](https://github.com/Denngrh/Smt-Slider/assets/112230212/e713a7ba-fe9d-419b-8937-72957344f797)
+
+3. Open the `plugins` directory on the terminal command line for your WordPress install.
+
+4. Do `git clone {url} {slug}` where `{url}` is the Gist SSH URL which you copied to the clipboard and `{slug}` is the name you want to use. You can leave out `{slug}` if you want, but then the slug of the plugin will be something like `Smt-Slider` instead of `my-plugin-doing-something`.
+
+5. Then activate the plugin either via the WordPress admin or via WP-CLI (e.g. `wp plugin activate {slug}`).
 
 ## License
 [MIT license](https://opensource.org/licenses/MIT)
