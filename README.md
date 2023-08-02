@@ -12,6 +12,29 @@
 ##  About
 Smooets Slider is an easy-to-use slider plugin for WordPress, allowing you to create stunning image sliders that grab the attention of your website visitors. With this Smooth Slider, you can easily display images and other content in a responsive and customizable slider.
 ## Instalasi
+Instructions for how to install a WordPress plugin that is stored in a Gist
+
+There are two ways to do it:
+1. [Installing via ZIP](#installing-via-zip)
+1. [Installing via Git](#installing-via-git)
+
+### Installing via ZIP
+
+1. Click the **Download ZIP** button:  
+![image](ht
+
+2. In the WordPress admin, go to **Plugins > Add New**:  
+![image](https://user-images.githubusercontent.com/134745/78461681-b58af980-76ba-11ea-9708-a74b88fb8ce4.png)
+
+3. Click **Upload Plugin**:  
+![image](https://user-images.githubusercontent.com/134745/78461697-cc315080-76ba-11ea-9b1b-ea4034a31079.png)
+
+4. Choose the ZIP file you downloaded and click **Install Now**:  
+![image](https://user-images.githubusercontent.com/134745/78461718-06025700-76bb-11ea-8f6c-ed21f5b9189b.png)
+
+5. Click **Activate Plugin**:  
+![image](https://user-images.githubusercontent.com/134745/78461730-1f0b0800-76bb-11ea-81f0-1f4f28e49df1.png)
+
 
 ## License
 [MIT license](https://opensource.org/licenses/MIT)
