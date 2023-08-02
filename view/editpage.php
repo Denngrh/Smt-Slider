@@ -215,6 +215,7 @@
     body{
         background-color: white;
         overflow-x:hidden;
+        overflow-y:hidden;
        
         
     }

@@ -81,12 +81,18 @@
     }
 
     .slider-wrap {
-        display: flex;
-    }
+    display: flex;
+    overflow: hidden; /* Add overflow property to hide overflowing content */
+}
 
-    .slider-pannel {
-        display: flex;
-    }
+
+.slider-pannel {
+    display: flex;
+    transform: translateX(0); /* Initialize the position of the slider to the first slide */
+    transition: transform 0.5s ease; /* Add the transition property for smooth sliding */
+}
+
+
 
     .slide {
         position: relative;
@@ -132,7 +138,7 @@
         color: burlywood;
         font-size: 24px;
         transition: opacity 0.3s ease-in-out;
-        margin: 0 580px;
+        margin: 0 400px;
     }
 
     .carousel-control-prev:hover,
@@ -161,7 +167,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        min-height: 100vh; 
+       
         background-image: url('https://i.pinimg.com/originals/1b/29/d4/1b29d447b384f9a568a7d2fa927e5655.jpg'); /* Mengatur gambar latar belakang awal di sini */
     }
 </style>
@@ -175,26 +181,33 @@
     let isAnimating = false;
 
     function showSlide(index) {
-        if (index >= 0 && index < slides.length && !isAnimating) {
-            isAnimating = true;
-            const previousSlide = activeSlide;
-            activeSlide = index;
+    if (index >= 0 && index < slides.length && !isAnimating) {
+        isAnimating = true;
+        const previousSlide = activeSlide;
+        activeSlide = index;
 
-            slides[previousSlide].classList.add("previous");
-            slides[activeSlide].classList.add("active");
-            slideIndicators[previousSlide].classList.remove("active");
-            slideIndicators[activeSlide].classList.add("active");
+        slides[previousSlide].classList.add("previous");
+        slides[activeSlide].classList.add("active");
+        slideIndicators[previousSlide].classList.remove("active");
+        slideIndicators[activeSlide].classList.add("active");
 
-            setTimeout(() => {
-                slides[previousSlide].classList.remove("previous");
-                slides[previousSlide].classList.remove("active");
-                isAnimating = false;
-            }, 200); // Sesuaikan durasi transisi dengan kebutuhan Anda
+        const containerWidth = document.querySelector(".container").clientWidth;
+        const slideWidth = slides[activeSlide].offsetWidth;
+        const slideMargin = 20; // Adjust this value if you have custom margins for the slides
+        const translateValue = -index * (slideWidth + slideMargin);
 
-            updateSlideContent();
-            updateBackgroundImage();
-        }
+        document.querySelector(".slider-pannel").style.transform = `translateX(${translateValue}px)`;
+
+        setTimeout(() => {
+            slides[previousSlide].classList.remove("previous");
+            slides[previousSlide].classList.remove("active");
+            isAnimating = false;
+        }, 500); // Adjust the time to match the CSS transition duration (0.5s in this case)
+
+        updateSlideContent();
+        updateBackgroundImage();
     }
+}
 
     function updateSlideContent() {
         const slideTitles = ["Slider Text 1", "Slider Text 2", "Slider Text 3"];
