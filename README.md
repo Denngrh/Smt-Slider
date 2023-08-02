@@ -12,7 +12,7 @@
 ##  About
 Smooets Slider is an easy-to-use slider plugin for WordPress, allowing you to create stunning image sliders that grab the attention of your website visitors. With this Smooth Slider, you can easily display images and other content in a responsive and customizable slider.
 ## Instalasi
-Instructions for how to install a WordPress plugin that is stored in a Gist
+Instructions for how to install a WordPress plugin that is stored in a Github
 
 There are two ways to do it:
 1. [Installing via ZIP](#installing-via-zip)
@@ -30,10 +30,10 @@ There are two ways to do it:
 4. Click **Upload Plugin**:  
 ![image](https://user-images.githubusercontent.com/134745/78461697-cc315080-76ba-11ea-9b1b-ea4034a31079.png)
 
-5. Choose the ZIP file you downloaded and click **Install Now**:  
-![image](https://user-images.githubusercontent.com/134745/78461718-06025700-76bb-11ea-8f6c-ed21f5b9189b.png)
+5. Choose the ZIP file you downloaded and click **Install Now**:
+![image](https://github.com/Denngrh/Smt-Slider/assets/112230212/8f1007e3-6c09-4865-992d-22d065016b15)
 
-6. Click **Activate Plugin**:  
+7. Click **Activate Plugin**:  
 ![image](https://user-images.githubusercontent.com/134745/78461730-1f0b0800-76bb-11ea-81f0-1f4f28e49df1.png)
 
 ## Installing via Git
@@ -49,6 +49,22 @@ There are two ways to do it:
 4. Do `git clone {url} {slug}` where `{url}` is the Gist SSH URL which you copied to the clipboard and `{slug}` is the name you want to use. You can leave out `{slug}` if you want, but then the slug of the plugin will be something like `Smt-Slider` instead of `my-plugin-doing-something`.
 
 5. Then activate the plugin either via the WordPress admin or via WP-CLI (e.g. `wp plugin activate {slug}`).
+
+
+## Contributors ✨
+
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Denngrh"><img src="https://avatars.githubusercontent.com/u/112230212?v=3?s=100" width="100px;" alt="Baden Nugraha"/><br /><sub><b>Baden Nugraha</b></sub></a><br /><a href="#question-Denngrh" title="Answering Questions">💬</a> <a href="https://github.com/Denngrh/Smt-slider/commits?author=Denngrh" title="Documentation">📖</a> <a href="https://github.com/Denngrh/Smt-Slider/pulls" title="Reviewed Pull Requests">👀</a> <a href="#talk-Denngrh" title="Talks">📢</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MDafaAzharya"><img src="https://avatars.githubusercontent.com/u/125567760?v=3?s=100" width="100px;" alt="M dafa Azharya"/><br /><sub><b>M Dafa Azharya</b></sub></a><br /><a href="#question-Dafa" title="Answering Questions">💬</a> <a href="https://github.com/Denngrh/Smt-Slider/commits?author=MDafaAzharya" title="Documentation">📖</a> <a href="https://github.com/MDafaAzharya/Smt-Slider/pulls" title="Reviewed Pull Requests">👀</a> <a href="#tool-Dafa" title="Tools">🔧</a></td>
+    </tr>
+  </tbody>
+</table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 [MIT license](https://opensource.org/licenses/MIT)
