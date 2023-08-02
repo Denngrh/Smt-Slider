@@ -20,19 +20,20 @@ There are two ways to do it:
 
 ### Installing via ZIP
 
-1. Click the **Download ZIP** button:  
-![image](ht
+1. Click the **Download ZIP** button or click the download link:
+[Link Download zip](https://github.com/Denngrh/Smt-Slider/archive/refs/heads/main.zip) <br>
+![Screenshot from 2023-08-02 09-32-59](https://github.com/Denngrh/Smt-Slider/assets/112230212/c64a4477-d161-4d54-9e53-5989d6dfe4db)
 
-2. In the WordPress admin, go to **Plugins > Add New**:  
+3. In the WordPress admin, go to **Plugins > Add New**:  
 ![image](https://user-images.githubusercontent.com/134745/78461681-b58af980-76ba-11ea-9708-a74b88fb8ce4.png)
 
-3. Click **Upload Plugin**:  
+4. Click **Upload Plugin**:  
 ![image](https://user-images.githubusercontent.com/134745/78461697-cc315080-76ba-11ea-9b1b-ea4034a31079.png)
 
-4. Choose the ZIP file you downloaded and click **Install Now**:  
+5. Choose the ZIP file you downloaded and click **Install Now**:  
 ![image](https://user-images.githubusercontent.com/134745/78461718-06025700-76bb-11ea-8f6c-ed21f5b9189b.png)
 
-5. Click **Activate Plugin**:  
+6. Click **Activate Plugin**:  
 ![image](https://user-images.githubusercontent.com/134745/78461730-1f0b0800-76bb-11ea-81f0-1f4f28e49df1.png)
 
 
