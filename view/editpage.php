@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
-                    <a href="" class="back">Back</a>
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
                     <button class="button-18" role="button">Save</button>
                 </div>
                 </form>
@@ -171,7 +171,6 @@
         <div class="content card col-md-9 mt-3" style="background-color:#fafafa;">
             <?php global $wpdb;
                 $table_slider = $wpdb->prefix . 'smt_slider';
-
                 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     $id = $_GET['id'];
                     $slider_data = $wpdb->get_row("SELECT * FROM $table_slider WHERE id = $id");

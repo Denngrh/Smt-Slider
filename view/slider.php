@@ -6,6 +6,7 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -47,7 +48,7 @@
 #moreText{
    display:none;
 }
-@media (max-width: 767px) {
+@media (width: 260px) and (height: 503px) {
   .custom-carousel-button {
     position: absolute;
     top: 160px;
@@ -55,16 +56,16 @@
   }
 
   .custom-carousel-button.prev {
-    left: 20px;
+    left: 50px;
   }
   .custom-carousel-button.next {
-    right: 20px;
+    right: 50px;
   }
 }
     </style>
 <body>
 <form method='post'>
-         <div class="card col-md-5 mx-auto">
+         <div class="mx-auto">
         <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"  aria-current="true" aria-label="Slide 1"></button>
@@ -81,7 +82,7 @@
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <img  id='image-preview' src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                <img  id='image-preview' src='https://www.gstatic.com/meet/meet_google_one_carousel_promo_icon_0f14bf8fc61484b019827c071ed8111d.svg'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                 <div class="d-md-block text-center mb-5 mt-4">
                   <h3>Dapatkan link yang bisa anda bagikan</h3>
                 <p>Klik <strong>Rapat Baru</strong> untuk dapatkan link yang bisa dikirim kepada orang yang ingin diajak rapat</p>
@@ -113,5 +114,17 @@
           </div>
     </div>
     </form>
+    <script>
+  $(document).ready(function(){
+     $('#readMore').click(function(){
+       $("#dots,#readMore").css("display","none");
+       $("#moreText,#readLess").css("display","inline");
+     });
+     $('#readLess').click(function(){
+       $("#dots,#readMore").css("display","inline");
+       $("#moreText,#readLess").css("display","none");
+     });
+  });
+  </script>
 </body>
 </html>
