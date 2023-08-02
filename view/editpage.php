@@ -36,19 +36,29 @@
             </div>
             <hr style="margin-top:-5px;">
             <div class="col">
+                <?php
+                // Ambil nilai ID dari permintaan
+                $id = $_GET['id'];
+                global $wpdb;
+                $table_name = $wpdb->prefix . 'smt_slider';
+                $data = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $id");
+                if ($data) {
+                ?>
                 <div class="setting-image-form" id="settingImageForm">
                     <h6 class="ms-md-4 ms-4 mb-3"> Slider </h6>
                     <div class="form-group px-4 col-md-8">
                         <span>Title</span>
-                        <input class="form-field" type="text" placeholder="Title">
+                        <input class="form-field" type="text" value="<?php echo $data->name; ?>" readonly>
                     </div>
                     <div class="form-group px-4 col-md-8 mt-3">
                         <span>Type</span>
-                        <input class="form-field" type="text" placeholder="Type">
+                        <input class="form-field" type="text" value="<?php echo $data->type; ?>" readonly>
                     </div>
+                    <?php
+                }
+                    ?>
                     <div class="form-container">
-                        
-                        
+                    <div class="form-item">
                         <div class="col d-flex justify-content-between px-md-4 mt-4 ms-4 ms-md-0">
                             <div>
                                 <h6> Image </h6>
@@ -120,7 +130,6 @@
                                     });
                                 });
                         </script>
-                        <div class="form-item">
                         <form>
                         <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
                             <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
@@ -159,8 +168,33 @@
             </div>
         </div>
         <!-- View Slider -->
-        <div class="content card col-md-9" style="background-color:#fafafa;">
-            <!-- <?php include_once 'slider.php';?> -->
+        <div class="content card col-md-9 mt-3" style="background-color:#fafafa;">
+            <?php global $wpdb;
+                $table_slider = $wpdb->prefix . 'smt_slider';
+
+                if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $slider_data = $wpdb->get_row("SELECT * FROM $table_slider WHERE id = $id");
+                    if ($slider_data) {
+                        // Tampilkan data slider sesuai tipe yang disimpan di tabel
+                        $type = $slider_data->type;
+                        if ($type === 'Paralax') {
+                            include 'parallax.php'; // Ganti 'paralax.php' dengan nama file sesuai tipe "paralax"
+                        } elseif ($type === 'Square') {
+                            include 'slider.php'; // Ganti 'square.php' dengan nama file sesuai tipe "square"
+                        } else {
+                            // Handle jika tipe tidak dikenali atau ada kesalahan
+                            echo "Tipe tidak dikenali atau terjadi kesalahan.";
+                        }
+                    } else {
+                        // Handle jika data slider dengan id yang diberikan tidak ditemukan
+                        echo "Data slider tidak ditemukan.";
+                    }
+                } else {
+                    // Handle jika parameter id tidak ada atau tidak valid
+                    echo "Parameter id tidak valid.";
+                }
+            ?>
         </div>
     </div>
     
@@ -181,7 +215,6 @@
     body{
         background-color: white;
         overflow-x:hidden;
-        overflow-y:hidden;
        
         
     }
@@ -435,9 +468,40 @@ function toggleCustomCSSForm() {
         dekstopsize();
     });
 });
+</script>
+
+<script>
+    jQuery(document).ready(function($) {
+    // Fungsi untuk menambahkan form baru
+    function addNewForm() {
+        // Dapatkan form terakhir
+        var lastForm = $('.form-container .form-item:last');
+        // Salin form terakhir
+        var newForm = lastForm.clone();
+
+        // Hapus nilai input pada form baru (jika ada)
+        newForm.find('input').val('');
+        // Hapus nilai textarea pada form baru (jika ada)
+        newForm.find('textarea').val('');
+
+        // Ubah ID dan atribut lain pada form baru
+        var uniqueId = Date.now();
+        newForm.find('#upload_image_button').attr('id', 'upload_image_button_' + uniqueId);
+        newForm.find('#image_attachment_id').attr('id', 'image_attachment_id_' + uniqueId);
+        newForm.find('[name="image_attachment_id"]').attr('name', 'image_attachment_id_' + uniqueId);
+
+        // Tambahkan form baru setelah form terakhir
+        $('.form-container').append(newForm);
+    }
+
+    // Tindakan ketika tombol "addform" diklik
+    $('.addform').on('click', function() {
+        addNewForm();
+    });
+});
 
 </script>
- 
+
  
 
 

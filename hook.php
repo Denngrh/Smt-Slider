@@ -62,7 +62,7 @@ function insert_slide_callback() {
             if ($result) {
             // Gets the ID of the row that was just inserted
             $inserted_id = $wpdb->insert_id;
-            $edit_url = admin_url("admin.php?page=edit&id=$inserted_id");
+            $edit_url = admin_url("admin.php?page=edit2&id=$inserted_id");
             wp_redirect($edit_url);
             exit;
             } else {

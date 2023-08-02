@@ -52,7 +52,7 @@
                         <tbody>
                         <?php foreach ($results as $result) {
                           $id = $result->id;
-                          $update_url = admin_url('admin.php?page=edit&id=' . $id); ?>
+                          $update_url = admin_url('admin.php?page=edit2&id=' . $id); ?>
                             <tr scope="row">
                             <?php $id = $result->id;?>
                                 <td class="text-center"><?php echo $no++; ?></td>
