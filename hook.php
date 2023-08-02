@@ -4,6 +4,7 @@ function ListMenu(){
     add_submenu_page('list','Dashboard','Dashboard','manage_options','dashboard','list_menu');
     add_submenu_page('list','List_sub_menu','Setting','manage_options','setting','list_menu_2');
     add_submenu_page('','List_sub_menu','Edit','manage_options','edit','list_menu_3');
+    add_submenu_page('list','List_sub_menu','Edit2','manage_options','edit2','list_menu_4');
 }
 
 function list_menu() {
@@ -14,6 +15,9 @@ function list_menu_2(){
 }
 function list_menu_3(){
     include_once 'view/edit.php';
+}
+function list_menu_4(){
+    include_once 'view/editpage.php';
 }
 // Insert Data
 function insert_slide_callback() {

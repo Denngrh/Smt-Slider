@@ -1,4 +1,3 @@
-<?php /* Template Name: Halaman Plugin Khusus */ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
