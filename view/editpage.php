@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <!-- Navbar  -->
@@ -63,9 +64,28 @@
                             <div>
                                 <h6> Image </h6>
                             </div>
-                            <div>
-                                <button class="addform" name="add" style="background:transparent;border:none;"><i class="fa-solid fa-plus"></i></button>
-                            </div>
+                           <form method="post">
+                              <select name="selected_slider">
+                <?php
+                global $wpdb;
+                $table_smt_img = $wpdb->prefix . 'smt_img';
+                $id = $_GET['id'];
+                $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
+                if (!empty($data_images)) {
+                ?>
+                        <option value="">Pilih Slider</option>
+                        <?php foreach ($data_images as $image): ?>
+                            <option value="<?= $image->id_img ?>"><?= $image->title ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
+                    <button type="submit" name="delete_slider" class="delete-link" data-id="<?= $image->id_img ?>">Delete</button>
+                <?php
+                } else {
+                    echo "Tidak ada slider yang tersedia.";
+                }
+                ?>
+            </form>
                         </div> 
                         <?php
                             if ( isset( $_POST['submit_image_selector'] ) && isset( $_POST['image_attachment_id'] ) ) :
@@ -472,35 +492,37 @@ function toggleCustomCSSForm() {
     });
 });
 </script>
-
 <script>
-    jQuery(document).ready(function($) {
-    // Fungsi untuk menambahkan form baru
-    function addNewForm() {
-        // Dapatkan form terakhir
-        var lastForm = $('.form-container .form-item:last');
-        // Salin form terakhir
-        var newForm = lastForm.clone();
-
-        // Hapus nilai input pada form baru (jika ada)
-        newForm.find('input').val('');
-        // Hapus nilai textarea pada form baru (jika ada)
-        newForm.find('textarea').val('');
-
-        // Ubah ID dan atribut lain pada form baru
-        var uniqueId = Date.now();
-        newForm.find('#upload_image_button').attr('id', 'upload_image_button_' + uniqueId);
-        newForm.find('#image_attachment_id').attr('id', 'image_attachment_id_' + uniqueId);
-        newForm.find('[name="image_attachment_id"]').attr('name', 'image_attachment_id_' + uniqueId);
-
-        // Tambahkan form baru setelah form terakhir
-        $('.form-container').append(newForm);
-    }
-
-    // Tindakan ketika tombol "addform" diklik
-    $('.addform').on('click', function() {
-        addNewForm();
+document.addEventListener("DOMContentLoaded", function () {
+  const deleteLinks = document.querySelectorAll(".delete-link");
+  deleteLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const id = this.getAttribute("data-id");
+      const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
+      
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+        iconHtml: '<i class="fa fa-trash"></i>',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setTimeout(function () {
+            window.location.href = url;
+          }, 1000);
+          // Show success alert immediately
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
     });
+  });
 });
+
 
 </script>

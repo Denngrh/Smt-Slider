@@ -68,85 +68,76 @@
 <?php
 global $wpdb;
 $table_smt_img = $wpdb->prefix . 'smt_img';
-$id = 88; // Ganti dengan ID gambar yang ingin ditampilkan dari tabel smt_img
-// Ambil ID gambar dari tabel smt_img
-$data = $wpdb->get_row("SELECT * FROM $table_smt_img WHERE id_img = $id");
-if ($data) {
-    $image_id = $data->img;
-    $image_url = wp_get_attachment_url($image_id);
-
-    // Tampilkan gambar dari wp_posts
-    if ($image_url) {
-        ?>
-<div class="mx-auto">
+$id = $_GET['id'];
+$data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
+if (!empty($data_images)) {
+    ?>
+    <div class="mx-auto">
         <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"  aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <?php foreach ($data_images as $index => $data): ?>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?= $index ?>" <?= $index === 0 ? 'class="active"' : '' ?> aria-label="Slide <?= $index + 1 ?>"></button>
+                <?php endforeach; ?>
             </div>
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="1000">
-                <img  id='image-preview' src='<?= $image_url ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
-                <div class="d-md-block text-center mb-5 mt-4">
-                <h3><?= $data->title; ?></h3>
-                  <p><?= $data->desc; ?></p>
-                </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="2000">
-                <img  id='image-preview' src='https://www.gstatic.com/meet/meet_google_one_carousel_promo_icon_0f14bf8fc61484b019827c071ed8111d.svg'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
-                <div class="d-md-block text-center mb-5 mt-4">
-                  <h3>Dapatkan link yang bisa anda bagikan</h3>
-                <p>Klik <strong>Rapat Baru</strong> untuk dapatkan link yang bisa dikirim kepada orang yang ingin diajak rapat</p>
-                </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="3000">
-                <img src="https://www.gstatic.com/meet/user_edu_scheduling_light_b352efa017e4f8f1ffda43e847820322.svg"  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
-                <div class="d-md-block text-center mb-5 mt-4">
-                  <h3>Rencana ke depan</h3>
-                  <p>Klik <strong>Rapat baru</strong> untuk menjadwalkan rapat di Google Kalender dan mengirimkan undangan kepada peserta</p>
-                </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="4000">
-                <img src="https://www.gstatic.com/meet/user_edu_safety_light_e04a2bbb449524ef7e49ea36d5f25b65.svg"  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
-                <div class="d-md-block text-center mb-5 mt-4">
-                  <h3>Rapat Anda aman</h3>
-                <p>Tidak ada yang dapat bergabung ke rapat kecuali diundang atau dizinkan oleh penyelenggara</p>
-                </div>
-              </div>
+                <?php foreach ($data_images as $index => $data): ?>
+                    <div class="carousel-item<?= $index === 0 ? ' active' : '' ?>" data-bs-interval="1000">
+                        <img id='image-preview' src='<?= wp_get_attachment_url($data->img) ?>' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                        <div class="d-md-block text-center mb-5 mt-4">
+                            <h3><?= $data->title; ?></h3>
+                            <p><?= $data->desc; ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <button class="carousel-control-prev custom-carousel-button prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon " aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next custom-carousel-button next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-          </div>
+        </div>
     </div>
-    <?php
-    } else {
-        echo 'Image not found in wp_posts.';
-    }
+<?php
 } else {
-    echo 'Data not found in smt_img.';
+   //example else
+   ?>
+   <div class="mx-auto">
+       <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
+           <div class="carousel-indicators">
+               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+           </div>
+           <div class="carousel-inner">
+               <div class="carousel-item active" data-bs-interval="1000">
+                   <img id='image-preview' src='https://www.gstatic.com/meet/meet_google_one_carousel_promo_icon_0f14bf8fc61484b019827c071ed8111d.svg' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                   <div class="d-md-block text-center mb-5 mt-4">
+                       <h3>Example Title 1</h3>
+                       <p>This is an example description for slide 1.</p>
+                   </div>
+               </div>
+               <div class="carousel-item" data-bs-interval="1000">
+                   <img id='image-preview' src='path_to_example_image2.jpg' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                   <div class="d-md-block text-center mb-5 mt-4">
+                       <h3>Example Title 2</h3>
+                       <p>This is an example description for slide 2.</p>
+                   </div>
+               </div>
+           <button class="carousel-control-prev custom-carousel-button prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+           </button>
+           <button class="carousel-control-next custom-carousel-button next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+           </button>
+       </div>
+   </div>
+<?php
 }
 ?>
     </form>
-    <script>
-  $(document).ready(function(){
-     $('#readMore').click(function(){
-       $("#dots,#readMore").css("display","none");
-       $("#moreText,#readLess").css("display","inline");
-     });
-     $('#readLess').click(function(){
-       $("#dots,#readMore").css("display","inline");
-       $("#moreText,#readLess").css("display","none");
-     });
-  });
-  </script>
-
 </body>
 </html>

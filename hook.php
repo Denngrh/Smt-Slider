@@ -93,6 +93,7 @@ function insert_img_callback() {
         $link = sanitize_text_field($_POST['link']);
         $image_id = absint($_POST['image_attachment_id']);
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
+
         // Insert data to smt-img table
         $result = $wpdb->insert(
             $table_smt_img,
@@ -101,6 +102,7 @@ function insert_img_callback() {
                 'desc' => $desc,
                 'link' => $link,
                 'img' => $image_id,
+                'id_slider' => $edit_id, // Tambahkan id_slider
             )
         );
 
@@ -120,6 +122,28 @@ function insert_img_callback() {
         }
     }
 }
+
+function delete_img_callback() {
+    global $wpdb;
+    $table_img = $wpdb->prefix . 'smt_img';
+    
+    if (isset($_GET['selected_slider'])) {
+        $selected_image_id = intval($_GET['selected_slider']);
+        
+        // Delete data from smt_img table
+        $result = $wpdb->delete($table_img, array('id_img' => $selected_image_id));
+        $edit_id = isset($_GET['edit_id']) ? $_GET['edit_id'] : null;
+        
+        if ($result) {
+            wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
+            exit;
+        } else {
+            wp_die('Terjadi kesalahan saat menghapus data gambar.');
+        }
+    }
+}
+
+add_action('admin_post_delete_img', 'delete_img_callback');
 // Action Insert
 add_action('admin_post_insert_img_callback', 'insert_img_callback');
 add_action('admin_post_nopriv_insert_img_callback', 'insert_img_callback');
