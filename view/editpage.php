@@ -130,32 +130,35 @@
                                     });
                                 });
                         </script>
-                        <form>
+                        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                        <input type="hidden" name="action" value="insert_img_callback">
                         <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
                             <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
                         </div>
+                        <input type="hidden" name="image_attachment_id" value="<?php echo get_option('media_selector_attachment_id'); ?>">
                         <div class="my-3 d-flex justify-content-center">
                             <img src="images.jpeg" alt="" srcset="" width="80%">
                         </div>
                         <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
                             <label> Title </label>
-                            <input class="form-control" type="text" name ="title"placeholder="Title" style="width:50%;height:5px;">
+                            <input class="form-control" type="text" name ="title" placeholder="Title" style="width:50%;height:5px;">
                         </div>
                         <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
                             <label> Link </label>
-                            <input class="form-control" type="text" name ="link"placeholder="Https" style="width:50%;height:5px;">
+                            <input class="form-control" type="text" name ="link" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
                         </div>
                         <div class="ms-md-4 mt-3 ms-4">
                             <label class="form-label" >Description : </label>
-                            <textarea name="" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                            <textarea name="desc" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                         </div>
                         <hr class="my-3 ms-4" width="85%;">
                         
                         </div>
                     </div>
                     <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
+                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
                     <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
-                    <button class="button-18" role="button">Save</button>
+                    <button class="button-18" role="button" name="submit" >Save</button>
                 </div>
                 </form>
                 </div>
@@ -501,8 +504,3 @@ function toggleCustomCSSForm() {
 });
 
 </script>
-
- 
-
-
-

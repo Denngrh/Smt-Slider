@@ -52,6 +52,7 @@ function smt_img_table() {
             title VARCHAR(100) NOT NULL,
             `desc` LONGTEXT NOT NULL,
             link VARCHAR(100) NOT NULL,
+            id_slider INT(11) NOT NULL,
             PRIMARY KEY (id_img)
         ) $charset_collate;";
         //Proses crete table

@@ -84,6 +84,46 @@ function delete_data_callback() {
         echo 'Terjadi kesalahan saat menghapus data.';
     }
 }
+function insert_img_callback() {
+    if (isset($_POST['submit'])) {
+        global $wpdb;
+        $table_smt_img = $wpdb->prefix . 'smt_img';
+        $title = sanitize_text_field($_POST['title']);
+        $desc = sanitize_textarea_field($_POST['desc']);
+        $link = sanitize_text_field($_POST['link']);
+        $image_id = absint($_POST['image_attachment_id']);
+        $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
+        // Insert data to smt-img table
+        $result = $wpdb->insert(
+            $table_smt_img,
+            array(
+                'title' => $title,
+                'desc' => $desc,
+                'link' => $link,
+                'img' => $image_id,
+            )
+        );
+
+        if ($result) {
+            if ($edit_id) {
+                wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
+                exit;
+            } else {
+            //  if dont have id insert again
+                $inserted_id = $wpdb->insert_id;   
+                // Redirect to edit2 id new
+                wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
+                exit;
+            }
+        } else {
+            $wpdb->print_error(); 
+        }
+    }
+}
+// Action Insert
+add_action('admin_post_insert_img_callback', 'insert_img_callback');
+add_action('admin_post_nopriv_insert_img_callback', 'insert_img_callback');
+
 // Action Insert
 add_action('admin_post_insert_slide_callback', 'insert_slide_callback');
 add_action('admin_post_nopriv_insert_slide_callback', 'insert_slide_callback');

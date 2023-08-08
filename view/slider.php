@@ -65,7 +65,20 @@
     </style>
 <body>
 <form method='post'>
-         <div class="mx-auto">
+<?php
+global $wpdb;
+$table_smt_img = $wpdb->prefix . 'smt_img';
+$id = 88; // Ganti dengan ID gambar yang ingin ditampilkan dari tabel smt_img
+// Ambil ID gambar dari tabel smt_img
+$data = $wpdb->get_row("SELECT * FROM $table_smt_img WHERE id_img = $id");
+if ($data) {
+    $image_id = $data->img;
+    $image_url = wp_get_attachment_url($image_id);
+
+    // Tampilkan gambar dari wp_posts
+    if ($image_url) {
+        ?>
+<div class="mx-auto">
         <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"  aria-current="true" aria-label="Slide 1"></button>
@@ -75,10 +88,10 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="1000">
-                <img  id='image-preview' src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                <img  id='image-preview' src='<?= $image_url ?>'  class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                 <div class="d-md-block text-center mb-5 mt-4">
-                <h3>Buka fitur meet premium</h3>
-                  <p>Nikmati panggilan video grup yang lebih lama, peredam bising<span id="dots">...</span><span id="readMore"> Read More »</span><span id="moreText">  dan fitur menarik lainnya dengan paket Google One Premium. </span><span id="readLess"> « Read Less</span></p>
+                <h3><?= $data->title; ?></h3>
+                  <p><?= $data->desc; ?></p>
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
@@ -113,6 +126,14 @@
             </button>
           </div>
     </div>
+    <?php
+    } else {
+        echo 'Image not found in wp_posts.';
+    }
+} else {
+    echo 'Data not found in smt_img.';
+}
+?>
     </form>
     <script>
   $(document).ready(function(){
@@ -126,5 +147,6 @@
      });
   });
   </script>
+
 </body>
 </html>
