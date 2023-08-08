@@ -2,21 +2,13 @@
 function ListMenu(){
     add_menu_page ('Plugin Slider', 'Smt Slider','','list', 'list_menu','dashicons-slides','20');
     add_submenu_page('list','Dashboard','Dashboard','manage_options','dashboard','list_menu');
-    add_submenu_page('list','List_sub_menu','Setting','manage_options','setting','list_menu_2');
-    add_submenu_page('','List_sub_menu','Edit','manage_options','edit','list_menu_3');
-    add_submenu_page('list','Edit-Page','Edit2','manage_options','edit2','list_menu_4');
+    add_submenu_page('','Edit-Page','Edit2','manage_options','edit2','list_menu_1');
 }
 
 function list_menu() {
     include('view/dashboard.php');
 }
-function list_menu_2(){
-    include_once 'view/setting.php';
-}
-function list_menu_3(){
-    include_once 'view/edit.php';
-}
-function list_menu_4(){
+function list_menu_1(){
     include_once 'view/editpage.php';
 }
 // Insert Data
@@ -49,7 +41,7 @@ function insert_slide_callback() {
         $id = $wpdb->get_var("SELECT id FROM $table_slider ORDER BY id DESC LIMIT 1");
         $id++; // Increment id insert id New
         // Generete short code automatic
-        $generated_shortcode = "[$type'$id']";
+        $generated_shortcode = "[smt_slider slider=$id]";
         // Insert data to smt_slider
         $result = $wpdb->insert(
           $table_slider,
@@ -142,6 +134,37 @@ function delete_img_callback() {
         }
     }
 }
+//shortcode
+function shortcode_smt_slider($atts) {
+    if (isset($atts['slider'])) {
+        $project_id = $atts['slider'];
+
+        // Get project information from the database
+        global $wpdb;
+        $table_slider = $wpdb->prefix . 'smt_slider'; // Replace with your table name
+        $project_data = $wpdb->get_row("SELECT * FROM $table_slider WHERE id = $project_id");
+
+        if ($project_data) {
+            $project_type = $project_data->type;
+
+            // Include the specific project file based on the type
+            if ($project_type === 'Paralax') {
+                include_once 'view/Paralax.php';
+            }
+            else if ($project_type === 'Square') {
+                include_once 'view/Square.php';
+            }
+            else{
+                echo '<p> Slider Tidak di temukan </p>';
+            }
+
+            // Return an empty string or content from the included file
+            ob_start();
+            return ob_get_clean();
+        }
+    }
+}
+add_shortcode('smt_slider', 'shortcode_smt_slider');
 
 add_action('admin_post_delete_img', 'delete_img_callback');
 // Action Insert

@@ -85,10 +85,11 @@
       <div class="modal-body">
       <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
       <input type="hidden" name="action" value="insert_slide_callback">
-     <div class="form-group " style="width: 70%;">
-          <span>Title</span>
-          <input class="form-field" type="text" name="title" placeholder="..." required style="border:1px solid #c9dd00;background-color:#F5F5F5;">
-      </div>
+        <div class="form-group  col-md-6">
+          <label for="exampleInputEmail1">Title :</label>
+          <input type="text" class="form-control" name="title" placeholder="Enter Title"
+          style="background-color:#fafafa">
+        </div>
           <div class="select my-3">
             <select id="type" name="type" style="background:#F5F5F5;" required>
                 <option selected disabled>Choose Type</option>
@@ -216,7 +217,7 @@ font-family:FUTURA MD BT;
 }
 /* CSS */
 .button-32 {
-  background-color:#c9dd00;
+  background-color:#4fb359;
   border-radius: 12px;
   color: #ffffff;
   cursor: pointer;
@@ -236,7 +237,7 @@ font-family:FUTURA MD BT;
 .button-32:not(:disabled):hover,
 .button-32:not(:disabled):focus {
   outline: 0;
-  background: #4fb359;
+  background: #c9dd00;
   box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
 
@@ -253,7 +254,7 @@ font-family:FUTURA MD BT;
     appearance:none;
     outline:0;
     box-shadow:none;
-    border:0!important;
+    border:none!important;
     background-image: none;
     padding-left: 10px;
     margin-top: -3px;
@@ -276,7 +277,7 @@ font-family:FUTURA MD BT;
     background-color: #4fb359;
     overflow: hidden;
     border-radius: .25em;
-    border : 1px solid #c9dd00;
+    border : 0px solid #c9dd00;
   }
   .select::after {
     content: '\25BC';
@@ -293,92 +294,6 @@ font-family:FUTURA MD BT;
   .select:hover::after {
     color: #F5F5F5;
   }
-.form-field {
-        display: block;
-        width: 100%;
-        height: 35px;
-        padding: 8px 16px;
-        line-height: 35px;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 6px;
-        -webkit-appearance: none;
-        color: var(--input-color);
-        border: 1px solid var(--input-border);
-        background: var(--input-background);
-        transition: border .3s ease;
-        &::placeholder {
-            color: var(--input-placeholder);
-        }
-        &:focus {
-            outline: none;
-            border-color: var(--input-border-focus);
-        }
-    }
-
-    .form-group {
-        position: relative;
-        display: flex;
-        width: 100%;
-        & > span,
-        .form-field {
-            white-space: nowrap;
-            display: block;
-            &:not(:first-child):not(:last-child) {
-                border-radius: 0;
-            }
-            &:first-child {
-                border-radius: 6px 0 0 6px;
-            }
-            &:last-child {
-                border-radius: 0 6px 6px 0;
-            }
-            &:not(:first-child) {
-                margin-left: -1px;
-            }
-        }
-        .form-field {
-            position: relative;
-            z-index: 1;
-            flex: 1 1 auto;
-            width: 1%;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-        & > span {
-            height: 35px;
-            text-align: center;
-            padding: 3px 10px;
-            font-size: 14px;
-            line-height: 25px;
-            color: var(--group-color);
-            background: var(--group-background);
-            border: 1px solid var(--group-border);
-            transition: background .3s ease, border .3s ease, color .3s ease;
-        }
-        &:focus-within {
-            & > span {
-                color: var(--group-color-focus);
-                background: var(--group-background-focus);
-                border-color: var(--group-border-focus);
-            }
-        }
-    }
-    :root {
-        --input-color: #c9dd00;
-        --input-border: #c9dd00 ;
-        --input-placeholder: #c9dd00;
-
-        --input-border-focus: #c9dd00;
-
-        --group-color: var(--input-color);
-        --group-border: var(--input-border);
-        --group-background: #4fb359;
-
-        --group-color-focus: #4fb359;
-        --group-border-focus: var(--input-border-focus);
-        --group-background-focus: #c9dd00;
-    }
     table.dataTable thead th {
       background-color: #f2f2f2;
       border-bottom: 1px solid #ddd;

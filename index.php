@@ -12,8 +12,7 @@
 
 // Include file hook
 include('hook.php');
-// Include file hook
-include('shortcode.php');
+
 
 // Insert table slider
 function smt_slider_table() {

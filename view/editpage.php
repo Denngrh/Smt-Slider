@@ -201,9 +201,9 @@
                         // Tampilkan data slider sesuai tipe yang disimpan di tabel
                         $type = $slider_data->type;
                         if ($type === 'Paralax') {
-                            include 'parallax.php'; // Ganti 'paralax.php' dengan nama file sesuai tipe "paralax"
+                            include 'Paralax.php'; // Ganti 'paralax.php' dengan nama file sesuai tipe "paralax"
                         } elseif ($type === 'Square') {
-                            include 'slider.php'; // Ganti 'square.php' dengan nama file sesuai tipe "square"
+                            include 'Square.php'; // Ganti 'square.php' dengan nama file sesuai tipe "square"
                         } else {
                             // Handle jika tipe tidak dikenali atau ada kesalahan
                             echo "Tipe tidak dikenali atau terjadi kesalahan.";
