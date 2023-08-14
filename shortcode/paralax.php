@@ -10,9 +10,8 @@
 <body>
     <?php
     global $wpdb;
-    $id = $_GET['id'];
     $table_smt_img = $wpdb->prefix . 'smt_img';
-    $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
+    $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ");
     if (!empty($data_images)) {?>
     <div class="sec container-fluid bg-container">
         <div class="container">
@@ -76,6 +75,15 @@
                         <div class="dot-wrapper" onclick="showSlide(1)">
                             <span class="dot"><span class="dot-number">2</span></span>
                         </div>
+                        <div class="dot-wrapper" onclick="showSlide(2)">
+                            <span class="dot"><span class="dot-number">3</span></span>
+                        </div>
+                        <div class="dot-wrapper" onclick="showSlide(3)">
+                            <span class="dot"><span class="dot-number">4</span></span>
+                        </div>
+                        <div class="dot-wrapper" onclick="showSlide(4)">
+                            <span class="dot"><span class="dot-number">5</span></span>
+                        </div>
                     </div>
                     
                 </div>
@@ -89,23 +97,49 @@
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                             <!-- Slide 1 -->
-                            <div class="slide col-md-4 active" onclick="showSlide(0)">
+                            <div class="slide slide1 col-md-4 active" onclick="showSlide(0)">
                                 <img class="inner" src="https://asset.kompas.com/crops/Tg1rEfwv-5GiWpbSb5-RuaBlkjk=/0x0:1800x1200/750x500/data/photo/2022/08/07/62ef3f9c2846d.jpg">
                                 <div class="slide-text">
-                                    <h3>Example 1</h3>
-                                    <p>Deskripsi Exapmle1.</p>
+                                    <h3>Gunung Prau</h3>
+                                    <p>Deskripsi Gunung Prau.</p>
                                 </div>
                             </div>
 
                             <!-- Slide 2 -->
-                            <div class="slide col-md-4" onclick="showSlide(1)">
+                            <div class="slide slide2 col-md-4" onclick="showSlide(1)">
                                 <img class="inner" src="https://asset.kompas.com/crops/SJBld7b2CtJC5zJMlFbu1zKopZY=/1x319:1024x1001/750x500/data/photo/2022/09/04/6314d47545313.jpg">
                                 <div class="slide-text">
-                                    <h3>Example 2</h3>
-                                    <p>Deskripsi Example 2.</p>
+                                    <h3>Banda Neira</h3>
+                                    <p>Deskripsi Banda Neira.</p>
                                 </div>
                             </div>
 
+                            <!-- Slide 3 -->
+                            <div class="slide slide3 col-md-4" onclick="showSlide(2)">
+                                <img class="inner" src="https://awsimages.detik.net.id/community/media/visual/2022/12/28/sunset-di-pantai-kuta-kabupaten-badung-bali_169.jpeg?w=1200">
+                                <div class="slide-text">
+                                    <h3>Sunset Pantai</h3>
+                                    <p>Deskripsi Sunset Pantai.</p>
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div class="slide slide4 col-md-4" onclick="showSlide(3)">
+                                <img class="inner" src="https://www.nativeindonesia.com/foto/2022/06/gunung-slamet.jpg">
+                                <div class="slide-text">
+                                    <h3>Gunung Slamet</h3>
+                                    <p>Deskripsi Gunung Slamet.</p>
+                                </div>
+                            </div>
+
+                            <!-- Slide 5 -->
+                            <div class="slide slide5 col-md-4" onclick="showSlide(4)">
+                                <img class="inner" src="https://akcdn.detik.net.id/visual/2018/07/29/bc121b83-938b-4c7c-946c-1f6f22e75d6d_169.jpeg?w=650">
+                                <div class="slide-text">
+                                    <h3>Gunung Rinjani</h3>
+                                    <p>Deskripsi Gunung Rinjani.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -68,8 +68,7 @@
 <?php
 global $wpdb;
 $table_smt_img = $wpdb->prefix . 'smt_img';
-$id = $_GET['id'];
-$data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
+$data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ");
 if (!empty($data_images)) {
     ?>
     <div class="mx-auto">

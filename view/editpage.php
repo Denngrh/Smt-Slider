@@ -56,133 +56,110 @@
                         <input class="form-field" type="text" value="<?php echo $data->type; ?>" readonly>
                     </div>
                     <?php
-                }
+                    }
                     ?>
                     <div class="form-container">
-                    <div class="form-item">
-                        <div class="col d-flex justify-content-between px-md-4 mt-4 ms-4 ms-md-0">
-                            <div>
-                                <h6> Image </h6>
-                            </div>
-                           <form method="post">
-                              <select name="selected_slider">
-                <?php
-                global $wpdb;
-                $table_smt_img = $wpdb->prefix . 'smt_img';
-                $id = $_GET['id'];
-                $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
-                if (!empty($data_images)) {
-                ?>
-                        <option value="">Pilih Slider</option>
-                        <?php foreach ($data_images as $image): ?>
-                            <option value="<?= $image->id_img ?>"><?= $image->title ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
-                    <button type="submit" name="delete_slider" class="delete-link" data-id="<?= $image->id_img ?>">Delete</button>
-                <?php
-                } else {
-                    echo "Tidak ada slider yang tersedia.";
-                }
-                ?>
-            </form>
-                        </div> 
-                        <?php
-                            if ( isset( $_POST['submit_image_selector'] ) && isset( $_POST['image_attachment_id'] ) ) :
-                                    update_option( 'media_selector_attachment_id', absint( $_POST['image_attachment_id'] ) );
-                                endif;
-                                wp_enqueue_media();
-                                ?><div class="mt-3 ms-md-4 ms-4">
-                                    <form method='post'>
-                                    <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
-                                    <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
-                                    <input type="submit" name="submit_image_selector" value="Save" class="button-primary">
-                                </form>
+                        <div class="form-item">
+                            <div class="col d-flex justify-content-between px-md-4 mt-4 ms-4 ms-md-0">
+                                <div>
+                                    <h6> Image </h6>
                                 </div>
-                            <?php
-                            $my_saved_attachment_post_id = get_option( 'media_selector_attachment_id', 0 );
-                            ?><script type='text/javascript'>
-                                jQuery( document ).ready( function( $ ) {
-                                    // Uploading files
+                                <form method="post">
+                                    <select name="selected_slider">
+                                        <?php
+                                        global $wpdb;
+                                        $table_smt_img = $wpdb->prefix . 'smt_img';
+                                        $id = $_GET['id'];
+                                        $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
+                                        if (!empty($data_images)) {
+                                            ?>
+                                            <option value="">Pilih Slider</option>
+                                            <?php foreach ($data_images as $image): ?>
+                                                <option value="<?= $image->id_img ?>" data-title="<?= $image->title ?>"><?= $image->title ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
+                                        <button type="submit" name="delete_slider" class="delete-link">Delete</button>
+                                        <?php
+                                    } else {
+                                        echo "Tidak ada slider yang tersedia.";
+                                    }
+                                    ?>
+                                </form>
+                            </div> 
+                            <script type='text/javascript'>
+                                jQuery(document).ready(function($) {
                                     var file_frame;
-                                    var wp_media_post_id = wp.media.model.settings.post.id; // Store the old id
-                                    var set_to_post_id = <?php echo $my_saved_attachment_post_id; ?>; // Set this
-                                    jQuery('#upload_image_button').on('click', function( event ){
+
+                                    $('#upload_image_button').on('click', function(event) {
                                         event.preventDefault();
-                                        // If the media frame already exists, reopen it.
-                                        if ( file_frame ) {
-                                            // Set the post ID to what we want
-                                            file_frame.uploader.uploader.param( 'post_id', set_to_post_id );
-                                            // Open frame
+
+                                        if (file_frame) {
                                             file_frame.open();
                                             return;
-                                        } else {
-                                            // Set the wp.media post id so the uploader grabs the ID we want when initialised
-                                            wp.media.model.settings.post.id = set_to_post_id;
                                         }
-                                        // Create the media frame.
+
                                         file_frame = wp.media.frames.file_frame = wp.media({
-                                            title: 'Select a image to upload',
+                                            title: 'Pilih gambar',
                                             button: {
-                                                text: 'Use this image',
+                                                text: 'Gunakan gambar ini',
                                             },
-                                            multiple: false // Set to true to allow multiple files to be selected
+                                            multiple: false
                                         });
-                                        // When an image is selected, run a callback.
-                                        file_frame.on( 'select', function() {
-                                            // We set multiple to false so only get one image from the uploader
-                                            attachment = file_frame.state().get('selection').first().toJSON();
-                                            // Do something with attachment.id and/or attachment.url here
-                                            $('#image-preview').attr('src', attachment.url).css({
-                                            width: '',
-                                            opacity: '0.2' // Ubah nilai 0.5 sesuai dengan tingkat transparansi yang Anda inginkan (dari 0 hingga 1)
-                                            });
-                                            $( '#image_attachment_id' ).val( attachment.id );
-                                            // Restore the main post ID
-                                            wp.media.model.settings.post.id = wp_media_post_id;
+
+                                        file_frame.on('select', function() {
+                                            var attachment = file_frame.state().get('selection').first().toJSON();
+                                            $('#image-preview').attr('src', attachment.url);
+                                            $('#image_attachment_id').val(attachment.id); // Setel ID gambar yang dipilih
                                         });
-                                            // Finally, open the modal
-                                            file_frame.open();
-                                    });
-                                    // Restore the main ID when the add media button is pressed
-                                    jQuery( 'a.add_media' ).on( 'click', function() {
-                                        wp.media.model.settings.post.id = wp_media_post_id;
+
+                                        file_frame.open();
                                     });
                                 });
-                        </script>
-                        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                        <input type="hidden" name="action" value="insert_img_callback">
-                        <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                            <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
+                            </script>
+                            <div class="mt-3 ms-md-4 ms-4">
+                            <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                            <input type="hidden" name="action" value="insert_img_callback">
+                            <?php
+                                if (isset($_POST['image_attachment_id'])) {
+                                    update_option('media_selector_attachment_id', absint($_POST['image_attachment_id']));
+                                }
+                                wp_enqueue_media();
+                                $my_saved_attachment_post_id = get_option('media_selector_attachment_id');
+                              
+                            ?>
+                                <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
+                                <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
+                            </div>
+                            <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
+                            </div>
+                            <div class="my-3 d-flex justify-content-center">
+                                <img src="images.jpeg" alt="" srcset="" width="80%">
+                            </div>
+                            <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
+                                <label> Title </label>
+                                <input class="form-control" type="text" name ="title" placeholder="Title" style="width:50%;height:5px;">
+                            </div>
+                            <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
+                                <label> Link </label>
+                                <input class="form-control" type="text" name ="link" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
+                            </div>
+                            <div class="ms-md-4 mt-3 ms-4">
+                                <label class="form-label" >Description : </label>
+                                <textarea name="desc" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                            </div>
+                            <hr class="my-3 ms-4" width="85%;">
+
+                            <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
+                                <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
+                                <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
+                                <button class="button-18" role="button" name="submit">Save</button>
+                            </div>
                         </div>
-                        <input type="hidden" name="image_attachment_id" value="<?php echo get_option('media_selector_attachment_id'); ?>">
-                        <div class="my-3 d-flex justify-content-center">
-                            <img src="images.jpeg" alt="" srcset="" width="80%">
-                        </div>
-                        <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
-                            <label> Title </label>
-                            <input class="form-control" type="text" name ="title" placeholder="Title" style="width:50%;height:5px;">
-                        </div>
-                        <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
-                            <label> Link </label>
-                            <input class="form-control" type="text" name ="link" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
-                        </div>
-                        <div class="ms-md-4 mt-3 ms-4">
-                            <label class="form-label" >Description : </label>
-                            <textarea name="desc" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
-                        </div>
-                        <hr class="my-3 ms-4" width="85%;">
-                        
-                        </div>
-                    </div>
-                    <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
-                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
-                    <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
-                    <button class="button-18" role="button" name="submit" >Save</button>
+                    </form>
+                        </div>       
                 </div>
-                </form>
-                </div>
-               
                 <div class="custom-css-form" id="customCSSForm">
                     <form>
                         <h4> Setting css</h4>
@@ -498,12 +475,13 @@ document.addEventListener("DOMContentLoaded", function () {
   deleteLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       event.preventDefault();
-      const id = this.getAttribute("data-id");
+      const id = this.parentElement.querySelector("select[name='selected_slider']").value;
+      const title = this.parentElement.querySelector("select[name='selected_slider']").selectedOptions[0].innerText;
       const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
-      
+      this.setAttribute("data-id", id); // Update the data-id attribute
       Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: `You won't be able to revert this for slider "${title}"!`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -517,12 +495,15 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = url;
           }, 1000);
           // Show success alert immediately
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
         }
       });
     });
   });
 });
-
-
 </script>
+
