@@ -12,91 +12,117 @@
     <script>
         <?php
         $delay = 3000;
-        $content = "Isi dengan judul pada bagan ini";
+        $content = "Diskon 20% Bagi Mempunyai Pacar!";
+        $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
+        $paragraf = "Officia reprehenderit cupidatat aute magna mollit adipisicing laborum pariatur ipsum laborum commodo quis proident quis. Quis irure reprehenderit reprehenderit commodo labore irure esse eiusmod culpa do proident laborum dolore occaecat. Amet est commodo laboris Lorem laborum et ex veniam nostrud ea anim. Fugiat laboris tempor esse qui occaecat magna laboris officia reprehenderit.";
         ?>
-        // jQuery(document).ready(function($) {
-        //     $('.custom-popup').hide(); // Hide the popup initially
-
-        //     setTimeout(function() {
-        //         let popupHTML = '<div class="custom-popup"><div class="popup-content"><?php //echo addslashes($content); 
-                                                                                            ?></div></div>';
-        //         $('body').append(popupHTML);
-
-        //         $('.custom-popup').fadeIn();
-
-        //         // Control the image size
-        //         $('.popup-content img').css({
-        //             'max-width': 'auto', // Adjust these values as needed
-        //             'max-height': 'auto%',
-        //             'height': 'auto'
-        //         });
-        //     }, <?php // echo intval($delay); 
-                    ?>);
-
-        //     $('.custom-popup .popup-content').on('click', function(e) {
-        //         e.stopPropagation();
-        //     });
-
-        //     $(document).on('click', function() {
-        //         if ($('.custom-popup').is(':visible')) {
-        //             $('.custom-popup').fadeOut();
-        //         }
-        //     });
-
-
-        // });
     </script>
 
     <style>
-        * {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        /* Styles for the custom popup within the popup-container */
         .custom-popup {
-            display: none;
-            position: fixed;
-            width: 55%;
-            height: 65%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
+            /* position: none; */
+            /* top: 0;
+            left: 0; */
+            width: 100%;
+            /* height: 100%; */
+            /* background-color: rgba(0, 0, 0, 0.5); */
+            /* z-index: 9999; */
             display: flex;
             justify-content: center;
             align-items: center;
+            display: flex;
         }
 
         .popup-content {
             background-color: #fff;
             padding: 20px;
-            margin: 5%;
+            position: relative;
+            /* margin-left: 25%;
+            margin-right: 25%; */
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             text-align: center;
-            font-family: Arial, sans-serif;
+            /* margin-bottom: 20px; */
+            display: flex;
+        }
+
+        .close-button {
+            position: absolute; 
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: #000;
+            padding: 0;
+        }
+
+        .close-button:hover {
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: #000;
+            padding: 0;
+        }
+
+        .popup-image {
+            border-radius: 15px;
+            object-fit: cover;
+            width: 350px;
+            height: 450px;
+        }
+
+        .jarak {
+            margin-right: 5%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .link {
+            margin: 10px;
+        }
+
+        .popup-text {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .popup-text h3 {
             margin-bottom: 20px;
         }
 
-        .popup-content img {
-            max-width: 30%;
-            border-radius: 15px;
-            /* Ensure images are responsive */
+        .popup-text p {
+            width: 100%;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-
     <div class="custom-popup">
         <div class="popup-content">
-            <img src="https://images.unsplash.com/photo-1689435210066-19ad40c54f4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="inigambar">
-            <h3><?php echo $content; ?></h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi voluptates qui quidem ipsa fugit sint quos tenetur ducimus asperiores minima. Magni, nisi? Minus a quod, iste aspernatur eligendi veritatis tempore.</p>
-            <a href="https://google.com" target="_blank" rel="noopener noreferrer">
-                <button type="button" class="btn btn-dark">Click Me</button>        
-            </a>
+            <button class="close-button btn btn-dark">&times;</button>
+            <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
+            <div class="popup-text">
+                <h3><?php echo $content; ?></h3>
+                <p><?php echo $paragraf ?></p>
+                <div class="link">
+                    <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+                        <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>

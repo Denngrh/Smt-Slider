@@ -9,18 +9,45 @@
     <script>
         <?php
         $delay = 2000;
-        $content = "lorem ipsum dolor sit amet, consectetur adip";
+        $content = "Discount 50% For All Members";
+        $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
+        $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
+        $link = "";
         ?>
         jQuery(document).ready(function($) {
             $('.custom-popup').hide(); // Hide the popup initially
 
             setTimeout(function() {
-                let popupHTML = '<div class="custom-popup"><div class="popup-content"><?php echo addslashes($content); ?></div></div>';
-                // isi dari variable custom harus 1 baris untuk tidak error
-                let custom = `<div class="custom-popup"><div class="popup-content"><img src="https://images.unsplash.com/photo-1689435210066-19ad40c54f4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="inigambar"><h3><?php echo $content; ?></h3><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi voluptates qui quidem ipsa fugit sint quos tenetur ducimus asperiores minima. Magni, nisi? Minus a quod, iste aspernatur eligendi veritatis tempore.</p><a href="https://google.com" target="_blank" rel="noopener noreferrer"><button type="button" class="btn btn-dark">Click Me</button></a></div></div>`;
-                $('body').append(custom);
+
+                const popupContent = `
+                    <div class="popup-content">
+                        <button class="close-button btn btn-dark">&times;</button>
+                        <img src="<?php echo $image ?>" alt="inigambar">
+                        <div class="content">
+                            <h3><?php echo $content; ?></h3>
+                            <p><?php echo $paragraf ?></p>
+                            <div class="link">
+                                <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+                                    <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const design = `
+                    <div class="custom-popup">
+                        ${popupContent}
+                    </div>
+                `;
+
+                $('body').append(design);
 
                 $('.custom-popup').fadeIn();
+
+                $('.close-button').on('click', function() {
+                    $('.custom-popup').fadeOut();
+                });
 
             }, <?php echo intval($delay); ?>);
 
@@ -28,20 +55,17 @@
                 e.stopPropagation();
             });
 
-            $(document).on('click', function() {
-                if ($('.custom-popup').is(':visible')) {
-                    $('.custom-popup').fadeOut();
-                }
-            });
-
+            // $(document).on('click', function() {
+            //     if ($('.custom-popup').is(':visible')) {
+            //         $('.custom-popup').fadeOut();
+            //     }
+            // });
 
         });
     </script>
 
     <style>
-        /* Styles for the custom popup */
         .custom-popup {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -52,28 +76,78 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            display: flex;
         }
 
         .popup-content {
             background-color: #fff;
             padding: 20px;
-            margin: 5%;
+            position: relative;
+            margin-left: 25%;
+            margin-right: 25%;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             text-align: center;
-            font-family: Arial, sans-serif;
             margin-bottom: 20px;
-        }   
+            display: flex;
+        }
+
+        .close-button {
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: #000;
+            padding: 0;
+        }
+
+        .close-button:hover {
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: #000;
+            padding: 0;
+        }
 
         .popup-content img {
-            max-width: 30%;
             border-radius: 15px;
+            object-fit: cover;
+            width: 350px;
+            height: 450px;
+            /* max-width: 40%; */
+        }
+
+        .jarak {
+            margin-right: 5%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .link {
+            margin: 10px;
+        }
+
+        .content {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content h3 {
             margin-bottom: 20px;
         }
-        .popup-content h3 {
-            margin-bottom: 20px;
-        }
-        .popup-content p {
+
+        .content p {
             width: 100%;
             margin-bottom: 20px;
         }
