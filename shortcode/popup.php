@@ -22,8 +22,8 @@
                 const popupContent = `
                     <div class="popup-content">
                         <button class="close-button btn btn-dark">&times;</button>
-                        <img src="<?php echo $image ?>" alt="inigambar">
-                        <div class="content">
+                        <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
+                        <div class="popup-text">
                             <h3><?php echo $content; ?></h3>
                             <p><?php echo $paragraf ?></p>
                             <div class="link">
@@ -136,18 +136,18 @@
             margin: 10px;
         }
 
-        .content {
+        .popup-text {
             padding-left: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .content h3 {
+        .popup-text h3 {
             margin-bottom: 20px;
         }
 
-        .content p {
+        .popup-text p {
             width: 100%;
             margin-bottom: 20px;
         }
