@@ -13,14 +13,15 @@
     $id = $_GET['id'];
     $table_smt_img = $wpdb->prefix . 'smt_img';
     $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
-    if (!empty($data_images)) {?>
+    if (!empty($data_images)) {
+       ?>
     <div class="sec container-fluid bg-container">
         <div class="container">
             <div class="row">
                 <div class="col-md-1 my-auto">
                 <div class="indicator-dots">
                     <?php foreach ($data_images as $index => $data): ?>
-                        <div class="dot-wrapper" onclick="showSlide(<?= $index ?>)">
+                        <div class="dot-wrapper" onclick="showSlide(<?= $index ?>)" >
                             <span class="dot <?= $index === 0 ? 'active' : '' ?>"><span class="dot-number"><?= $index + 1 ?></span></span>
                         </div>
                     <?php endforeach; ?>
@@ -36,7 +37,7 @@
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                         <?php foreach ($data_images as $index => $data): ?>
-                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)">
+                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>">
                                 <img class="inner" src="<?= wp_get_attachment_url($data->img) ?>">
                                 <div class="slide-text">
                                     <h3><?= $data->title ?></h3>
@@ -73,9 +74,6 @@
                         <div class="dot-wrapper" onclick="showSlide(0)">
                             <span class="dot"><span class="dot-number">1</span></span>
                         </div>
-                        <div class="dot-wrapper" onclick="showSlide(1)">
-                            <span class="dot"><span class="dot-number">2</span></span>
-                        </div>
                     </div>
                     
                 </div>
@@ -89,20 +87,11 @@
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                             <!-- Slide 1 -->
-                            <div class="slide col-md-4 active" onclick="showSlide(0)">
-                                <img class="inner" src="https://asset.kompas.com/crops/Tg1rEfwv-5GiWpbSb5-RuaBlkjk=/0x0:1800x1200/750x500/data/photo/2022/08/07/62ef3f9c2846d.jpg">
+                            <div class="slide col-md-4 active" onclick="showSlide(0)" data-background="https://www.pinhome.id/info-area/wp-content/uploads/2022/07/Gunung-Prau-1.jpg">
+                                <img class="inner" src="https://www.carrierstory.com/wp-content/uploads/2021/09/Jalur-Pendakian-Via-Patak-Banteng.jpg">
                                 <div class="slide-text">
                                     <h3>Example 1</h3>
                                     <p>Deskripsi Exapmle1.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 2 -->
-                            <div class="slide col-md-4" onclick="showSlide(1)">
-                                <img class="inner" src="https://asset.kompas.com/crops/SJBld7b2CtJC5zJMlFbu1zKopZY=/1x319:1024x1001/750x500/data/photo/2022/09/04/6314d47545313.jpg">
-                                <div class="slide-text">
-                                    <h3>Example 2</h3>
-                                    <p>Deskripsi Example 2.</p>
                                 </div>
                             </div>
 
@@ -274,7 +263,6 @@
     }
 
     .bg-container {
-        background-image: url(''); /* Kosongkan URL gambar latar belakang */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -336,11 +324,12 @@
     const slides = document.querySelectorAll('.slide');
     const bgContainer = document.querySelector('.bg-container');
 
-    function showSlide(index) {
+function showSlide(index) {
     if (index >= 0 && index < slides.length) {
         slides[currentSlide].classList.remove('active');
         slides[index].classList.add('active');
-        bgContainer.style.backgroundImage = `url('${slides[index].querySelector('.inner').src}')`;
+        const backgroundURL = slides[index].getAttribute('data-background');
+        bgContainer.style.backgroundImage = `url('${backgroundURL}')`;
         currentSlide = index;
 
         const slideText = slides[index].querySelector('.slide-text');

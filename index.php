@@ -48,6 +48,7 @@ function smt_img_table() {
         $sql = "CREATE TABLE $table_name (
             id_img INT(11) NOT NULL AUTO_INCREMENT,
             img INT(11) NOT NULL,
+            bg_img INT(11) NOT NULL,
             title VARCHAR(100) NOT NULL,
             `desc` LONGTEXT NOT NULL,
             link VARCHAR(100) NOT NULL,

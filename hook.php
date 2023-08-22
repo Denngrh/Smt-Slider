@@ -79,43 +79,47 @@ function delete_data_callback() {
 function insert_img_callback() {
     global $wpdb;
 
-    if (isset($_POST['submit'])) {
-    
-        // Proses form kedua
-        $table_smt_img = $wpdb->prefix . 'smt_img';
-        $title = sanitize_text_field($_POST['title']);
-        $desc = sanitize_textarea_field($_POST['desc']);
-        $link = sanitize_text_field($_POST['link']);
-        $image_id = absint($_POST['image_attachment_id']); // Gunakan ID gambar yang dipilih
-        $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
+    // Proses form kedua
+    $table_smt_img = $wpdb->prefix . 'smt_img';
+    $title = sanitize_text_field($_POST['title']);
+    $desc = sanitize_textarea_field($_POST['desc']);
+    $link = sanitize_text_field($_POST['link']);
+    $image_id = absint($_POST['image_attachment_id']); // Gunakan ID gambar yang dipilih
+    $bg_image_id = absint($_POST['bg_image_attachment_id']); // ID gambar latar belakang
+    $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
 
-        // Masukkan data ke tabel smt-img
-        $result = $wpdb->insert(
-            $table_smt_img,
-            array(
-                'title' => $title,
-                'desc' => $desc,
-                'link' => $link,
-                'img' => $image_id,
-                'id_slider' => $edit_id,
-            )
-        );
 
-        if ($result) {
-            if ($edit_id) {
-                wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
-                exit;
-            } else {
-                // Jika tidak ada ID, masukkan lagi
-                $inserted_id = $wpdb->insert_id;
-                // Redirect ke edit2 dengan id baru
-                wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
-                exit;
-            }
+    // Masukkan data ke tabel smt-img
+    $result = $wpdb->insert(
+        $table_smt_img,
+        array(
+            'title' => $title,
+            'desc' => $desc,
+            'link' => $link,
+            'img' => $image_id,
+            'bg_img' => $bg_image_id, // Simpan ID gambar latar belakang
+            'id_slider' => $edit_id,
+        )
+    );
+
+    if ($result) {
+        // Jika data berhasil diinsert, periksa apakah ada $edit_id
+        if ($edit_id) {
+            wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
         } else {
-            wp_die('Terjadi kesalahan saat menghapus data gambar.');
+            // Jika tidak ada $edit_id, maka perlu mencari id yang baru saja diinsert
+            $inserted_id = $wpdb->insert_id;
+            if ($inserted_id) {
+                wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
+            } else {
+                wp_die('Terjadi kesalahan saat mengirim data gambar.');
+            }
         }
+        exit;
+    } else {
+        wp_die('Terjadi kesalahan saat mengirim data gambar.');
     }
+
 }
 
 function delete_img_callback() {
@@ -167,6 +171,7 @@ function shortcode_smt_slider($atts) {
         }
     }
 }
+
 add_shortcode('smt_slider', 'shortcode_smt_slider');
 // Tambahkan aksi ke dalam WordPress admin
 add_action('admin_post_delete_img', 'delete_img_callback');
