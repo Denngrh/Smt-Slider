@@ -92,7 +92,7 @@ function insert_img_callback()
         $titles = array_map('sanitize_text_field', $_POST['title']);
         $descs = array_map('sanitize_textarea_field', $_POST['desc']);
         $links = array_map('sanitize_textarea_field', $_POST['link']);
-        $image_id = absint($_POST['image_attachment_id'][0]); // Gunakan ID gambar yang dipilih
+        $image_id = array_map('absint', $_POST['image_attachment_id']); // Gunakan ID gambar yang dipilih
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
 
         for ($i = 0; $i < count($titles); $i++) {
@@ -102,7 +102,7 @@ function insert_img_callback()
                     'title' => $titles[$i],
                     'desc' => $descs[$i],
                     'link' => $links[$i],
-                    'img' => $image_id,
+                    'img' => $image_id[$i],
                     'id_slider' => $edit_id,
                 )
             );

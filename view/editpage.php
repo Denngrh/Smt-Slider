@@ -125,7 +125,6 @@
                         </script>
                         <div class="mt-3 ms-md-4 ms-4">
                             <form id="form_root" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
-                                //start
                                 <div id="multiple_form">
 
                                     <div>
@@ -160,7 +159,6 @@
                                         <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                                     </div>
                                     <hr class="my-3 ms-4" width="85%;">
-                                    // end
                                 </div>
 
                                 <div id="additional_fields">
