@@ -133,6 +133,7 @@
 
 <body>
     <?php
+    // check jika data dari table ada pada kondisi true
     if (!empty($latest_data)) { ?>
         <div class="custom-popup">
             <div class="popup-content">
@@ -143,7 +144,7 @@
                         <h3><?php echo $data->title; ?></h3>
                         <p><?php echo $data->desc ?></p>
                         <div class="link">
-                            <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+                            <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
                                 <button type="button" class="jarak btn btn-dark">Click Me Now</button>
                             </a>
                         </div>

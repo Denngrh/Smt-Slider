@@ -95,70 +95,99 @@
                         </div>
                         <script type='text/javascript'>
                             jQuery(document).ready(function($) {
-                                var file_frame;
+                                // var file_frame;
 
-                                $('#upload_image_button').on('click', function(event) {
+                                // $('#upload_image_button').on('click', function(event) {
+                                //     event.preventDefault();
+
+                                //     if (file_frame) {
+                                //         file_frame.open();
+                                //         return;
+                                //     }
+
+                                //     file_frame = wp.media.frames.file_frame = wp.media({
+                                //         title: 'Pilih gambar',
+                                //         button: {
+                                //             text: 'Gunakan gambar ini',
+                                //         },
+                                //         multiple: false
+                                //     });
+
+                                //     file_frame.on('select', function() {
+                                //         var attachment = file_frame.state().get('selection').first().toJSON();
+                                //         $('#image-preview').attr('src', attachment.url);
+                                //         $('#image_attachment_id').val(attachment.id); // Setel ID gambar yang dipilih
+                                //     });
+
+                                //     file_frame.open();
+                                // });
+                                
+                                $('.form-container').on('click', '#upload_image_button', function(event) {
                                     event.preventDefault();
 
-                                    if (file_frame) {
-                                        file_frame.open();
-                                        return;
-                                    }
+                                    var container = $(this).closest('.form-container');
+                                    var file_frame = container.data('file_frame');
 
-                                    file_frame = wp.media.frames.file_frame = wp.media({
-                                        title: 'Pilih gambar',
-                                        button: {
-                                            text: 'Gunakan gambar ini',
-                                        },
-                                        multiple: false
-                                    });
+                                    if (!file_frame) {
+                                        file_frame = wp.media.frames.file_frame = wp.media({
+                                            title: 'Pilih gambar',
+                                            button: {
+                                                text: 'Gunakan gambar ini'
+                                            },
+                                            multiple: false
+                                        });
+
+                                        container.data('file_frame', file_frame);
+                                    }
 
                                     file_frame.on('select', function() {
                                         var attachment = file_frame.state().get('selection').first().toJSON();
-                                        $('#image-preview').attr('src', attachment.url);
-                                        $('#image_attachment_id').val(attachment.id); // Setel ID gambar yang dipilih
+                                        container.find('#image-preview').attr('src', attachment.url);
+                                        container.find('#image_attachment_id').val(attachment.id);
                                     });
 
                                     file_frame.open();
                                 });
+
                             });
                         </script>
                         <div class="mt-3 ms-md-4 ms-4">
                             <form id="form_root" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="POST">
                                 <div id="multiple_form">
+                                    <div class="form-container">
+                                        <div>
+                                            <input type="hidden" name="action" value="insert_img_callback">
+                                            <?php
+                                            if (isset($_POST['image_attachment_id'])) {
+                                                update_option('media_selector_attachment_id', absint($_POST['image_attachment_id']));
+                                            }
+                                            wp_enqueue_media();
+                                            $my_saved_attachment_post_id = get_option('media_selector_attachment_id');
 
-                                    <div>
-                                        <input type="hidden" name="action" value="insert_img_callback">
-                                        <?php
-                                        if (isset($_POST['image_attachment_id'])) {
-                                            update_option('media_selector_attachment_id', absint($_POST['image_attachment_id']));
-                                        }
-                                        wp_enqueue_media();
-                                        $my_saved_attachment_post_id = get_option('media_selector_attachment_id');
-
-                                        ?>
-                                        <input id="upload_image_button" type="button" class="button" value="<?php _e('Upload image'); ?>" />
-                                        <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option('media_selector_attachment_id'); ?>'>
+                                            ?>
+                                            <input id="upload_image_button" type="button" class="button" value="<?php _e('Upload image'); ?>" />
+                                            <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option('media_selector_attachment_id'); ?>'>
+                                        </div>
+                                        <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                            <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url(get_option('media_selector_attachment_id')); ?>' width='200'>
+                                        </div>
+                                        <div class="my-3 d-flex justify-content-center">
+                                            <img src="images.jpeg" alt="" srcset="" width="80%">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between">
+                                            <label> Title </label>
+                                            <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3">
+                                            <label> Link </label>
+                                            <input class="form-control" type="text" name="link[]" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="ms-md-4 mt-3 ms-4">
+                                            <label class="form-label">Description : </label>
+                                            <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                                        </div>
+                                        <hr class="my-3 ms-4" width="85%;">
                                     </div>
-                                    <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                                        <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url(get_option('media_selector_attachment_id')); ?>' width='200'>
-                                    </div>
-                                    <div class="my-3 d-flex justify-content-center">
-                                        <img src="images.jpeg" alt="" srcset="" width="80%">
-                                    </div>
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between">
-                                        <label> Title </label>
-                                        <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3">
-                                        <label> Link </label>
-                                        <input class="form-control" type="text" name="link[]" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="ms-md-4 mt-3 ms-4">
-                                        <label class="form-label">Description : </label>
-                                        <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
-                                    </div>
-                                    <hr class="my-3 ms-4" width="85%;">
                                 </div>
 
                                 <div id="additional_fields">
@@ -185,8 +214,9 @@
 
                                     // Reset values of cloned input fields
                                     multiFormDiv.find("input[name='title[]']").val('');
-                                    multiFormDiv.find("input[name='desc[]']").val('');
                                     multiFormDiv.find("input[name='link[]']").val('');
+                                    multiFormDiv.find("textarea[name='desc[]']").val('Desc');
+                                    multiFormDiv.find("img[name='image_attachment_id[]']").val('');
 
                                     // Modify attributes and IDs of the cloned elements
                                     multiFormDiv.find("input[name='title[]']").attr({
