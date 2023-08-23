@@ -106,6 +106,7 @@ function smt_type_table() {
         $type = array(
             array('type' => 'Paralax'),
             array('type' => 'Square'),
+            array('type' => 'Popup'),
         );
         //Prosess insert
         foreach ($type as $icon) {

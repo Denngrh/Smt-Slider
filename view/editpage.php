@@ -246,7 +246,9 @@
                         if ($type === 'Paralax') {
                             include 'Paralax.php'; 
                         } elseif ($type === 'Square') {
-                            include 'Square.php'; 
+                            include 'Square.php'; // Ganti 'square.php' dengan nama file sesuai tipe "square"
+                        } elseif ($type === 'Popup') {
+                            include 'Popup.php'; // Ganti 'Popup.php' dengan nama file sesuai tipe "popup"
                         } else {
                             echo "Tipe tidak dikenali atau terjadi kesalahan.";
                         }

@@ -160,6 +160,10 @@ function shortcode_smt_slider($atts) {
             }
             else if ($project_type === 'Square') {
                 include_once 'shortcode/square.php';
+                
+            } else if ($project_type === 'Popup') {
+                include_once 'shortcode/popup.php';
+                
             }
             else{
                 echo '<p> Slider Tidak di temukan </p>';
@@ -187,4 +191,3 @@ add_action('admin_post_nopriv_insert_slide_callback', 'insert_slide_callback');
 add_action('admin_post_delete_data', 'delete_data_callback');
 // ADD MENU
 add_action('admin_menu','ListMenu');
-?>
