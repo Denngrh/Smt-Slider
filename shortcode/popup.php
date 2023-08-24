@@ -13,6 +13,12 @@
         $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
         $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
         $link = "";
+
+        global $wpdb;
+        $id = $_GET['id'];
+        $table_smt_img = $wpdb->prefix . 'smt_img';
+        // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1;");
         ?>
         jQuery(document).ready(function($) {
             $('.custom-popup').hide(); // Hide the popup initially
@@ -22,12 +28,12 @@
                 const popupContent = `
                     <div class="popup-content">
                         <button class="close-button btn btn-dark">&times;</button>
-                        <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
+                        <img src="<?php echo $image; ?>" alt="inigambar" class="popup-image">
                         <div class="popup-text">
                             <h3><?php echo $content; ?></h3>
-                            <p><?php echo $paragraf ?></p>
+                            <p><?php echo $paragraf; ?></p>
                             <div class="link">
-                                <a href="https://google.com" target="_blank" rel="noopener noreferrer">
+                                <a href="<?php echo $link; ?>" target="_blank" rel="noopener noreferrer">
                                     <button type="button" class="jarak btn btn-dark">Click Me Now</button>
                                 </a>
                             </div>
@@ -54,12 +60,6 @@
             $('.custom-popup .popup-content').on('click', function(e) {
                 e.stopPropagation();
             });
-
-            // $(document).on('click', function() {
-            //     if ($('.custom-popup').is(':visible')) {
-            //         $('.custom-popup').fadeOut();
-            //     }
-            // });
 
         });
     </script>
