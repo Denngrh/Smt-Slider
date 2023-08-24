@@ -19,8 +19,8 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1;");
+
         ?>
         const type2 = false;
 
@@ -139,7 +139,7 @@
         <div class="custom-popup">
             <div class="popup-content">
                 <?php foreach ($latest_data as $index => $data) : ?>
-                    <button class="close-button btn btn-dark">&times;</button>
+                    <button title="close" class="close-button">&times;</button>
                     <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                     <div class="popup-text">
                         <h3><?php echo $data->title; ?></h3>
@@ -156,7 +156,7 @@
     <?php } else { ?>
         <div class="custom-popup">
             <div class="popup-content">
-                <button class="close-button btn btn-dark">&times;</button>
+                <button title="close" class="close-button">&times;</button>
                 <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
                 <div class="popup-text">
                     <h3>Lorem Ipsum! Example</h3>

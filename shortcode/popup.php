@@ -12,13 +12,12 @@
         $content = "Discount 50% For All Members";
         $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
         $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
-        $link = "";
+        $link = "http://example.com";
 
         global $wpdb;
-        $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1;");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ORDER BY id_img DESC LIMIT 1;");
+
         ?>
         jQuery(document).ready(function($) {
             $('.custom-popup').hide(); // Hide the popup initially
@@ -27,8 +26,26 @@
 
                 const popupContent = `
                     <div class="popup-content">
-                        <button class="close-button btn btn-dark">&times;</button>
-                        <img src="<?php echo $image; ?>" alt="inigambar" class="popup-image">
+                        <?php foreach ($latest_data as $index => $data) : ?>
+                            <button title="close" class="close-button">&times;</button>
+                            <img src="<?php echo wp_get_attachment_url($data->img); ?>" alt="inigambar" class="popup-image">
+                            <div class="popup-text">
+                                <h3><?php echo $data->title; ?></h3>
+                                <p><?php echo $data->desc; ?></p>
+                                <div class="link">
+                                    <a href="<?php echo esc_url($data->link); ?>" target="_blank" rel="noopener noreferrer">
+                                        <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                `;
+
+                const defaultPopupContent = `
+                    <div class="popup-content">
+                        <button title="close" class="close-button">&times;</button>
+                        <img src="<?php echo esc_url($image); ?>" alt="inigambar" class="popup-image">
                         <div class="popup-text">
                             <h3><?php echo $content; ?></h3>
                             <p><?php echo $paragraf; ?></p>
@@ -43,7 +60,17 @@
 
                 const design = `
                     <div class="custom-popup">
+                    <?php 
+                        if(!empty($latest_data)){
+                    ?>
                         ${popupContent}
+                    <?php 
+                        } else {
+                    ?>
+                        ${defaultPopupContent} 
+                    <?php 
+                        }
+                    ?>    
                     </div>
                 `;
 
@@ -101,7 +128,7 @@
             background: none;
             border: none;
             color: #000;
-            padding: 0;
+            padding: 0; 
         }
 
         .close-button:hover {
