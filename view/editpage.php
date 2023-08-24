@@ -109,6 +109,11 @@
                                 $('.bg-image-button').hide(); 
                                 $('.bg-image-preview-wrapper').hide();
                                 }
+
+                                if (typeOfSlider == "Paralax") {
+                                    $('#add_field').hide();
+                                }
+
                                 })
                             </script>
                             <?php if ($id_slider_exists) 
@@ -126,9 +131,9 @@
                             <div class="mt-3 ms-md-4 ms-4">
                                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
 
-                                // start multiple_form
+                                <!-- // start multiple_form -->
                                 <div id="multiple_form">
-                                    // start form-container
+                                    <!-- start form-container -->
                                     <div class="form-container">
                                         <input type="hidden" name="action" value="insert_img_callback">
                                         <!-- Upload Image  -->
@@ -166,9 +171,9 @@
                                         </div>
                                         <hr class="my-3 ms-4" width="85%;">
 
-                                        // end form-container
+                                        <!-- end form-container -->
                                     </div>
-                                    // end multiple form
+                                    <!-- end multiple form -->
                                 </div>
 
 
@@ -206,9 +211,9 @@
                             <div class="mt-3 ms-md-4 ms-4">
                                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
 
-                                // start multiple_form
+                                <!-- start multiple_form -->
                                 <div id="multiple_form">
-                                    // start form-container
+                                    <!-- start form-container -->
                                     <div class="form-container">
                                         <input type="hidden" name="action" value="insert_img_callback">
                                         <!-- Upload Image  -->
@@ -246,9 +251,9 @@
                                         </div>
                                         <hr class="my-3 ms-4" width="85%;">
 
-                                        // end form-container
+                                        <!-- end form-container -->
                                     </div>
-                                    // end multiple form
+                                    <!-- end multiple form -->
                                 </div>
 
 
@@ -671,7 +676,39 @@
     });
 </script>
 
-// script dibawah ini untuk memproses multiple upload image
+// script dibawah ini untuk memproses multiple upload image dengan field yang di copas
+
+<script type="text/javascript">
+    $('.form-container').on('click', '#upload_image_button', function(event) {
+        event.preventDefault();
+
+        var container = $(this).closest('.form-container');
+        var file_frame = container.data('file_frame');
+
+        if (!file_frame) {
+            file_frame = wp.media.frames.file_frame = wp.media({
+                title: 'Pilih gambar',
+                button: {
+                    text: 'Gunakan gambar ini'
+                },
+                multiple: false
+            });
+
+            container.data('file_frame', file_frame);
+        }
+
+        file_frame.on('select', function() {
+            var attachment = file_frame.state().get('selection').first().toJSON();
+            container.find('#image-preview').attr('src', attachment.url);
+            container.find('#image_attachment_id').val(attachment.id);
+        });
+
+        file_frame.open();
+    });
+</script>
+
+
+// script buat copas div untuk multiple field
 <script type='text/javascript'>
     $(document).ready(function() {
         var fieldCounter = 1; // To generate unique IDs for each field
