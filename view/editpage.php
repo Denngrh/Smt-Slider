@@ -193,7 +193,7 @@
                                 <div id="additional_fields">
                                     <!-- Additional fields will be added here -->
                                 </div>
-
+                                
                                 <button type="button" id="add_field">Add Field</button>
 
 
@@ -209,46 +209,52 @@
                                 var fieldCounter = 1; // To generate unique IDs for each field
 
                                 $("#add_field").click(function() {
-                                    var additionalFields = $("#additional_fields");
-                                    var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
+                                    if(fieldCounter < 5){
 
-                                    // Reset values of cloned input fields
-                                    multiFormDiv.find("input[name='title[]']").val('');
-                                    multiFormDiv.find("input[name='link[]']").val('');
-                                    multiFormDiv.find("textarea[name='desc[]']").val('Desc');
-                                    multiFormDiv.find("img[name='image_attachment_id[]']").val('');
-
-                                    // Modify attributes and IDs of the cloned elements
-                                    multiFormDiv.find("input[name='title[]']").attr({
-                                        name: "title[]",
-                                        id: "field_title_" + fieldCounter
-                                    });
-
-                                    multiFormDiv.find("input[name='desc[]']").attr({
-                                        name: "desc[]",
-                                        id: "field_desc_" + fieldCounter
-                                    });
-
-                                    multiFormDiv.find("input[name='link[]']").attr({
-                                        name: "link[]",
-                                        id: "field_link_" + fieldCounter
-                                    });
-
-                                    var br = $("<br>");
-
-                                    var deleteButton = $("<button>").attr({
-                                        type: "button"
-                                    }).text("Delete Field").click(function() {
-                                        multiFormDiv.remove(); // Remove the cloned div
-                                        br.remove();
-                                    });
-
-                                    additionalFields.append(multiFormDiv);
-                                    multiFormDiv.append(deleteButton);
-                                    additionalFields.append(br);
-
-
-                                    fieldCounter++; // Increment the field counter for the next field
+                                        var additionalFields = $("#additional_fields");
+                                        var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
+    
+                                        // Reset values of cloned input fields
+                                        multiFormDiv.find("input[name='title[]']").val('');
+                                        multiFormDiv.find("input[name='link[]']").val('');
+                                        multiFormDiv.find("textarea[name='desc[]']").val('Desc');
+                                        multiFormDiv.find("img[name='image_attachment_id[]']").val('');
+    
+                                        // Modify attributes and IDs of the cloned elements
+                                        multiFormDiv.find("input[name='title[]']").attr({
+                                            name: "title[]",
+                                            id: "field_title_" + fieldCounter
+                                        });
+    
+                                        multiFormDiv.find("input[name='desc[]']").attr({
+                                            name: "desc[]",
+                                            id: "field_desc_" + fieldCounter
+                                        });
+    
+                                        multiFormDiv.find("input[name='link[]']").attr({
+                                            name: "link[]",
+                                            id: "field_link_" + fieldCounter
+                                        });
+    
+                                        var br = $("<br>");
+    
+                                        var deleteButton = $("<button>").attr({
+                                            type: "button"
+                                        }).text("Delete Field").click(function() {
+                                            multiFormDiv.remove(); // Remove the cloned div
+                                            br.remove();
+                                        });
+    
+                                        additionalFields.append(multiFormDiv);
+                                        multiFormDiv.append(deleteButton);
+                                        additionalFields.append(br);
+    
+    
+                                        fieldCounter++; // Increment the field counter for the next field
+                                    } else {
+                                        alert("Max Field Has Reached!");
+                                    }
+                                    
                                 });
                             });
                         </script>

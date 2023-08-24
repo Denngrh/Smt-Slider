@@ -22,14 +22,15 @@
         // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1;");
         ?>
-        const type2 = false;
+        const type2 = true;
 
         jQuery(document).ready(function($) {
             if (type2) {
                 $('.popup-content').css({
                     "background-image": "url('<?php echo wp_get_attachment_url($latest_data[0]->img); ?>')",
                     "background-size": "cover",
-                    "height": "450"
+                    "height": "450",
+                    "width": "750"
                 });
 
                 $('.popup-content img').remove();
