@@ -125,47 +125,66 @@
                             ?>
                             <div class="mt-3 ms-md-4 ms-4">
                                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                                    <input type="hidden" name="action" value="insert_img_callback">
-                                    <!-- Upload Image  -->
-                                        <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
-                                        <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
-                                        <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                                            <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
-                                        </div>
-                                    <!-- End Upload Image -->
-                                    <!-- Upload Background -->
-                                        <?php
-                                            if (isset($_POST['bg_image_attachment_id'])) {
-                                                update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
-                                            }
-                                            wp_enqueue_media();
-                                            $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
-                                        ?>
-                                        <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
-                                        <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
-                                        <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                                            <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
-                                        </div>
-                                    <!-- End BG -->
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
-                                        <label> Title </label>
-                                        <input class="form-control" type="text" name ="title" placeholder="Title" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
-                                        <label> Link </label>
-                                        <input class="form-control" type="text" name ="link" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="ms-md-4 mt-3 ms-4">
-                                        <label class="form-label" >Description : </label>
-                                        <textarea name="desc" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
-                                    </div>
-                                    <hr class="my-3 ms-4" width="85%;">
 
-                                    <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
-                                        <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
-                                        <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
-                                        <button class="button-18" role="button" name="submit">Save</button>
+                                // start multiple_form
+                                <div id="multiple_form">
+                                    // start form-container
+                                    <div class="form-container">
+                                        <input type="hidden" name="action" value="insert_img_callback">
+                                        <!-- Upload Image  -->
+                                            <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
+                                            <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
+                                            <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                                <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
+                                            </div>
+                                        <!-- End Upload Image -->
+                                        <!-- Upload Background -->
+                                            <?php
+                                                if (isset($_POST['bg_image_attachment_id'])) {
+                                                    update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
+                                                }
+                                                wp_enqueue_media();
+                                                $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
+                                            ?>
+                                            <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
+                                            <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
+                                            <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                                <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
+                                            </div>
+                                        <!-- End BG -->
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
+                                            <label> Title </label>
+                                            <input class="form-control" type="text" name ="title[]" placeholder="Title" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
+                                            <label> Link </label>
+                                            <input class="form-control" type="text" name ="link[]" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="ms-md-4 mt-3 ms-4">
+                                            <label class="form-label" >Description : </label>
+                                            <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                                        </div>
+                                        <hr class="my-3 ms-4" width="85%;">
+
+                                        // end form-container
                                     </div>
+                                    // end multiple form
+                                </div>
+
+
+                                <div id="additional_fields">
+                                    <!-- Konten hasil copy div field ke sini -->
+
+                                </div>
+
+                                <button type="button" id="add_field">Add Field</button>
+
+                                <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
+                                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
+                                    <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
+                                    <button class="button-18" role="button" name="submit">Save</button>
+                                </div>
+
                                 </form>
                             </div>
                             <?php 
@@ -186,46 +205,66 @@
                             ?>
                             <div class="mt-3 ms-md-4 ms-4">
                                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                                    <input type="hidden" name="action" value="insert_img_callback">
-                                    <!-- Upload Image  -->
-                                        <input type='hidden' name='image_attachment_id' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
-                                        <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                                            <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
-                                        </div>
-                                    <!-- End Upload Image -->
-                                    <!-- Upload Background -->
-                                        <?php
-                                            if (isset($_POST['bg_image_attachment_id'])) {
-                                                update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
-                                            }
-                                            wp_enqueue_media();
-                                            $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
-                                        ?>
-                                        <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
-                                        <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
-                                        <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
-                                            <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
-                                        </div>
-                                    <!-- End BG -->
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
-                                        <label> Title </label>
-                                        <input class="form-control" type="text" name ="title" placeholder="Title" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
-                                        <label> Link </label>
-                                        <input class="form-control" type="text" name ="link" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
-                                    </div>
-                                    <div class="ms-md-4 mt-3 ms-4">
-                                        <label class="form-label" >Description : </label>
-                                        <textarea name="desc" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
-                                    </div>
-                                    <hr class="my-3 ms-4" width="85%;">
 
-                                    <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
-                                        <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
-                                        <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
-                                        <button class="button-18" role="button" name="submit">Save</button>
+                                // start multiple_form
+                                <div id="multiple_form">
+                                    // start form-container
+                                    <div class="form-container">
+                                        <input type="hidden" name="action" value="insert_img_callback">
+                                        <!-- Upload Image  -->
+                                            <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
+                                            <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
+                                            <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                                <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
+                                            </div>
+                                        <!-- End Upload Image -->
+                                        <!-- Upload Background -->
+                                            <?php
+                                                if (isset($_POST['bg_image_attachment_id'])) {
+                                                    update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
+                                                }
+                                                wp_enqueue_media();
+                                                $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
+                                            ?>
+                                            <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
+                                            <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
+                                            <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
+                                                <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
+                                            </div>
+                                        <!-- End BG -->
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between" >
+                                            <label> Title </label>
+                                            <input class="form-control" type="text" name ="title[]" placeholder="Title" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4 d-flex justify-content-between mt-3" >
+                                            <label> Link </label>
+                                            <input class="form-control" type="text" name ="link[]" placeholder="Https" autocomplete="off" style="width:50%;height:5px;">
+                                        </div>
+                                        <div class="ms-md-4 mt-3 ms-4">
+                                            <label class="form-label" >Description : </label>
+                                            <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
+                                        </div>
+                                        <hr class="my-3 ms-4" width="85%;">
+
+                                        // end form-container
                                     </div>
+                                    // end multiple form
+                                </div>
+
+
+                                <div id="additional_fields">
+                                    <!-- Konten hasil copy div field ke sini -->
+
+                                </div>
+
+                                <button type="button" id="add_field">Add Field</button>
+
+                                <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
+                                    <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
+                                    <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
+                                    <button class="button-18" role="button" name="submit">Save</button>
+                                </div>
+
                                 </form>
                             </div>
                             <?php } ?>
@@ -632,39 +671,62 @@
     });
 </script>
 
+// script dibawah ini untuk memproses multiple upload image
 <script type='text/javascript'>
-jQuery(document).ready(function($) {
-    var file_frame;
+    $(document).ready(function() {
+        var fieldCounter = 1; // To generate unique IDs for each field
 
-    $('#upload_image_button').on('click', function(event) {
-        event.preventDefault();
+        $("#add_field").click(function() {
+            if(fieldCounter < 5){
 
-        if (file_frame) {
-            file_frame.open();
-            return;
-        }
+                var additionalFields = $("#additional_fields");
+                var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
 
-        file_frame = wp.media.frames.file_frame = wp.media({
-            title: 'Select an Image',
-            button: {
-                text: 'Use this image',
-            },
-            multiple: false
+                // Reset values of cloned input fields
+                multiFormDiv.find("input[name='title[]']").val('');
+                multiFormDiv.find("input[name='link[]']").val('');
+                multiFormDiv.find("textarea[name='desc[]']").val('Desc');
+                multiFormDiv.find("img[name='image_attachment_id[]']").val('');
+
+                // Modify attributes and IDs of the cloned elements
+                multiFormDiv.find("input[name='title[]']").attr({
+                    name: "title[]",
+                    id: "field_title_" + fieldCounter
+                });
+
+                multiFormDiv.find("input[name='desc[]']").attr({
+                    name: "desc[]",
+                    id: "field_desc_" + fieldCounter
+                });
+
+                multiFormDiv.find("input[name='link[]']").attr({
+                    name: "link[]",
+                    id: "field_link_" + fieldCounter
+                });
+
+                var br = $("<br>");
+
+                var deleteButton = $("<button>").attr({
+                    type: "button"
+                }).text("Delete Field").click(function() {
+                    multiFormDiv.remove(); // Remove the cloned div
+                    br.remove();
+                });
+
+                additionalFields.append(multiFormDiv);
+                multiFormDiv.append(deleteButton);
+                additionalFields.append(br);
+
+
+                fieldCounter++; // Increment the field counter for the next field
+            } else {
+                alert("Max Field Has Reached!");
+            }
+            
         });
-
-        file_frame.on('select', function() {
-            var attachment = file_frame.state().get('selection').first().toJSON();
-            $('#image-preview').attr('src', attachment.url);
-            $('#image_attachment_id').val(attachment.id); // Set the selected image ID
-
-            // Automatically submit the form when an image is selected
-            $('#upload_img').submit(); // Replace 'your-form-id' with the actual ID of your form
-        });
-
-        file_frame.open();
     });
-});
 </script>
+
 
 
 

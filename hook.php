@@ -141,6 +141,7 @@ function insert_img_callback()
         wp_die('Terjadi kesalahan saat mengirim data gambar.');
     }
 
+    }
 }
 
 function delete_img_callback()
