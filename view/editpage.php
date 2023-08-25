@@ -109,10 +109,7 @@
                                 $('.bg-image-button').hide(); 
                                 $('.bg-image-preview-wrapper').hide();
                                 }
-
-                                if (typeOfSlider == "Paralax") {
-                                    $('#add_field').hide();
-                                }
+                                
 
                                 })
                             </script>
@@ -127,12 +124,17 @@
                                 ?>
                             <?php
                             $my_saved_attachment_post_id = get_option( 'media_selector_attachment_id', 0 );
+
+                            global $wpdb;
+                            $table_smt_img = $wpdb->prefix . 'smt_img';
+                            $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
                             ?>
                             <div class="mt-3 ms-md-4 ms-4">
                                 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
 
                                 <!-- // start multiple_form -->
                                 <div id="multiple_form">
+
                                     <!-- start form-container -->
                                     <div class="form-container">
                                         <input type="hidden" name="action" value="insert_img_callback">
@@ -173,6 +175,7 @@
 
                                         <!-- end form-container -->
                                     </div>
+
                                     <!-- end multiple form -->
                                 </div>
 
@@ -712,18 +715,17 @@
 <script type='text/javascript'>
     $(document).ready(function() {
         var fieldCounter = 1; // To generate unique IDs for each field
-
-        $("#add_field").click(function() {
-            if(fieldCounter < 5){
-
+        
+        function populateFormFields(savedData) {
+            savedData.forEach(function(data) {
                 var additionalFields = $("#additional_fields");
-                var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
+                var multiFormDiv = $("#multiple_form").clone();
 
-                // Reset values of cloned input fields
-                multiFormDiv.find("input[name='title[]']").val('');
-                multiFormDiv.find("input[name='link[]']").val('');
-                multiFormDiv.find("textarea[name='desc[]']").val('Desc');
-                multiFormDiv.find("img[name='image_attachment_id[]']").val('');
+
+                // Populate fields with saved data
+                multiFormDiv.find("input[name='title[]']").val(data.title);
+                multiFormDiv.find("textarea[name='desc[]']").val(data.desc);
+                multiFormDiv.find("input[name='link[]']").val(data.link);
 
                 // Modify attributes and IDs of the cloned elements
                 multiFormDiv.find("input[name='title[]']").attr({
@@ -750,15 +752,68 @@
                     br.remove();
                 });
 
+                // Append the populated form fields
                 additionalFields.append(multiFormDiv);
                 multiFormDiv.append(deleteButton);
                 additionalFields.append(br);
+                // multiFormDiv.hide();
+
+                fieldCounter++;
+            });
+        }
+
+        var savedData = [
+            <?php foreach ($data_images as $key => $data) : ?>
+            // Example saved data objects
+            { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>" },
+            <?php endforeach; ?>
+            // Add more saved data objects as needed
+        ];
+
+        populateFormFields(savedData);
+
+        $("#add_field").click(function() {
+            var additionalFields = $("#additional_fields");
+            var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
+            
+            // Reset values of cloned input fields
+            multiFormDiv.find("input[name='title[]']").val('');
+            multiFormDiv.find("input[name='link[]']").val('');
+            multiFormDiv.find("textarea[name='desc[]']").val('Desc');
+            multiFormDiv.find("img[name='image_attachment_id[]']").val('');
+
+            // Modify attributes and IDs of the cloned elements
+            multiFormDiv.find("input[name='title[]']").attr({
+                name: "title[]",
+                id: "field_title_" + fieldCounter
+            });
+
+            multiFormDiv.find("input[name='desc[]']").attr({
+                name: "desc[]",
+                id: "field_desc_" + fieldCounter
+            });
+
+            multiFormDiv.find("input[name='link[]']").attr({
+                name: "link[]",
+                id: "field_link_" + fieldCounter
+            });
+
+            var br = $("<br>");
+
+            var deleteButton = $("<button>").attr({
+                type: "button"
+            }).text("Delete Field").click(function() {
+                multiFormDiv.remove(); // Remove the cloned div
+                br.remove();
+            });
+
+            additionalFields.append(multiFormDiv);
+            multiFormDiv.append(deleteButton);
+            additionalFields.append(br);
 
 
-                fieldCounter++; // Increment the field counter for the next field
-            } else {
-                alert("Max Field Has Reached!");
-            }
+            fieldCounter++; // Increment the field counter for the next field
+            
             
         });
     });
