@@ -748,17 +748,21 @@
 
                 var br = $("<br>");
 
-                var deleteButton = $("<button>").attr({
-                    type: "button"
-                }).text("Delete Field").click(function() {
-                    multiFormDiv.remove(); // Remove the cloned div
-                    br.remove();
-                });
+                if (fieldCounter > 1) { 
+                    var deleteButton = $("<button>").attr({
+                        type: "button"
+                    }).text("Delete Field").click(function() {
+                        multiFormDiv.remove(); // Remove the cloned div
+                        br.remove();
+                    });
+                }
 
                 // Append the populated form fields
                 additionalFields.append(multiFormDiv);
                 multiFormDiv.append(deleteButton);
                 additionalFields.append(br);
+
+                
 
                 fieldCounter++;
             });
