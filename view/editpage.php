@@ -172,6 +172,7 @@
                                             <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                                         </div>
                                         <hr class="my-3 ms-4" width="85%;">
+                                        <input type="hidden" name="id_img" value="">
 
                                         <!-- end form-container -->
                                     </div>
@@ -190,7 +191,7 @@
                                 <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
                                     <input type="hidden" name="edit_id" value="<?php echo esc_attr($id); ?>">
                                     <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
-                                    <button class="button-18" role="button" name="submit">Save</button>
+                                    <button class="button-18" id="submit" role="button" name="submit">Save</button>
                                 </div>
 
                                 </form>
@@ -726,6 +727,8 @@
                 multiFormDiv.find("input[name='title[]']").val(data.title);
                 multiFormDiv.find("textarea[name='desc[]']").val(data.desc);
                 multiFormDiv.find("input[name='link[]']").val(data.link);
+                multiFormDiv.find("input[name='image_attachment_id[]']").val(data.img);
+                multiFormDiv.find("input[name='id_img']").val(data.id_img);
 
                 // Modify attributes and IDs of the cloned elements
                 multiFormDiv.find("input[name='title[]']").attr({
@@ -756,24 +759,33 @@
                 additionalFields.append(multiFormDiv);
                 multiFormDiv.append(deleteButton);
                 additionalFields.append(br);
-                // multiFormDiv.hide();
 
                 fieldCounter++;
             });
         }
 
         var savedData = [
-            <?php foreach ($data_images as $key => $data) : ?>
             // Example saved data objects
-            { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>" },
+            <?php foreach ($data_images as $key => $data) : ?>
+            { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>", img: "<?php echo $data->img ?>", id_img: "<?php echo $data->id_img ?>"  },
             <?php endforeach; ?>
             // Add more saved data objects as needed
         ];
 
-        populateFormFields(savedData);
+        if (<?php echo $id_slider ?>) {
+            populateFormFields(savedData);
+            $('#multiple_form').hide();
+        } else {            
+            $('#multiple_form').css('display', 'block');
+        }
 
         $("#add_field").click(function() {
             var additionalFields = $("#additional_fields");
+
+            if (<?php echo $id_slider ?>) {
+                $('#multiple_form').css('display', 'block');
+            }
+
             var multiFormDiv = $("#multiple_form").clone(); // Clone the original div
             
             // Reset values of cloned input fields
@@ -788,7 +800,7 @@
                 id: "field_title_" + fieldCounter
             });
 
-            multiFormDiv.find("input[name='desc[]']").attr({
+            multiFormDiv.find("textarea[name='desc[]']").attr({
                 name: "desc[]",
                 id: "field_desc_" + fieldCounter
             });
@@ -813,9 +825,17 @@
 
 
             fieldCounter++; // Increment the field counter for the next field
-            
-            
+
+            if (<?php echo $id_slider ?>) {
+                $('#multiple_form').css('display', 'none');
+            }
         });
+
+        $('#submit').on('click', function() {
+            $('#multiple_form').remove();
+        });
+
+
     });
 </script>
 
