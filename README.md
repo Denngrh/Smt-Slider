@@ -48,7 +48,7 @@ There are two ways to do it:
 
 4. Do `git clone {url} {slug}` where `{url}` is the Gist SSH URL which you copied to the clipboard and `{slug}` is the name you want to use. You can leave out `{slug}` if you want, but then the slug of the plugin will be something like `Smt-Slider` instead of `my-plugin-doing-something`.
 
-5. Then activate the plugin either via the WordPress admin or via WP-CLI (e.g. `wp plugin activate {slug}`).
+5. Then activate the plugin either via the WordPress admin or via WP-CLI test (e.g. `wp plugin activate {slug}`).
 
 
 ## Contributors ✨
