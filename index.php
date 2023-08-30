@@ -52,6 +52,7 @@ function smt_img_table() {
             title VARCHAR(100) NOT NULL,
             `desc` LONGTEXT NOT NULL,
             link VARCHAR(100) NOT NULL,
+            button_link VARCHAR(30) NOT NULL,
             id_slider INT(11) NOT NULL,
             PRIMARY KEY (id_img)
         ) $charset_collate;";
@@ -72,12 +73,8 @@ function smt_style_table() {
         // Skema tabel
         $sql = "CREATE TABLE $table_name (
             id_style INT(11) NOT NULL AUTO_INCREMENT,
-            button_color VARCHAR(30) NOT NULL,
-            button_hover VARCHAR(30) NOT NULL,
-            font_name VARCHAR(50) NOT NULL,
-            font_color VARCHAR(30) NOT NULL,
-            border_img VARCHAR(30) NOT NULL,
-            shadow_img VARCHAR(30) NOT NULL,
+            style_data LONGTEXT NOT NULL,
+            id_slider VARCHAR(50) NOT NULL,
             PRIMARY KEY (id_style)
         ) $charset_collate;";
         //Proses crete table

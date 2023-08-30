@@ -10,8 +10,9 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 
 <body>
      <!-- Navbar  -->
@@ -44,7 +45,6 @@
             <div class="col">
                 <div class="setting-image-form" id="settingImageForm">
                     <?php
-                    // Ambil nilai ID dari permintaan
                     $id = $_GET['id'];
                     global $wpdb;
                     $table_name = $wpdb->prefix . 'smt_slider';
@@ -283,9 +283,138 @@
                     </div>
                 </div>
                 <div class="custom-css-form" id="customCSSForm">
-                    <form>
-                        <h4> Setting css</h4>
+                    <?php
+                    global $wpdb;
+                    $id = $_GET['id'];
+                    $table_smt_css = $wpdb->prefix . 'smt_style';
+                    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+                    $css_data = json_decode($data->style_data, true);
+                    {
+                    ?>
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                        <input type="hidden" name="action" value="insert_css_callback">
+                        <div class="component">
+                            <span class="arrow-down" onclick="toggleCssForm('title')">Title ▼</span>
+                            <div class="css-form" id="titleCssForm">
+                                <!-- Form CSS for Title -->
+                                <div class="select px-md-4 px-4 d-flex justify-content-between">
+                                    <label>Font</label>
+                                    <select name="title_fam" id="title_fam">
+                                        <option value="<?php echo $css_data['title_fam']; ?>"><?php echo $css_data['title_fam']; ?></option>
+                                        <option value="sans-serif" style="font-family:sans-serif;">Sans Serif</option>
+                                        <option value="serif" style="font-family:serif;">Serif</option>
+                                        <option value="fantasy" style="font-family:fantasy;">Fantasy</option>
+                                        <option value="Verdana" style="font-family:Verdana;">Verdana</option>
+                                    </select>
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="title_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['title_color']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component">
+                            <span class="arrow-down" onclick="toggleCssForm('description')">Description ▼</span>
+                            <div class="css-form" id="descriptionCssForm">
+                                <!-- Form CSS for Description -->
+                                <div class="select px-md-4 px-4 d-flex justify-content-between">
+                                    <label>Font</label>
+                                    <select name="desc_fam" id="desc_fam">
+                                        <option value="<?php echo $css_data['desc_fam']; ?>"><?php echo $css_data['desc_fam']; ?></option>
+                                        <option value="sans-serif" style="font-family:sans-serif;">Sans Serif</option>
+                                        <option value="serif" style="font-family:serif;">Serif</option>
+                                        <option value="fantasy" style="font-family:fantasy;">Fantasy</option>
+                                        <option value="Verdana" style="font-family:Verdana;">Verdana</option>
+                                    </select>
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="desc_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['desc_color']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component">
+                            <span class="arrow-down" onclick="toggleCssForm('button')">Button Link ▼</span>
+                            <div class="css-form" id="buttonCssForm">
+                                <!-- Form CSS for Button Link -->
+                                <div class="select px-md-4 px-4 d-flex justify-content-between">
+                                    <label>Font</label>
+                                    <select name="btn_fam" id="btn_fam">
+                                        <option value="<?php echo $css_data['btn_fam']; ?>"><?php echo $css_data['btn_fam']; ?></option>
+                                        <option value="sans-serif" style="font-family:sans-serif;">Sans Serif</option>
+                                        <option value="serif" style="font-family:serif;">Serif</option>
+                                        <option value="fantasy" style="font-family:fantasy;">Fantasy</option>
+                                        <option value="Verdana" style="font-family:Verdana;">Verdana</option>
+                                    </select>
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="btn_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_color']; ?>">
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Background  </label>
+                                    <input class="form-control" type="color" name ="btn_bg" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_bg']; ?>">
+                                </div>
+                                <hr class="my-3 ms-4" width="75%;"> 
+                                <p class="ms-md-4"> Hover </p>
+                                <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="btn_color_hvr" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_color_hvr']; ?>">
+                                </div>
+                                <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between" >
+                                    <label> Background </label>
+                                    <input class="form-control" type="color" name ="btn_bg_hvr" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_bg_hvr']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component">
+                            <span class="arrow-down" onclick="toggleCssForm('dots')">Indicator Dots ▼</span>
+                            <div class="css-form" id="dotsCssForm">
+                                <!-- Form CSS for Indicator Dots -->
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="dots_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['dots_color']; ?>">
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Background  </label>
+                                    <input class="form-control" type="color" name ="dots_bg" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['dots_bg']; ?>">
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Line Color </label>
+                                    <input class="form-control" type="color" name ="dots_line" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['dots_line']; ?>">
+                                </div>
+                                <hr class="my-3 ms-4" width="75%;"> 
+                                <p class="ms-md-4"> Active </p>
+                                <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between" >
+                                    <label> Background  </label>
+                                    <input class="form-control" type="color" name ="dots_bg_active" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['dots_bg_active']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component">
+                            <span class="arrow-down" onclick="toggleCssForm('control')">Button Control ▼</span>
+                            <div class="css-form" id="controlCssForm">
+                                <!-- Form CSS for Button Control -->
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Font Color </label>
+                                    <input class="form-control" type="color" name ="control_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['control_color']; ?>">
+                                </div>
+                                <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                    <label> Background  </label>
+                                    <input class="form-control" type="color" name ="control_bg" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['control_bg']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-3 ms-4" width="85%;">
+                        <div class="col justify-content-between d-flex px-md-5 px-4 mb-4">
+                            <input type="hidden" name="get_id_css" value="<?php echo esc_attr($id); ?>">
+                            <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back">Back</a>
+                            <button class="button-18" role="button" name="submit">Save</button>
+                        </div>
                     </form>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div> 
@@ -338,35 +467,32 @@
 
     body {
         background-color: white;
-        overflow-x: hidden;
-        overflow-y: hidden;
-
-
+        overflow-x:hidden;
+        overflow-y:hidden;
+       
+        
     }
-
-    .navbar {
-        background: #4fb359;
-        width: 102%;
-        height: 40px;
+    .navbar{
+        background : #4fb359;
+        width : 102%;
+        height :40px;
     }
-
-    .title-navbar {
-        color: #ffffff;
-        font-size: 20px;
-
-    }
-
-    .icon {
-        height: 30px;
-        color: #ffffff;
-        font-size: 20px;
-    }
+    .title-navbar{
+        color:#ffffff;
+        font-size : 20px;
 
     h6 {
         font-size: 15px;
     }
-
-    .sidebar {
+    .icon{
+        height:30px;
+        color:#ffffff;
+        font-size : 20px;
+    }
+    h6{
+        font-size:15px;
+    }
+    .sidebar{
         overflow-y: auto;
         height: 90vh;
     }
@@ -541,10 +667,16 @@
     .content {
         height: 80vh;
     }
-
-    /* Gaya untuk tampilan desktop */
-    .content.card {
-        /* Gaya untuk card di tampilan desktop */
+    .component {
+    margin-bottom: 10px;
+    }
+    .arrow-down {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .css-form {
+        padding: 10px;
+    
     }
 </style>
 
@@ -573,48 +705,67 @@
 
 <script>
     jQuery(document).ready(function($) {
-        // Fungsi untuk mengubah ukuran card
         function dekstopsize() {
             var card = $('.content.card');
-            // Tambahkan logika untuk mengubah lebar dan tinggi card sesuai yang Anda inginkan
-            // Misalnya, Anda dapat menggunakan metode .css() untuk mengubah properti CSS
             card.css('width', '925px');
-            card.css('height', '526px');
+            card.css('height', '670px');
             card.css('margin', 'auto');
         }
-
-        // Panggil fungsi untuk mengatur ukuran card saat halaman dimuat
         dekstopsize();
-
-        // Tindakan ketika tombol "Mobile" diklik
         $('#mobilebutton').on('click', function() {
-            // Tambahkan logika untuk mengubah ukuran card sesuai tampilan mobile
-            // Contoh:
             var card = $('.content.card');
-            card.css('width', '260px');
-            card.css('height', '503px');
+            card.css('width', '360px');
+            card.css('height', '670px');
             card.css('margin', 'auto');
         });
-
-        // Tindakan ketika tombol "Tablet" diklik
         $('#tabletbutton').on('click', function() {
-            // Tambahkan logika untuk mengubah ukuran card sesuai tampilan tablet
-            // Contoh:
             var card = $('.content.card');
-            card.css('width', '668px');
-            card.css('height', '503px');
+            card.css('width', '820px');
+            card.css('height', '670px');
             card.css('margin', 'auto');
         });
-
-        // Tindakan ketika tombol "Dekstop" diklik
         $('#dekstopbutton').on('click', function() {
-            // Panggil fungsi dekstopsize() untuk mengubah ukuran card sesuai tampilan desktop
             dekstopsize();
         });
     });
 </script>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteLinks = document.querySelectorAll(".delete-link");
+        deleteLinks.forEach((link) => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                const id = this.parentElement.querySelector("select[name='selected_slider']").value;
+                const title = this.parentElement.querySelector("select[name='selected_slider']").selectedOptions[0].innerText;
+                const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
+                this.setAttribute("data-id", id); // Update the data-id attribute
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: `You won't be able to revert this for slider "${title}"!`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Cancel",
+                    iconHtml: '<i class="fa fa-trash"></i>',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        setTimeout(function() {
+                            window.location.href = url;
+                        }, 1000);
+                        // Show success alert immediately
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    });
     document.addEventListener("DOMContentLoaded", function() {
         const deleteLinks = document.querySelectorAll(".delete-link");
         deleteLinks.forEach((link) => {
@@ -708,8 +859,7 @@
                 container.find('#bg_image_attachment_id').val(bg_attachment.id);
             });
 
-            bg_file_frame.open();
-        });
+        bg_file_frame.open();
     });
 </script>
 
@@ -889,6 +1039,18 @@
     });
 </script>
 
+
+<script>
+    function toggleCssForm(componentName) {
+    var cssForm = document.getElementById(componentName + 'CssForm');
+
+    if (cssForm.style.display === 'block') {
+        cssForm.style.display = 'none';
+    } else {
+        cssForm.style.display = 'block';
+    }
+}
+</script>
 
 
 
