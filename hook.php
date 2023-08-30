@@ -1,7 +1,8 @@
 <?php
 function ListMenu()
 {
-    add_menu_page('Plugin Slider', 'Smt Slider', '', 'list', 'list_menu', 'dashicons-slides', '20');
+    $icon_url = plugin_dir_url(__FILE__) . 'assets/icons/logo.png';
+    add_menu_page('Plugin Slider', 'Smt Slider', '', 'list', 'list_menu',$icon_url, '20');
     add_submenu_page('list', 'Dashboard', 'Dashboard', 'manage_options', 'dashboard', 'list_menu');
     add_submenu_page('', 'Edit-Page', 'Edit2', 'manage_options', 'edit2', 'list_menu_1');
 }
@@ -187,6 +188,19 @@ function shortcode_smt_slider($atts)
         }
     }
 }
+
+function custom_admin_menu_styles() {
+    echo '<style>
+        #toplevel_page_list .wp-menu-image img {
+            width: 25px;
+            height: auto;
+            filter: brightness(1.5);
+            margin-top: -4px; 
+        }
+    </style>';
+}
+
+add_action('admin_head', 'custom_admin_menu_styles');
 
 add_shortcode('smt_slider', 'shortcode_smt_slider');
 // Tambahkan aksi ke dalam WordPress admin
