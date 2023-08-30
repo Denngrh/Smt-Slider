@@ -221,7 +221,6 @@
                                     <div class="form-container">
                                         <input type="hidden" name="action" value="insert_img_callback">
                                         <!-- Upload Image  -->
-                                            <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
                                             <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
                                             <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
                                                 <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
@@ -480,6 +479,7 @@
     .title-navbar{
         color:#ffffff;
         font-size : 20px;
+    }
 
     h6 {
         font-size: 15px;
@@ -864,7 +864,6 @@
 </script>
 
 
-// script buat copas div untuk multiple field
 <script type='text/javascript'>
     $(document).ready(function() {
         var fieldCounter = 1; // To generate unique IDs for each field
@@ -1041,7 +1040,7 @@
 
 
 <script>
-    function toggleCssForm(componentName) {
+function toggleCssForm(componentName) {
     var cssForm = document.getElementById(componentName + 'CssForm');
 
     if (cssForm.style.display === 'block') {
@@ -1051,6 +1050,3 @@
     }
 }
 </script>
-
-
-

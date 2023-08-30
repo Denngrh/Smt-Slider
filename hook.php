@@ -74,6 +74,12 @@ function insert_slide_callback()
                 'btn_bg' => 'blue',
                 'btn_color_hvr' => 'white',
                 'btn_bg_hvr' => 'cyan',
+                'dots_color' => 'white',
+                'dots_bg' => 'blue',
+                'dots_line' => 'blue',
+                'dots_bg_active' => 'red',
+                'control_color' => 'black',
+                'control_bg' => 'white',
             );
 
             $json_style_data = json_encode($style_data);
@@ -173,7 +179,6 @@ function insert_img_callback()
         }
 
     }
-}
     }
 }
 

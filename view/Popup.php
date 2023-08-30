@@ -19,7 +19,7 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
 
         ?>
         const type2 = false;
@@ -38,7 +38,7 @@
         });
     </script>
 
-    <!-- <style>
+    <style>
         .custom-popup {
             /* position: none; */
             /* top: 0;
@@ -70,8 +70,6 @@
             /* margin-bottom: 20px; */
             display: flex;
 
-            max-width: 100%;
-            height: auto;
         }
 
         .close-button {
@@ -101,10 +99,8 @@
         .popup-image {
             border-radius: 15px;
             object-fit: cover;
-            /* width: 350px;
-            height: 450px; */
-            max-width: 100%;
-            height: auto;
+            width: 350px;
+            height: 450px;
         }
 
         .jarak {
@@ -134,8 +130,8 @@
             width: 100%;
             margin-bottom: 20px;
         }
-    </style> -->
-
+    </style>
+<!-- 
     <style>
         .custom-popup {
             display: none;
@@ -191,7 +187,7 @@
                 /* Adjust the width for smaller screens */
             }
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
