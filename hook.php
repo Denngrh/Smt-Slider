@@ -93,53 +93,45 @@ function insert_img_callback()
         $descs = array_map('sanitize_textarea_field', $_POST['desc']);
         $links = array_map('sanitize_textarea_field', $_POST['link']);
         $image_id = array_map('absint', $_POST['image_attachment_id']); // Gunakan ID gambar yang dipilih
-        $bg_image_id = absint($_POST['bg_image_attachment_id']); // ID gambar latar belakang
+        $bg_image_id = array_map('absint', $_POST['bg_image_attachment_id']); // Gunakan ID gambar yang dipilih
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
 
+        $id_img = array_map('absint' ,$_POST['id_img']);
+
         for ($i = 0; $i < count($titles); $i++) {
-            $result = $wpdb->insert(
-                $table_smt_img,
-                array(
-                    'title' => $titles[$i],
-                    'desc' => $descs[$i],
-                    'link' => $links[$i],
-                    'img' => $image_id[$i],
-                    'bg_img' => $bg_image_id, // Simpan ID gambar latar belakang
-                    'id_slider' => $edit_id,
-                )
-            );
+
+            $custom_query = "
+                INSERT INTO $table_smt_img (id_img, img, bg_img, title, `desc`, link, id_slider)
+                VALUES ($id_img[$i], $image_id[$i], $bg_image_id[$i], '$titles[$i]', '$descs[$i]', '$links[$i]', $edit_id)
+                ON DUPLICATE KEY UPDATE
+                    img = CASE WHEN VALUES(img) <> img THEN VALUES(img) ELSE img END,
+                    bg_img = CASE WHEN VALUES(bg_img) <> bg_img THEN VALUES(bg_img) ELSE bg_img END,
+                    title = CASE WHEN VALUES(title) <> title THEN VALUES(title) ELSE title END,
+                    `desc` = CASE WHEN VALUES(`desc`) <> `desc` THEN VALUES(`desc`) ELSE `desc` END,
+                    link = CASE WHEN VALUES(link) <> link THEN VALUES(link) ELSE link END,
+                    id_slider = CASE WHEN VALUES(id_slider) <> id_slider THEN VALUES(id_slider) ELSE id_slider END;
+            ";
+
+            $hasil = $wpdb->query($custom_query);
         }
 
-    // Masukkan data ke tabel smt-img
-    // $result = $wpdb->insert(
-    //     $table_smt_img,
-    //     array(
-    //         'title' => $title,
-    //         'desc' => $desc,
-    //         'link' => $link,
-    //         'img' => $image_id,
-    //         'bg_img' => $bg_image_id, // Simpan ID gambar latar belakang
-    //         'id_slider' => $edit_id,
-    //     )
-    // );
-
-    if ($result) {
-        // Jika data berhasil diinsert, periksa apakah ada $edit_id
-        if ($edit_id) {
-            wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
-        } else {
-            // Jika tidak ada $edit_id, maka perlu mencari id yang baru saja diinsert
-            $inserted_id = $wpdb->insert_id;
-            if ($inserted_id) {
-                wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
+        if ($hasil !== false) {
+            // Jika data berhasil diinsert, periksa apakah ada $edit_id
+            if ($edit_id) {
+                wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
             } else {
-                wp_die('Terjadi kesalahan saat mengirim data gambar.');
+                // Jika tidak ada $edit_id, maka perlu mencari id yang baru saja diinsert
+                $inserted_id = $wpdb->insert_id;
+                if ($inserted_id) {
+                    wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
+                } else {
+                    wp_die('Terjadi kesalahan saat mengirim data gambar.');
+                }
             }
+            exit;
+        } else {
+            wp_die('Terjadi kesalahan saat mengirim data gambar. :( ');
         }
-        exit;
-    } else {
-        wp_die('Terjadi kesalahan saat mengirim data gambar.');
-    }
 
     }
 }

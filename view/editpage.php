@@ -154,7 +154,7 @@
                                                 $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
                                             ?>
                                             <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
-                                            <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
+                                            <input type='hidden' name='bg_image_attachment_id[]' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
                                             <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
                                                 <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
                                             </div>
@@ -172,7 +172,7 @@
                                             <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                                         </div>
                                         <hr class="my-3 ms-4" width="85%;">
-                                        <input type="hidden" name="id_img" value="">
+                                        <input type="hidden" name="id_img[]" value="">
 
                                         <!-- end form-container -->
                                     </div>
@@ -230,13 +230,14 @@
                                         <!-- Upload Background -->
                                             <?php
                                                 if (isset($_POST['bg_image_attachment_id'])) {
-                                                    update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
+                                                   // update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
+                                                    echo $_POST['bg_image_attachment_id'];
                                                 }
                                                 wp_enqueue_media();
                                                 $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');
                                             ?>
                                             <input id="upload_bg_image_button" type="button" class="button bg-image-button" value="<?php _e( 'Unggah gambar latar belakang' ); ?>" />
-                                            <input type='hidden' name='bg_image_attachment_id' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
+                                            <input type='hidden' name='bg_image_attachment_id[]' id='bg_image_attachment_id' value='<?php echo get_option( 'bg_media_selector_attachment_id' ); ?>'>
                                             <div class='bg-image-preview-wrapper mt-3 ms-4 ms-md-4'>
                                                 <img id='bg-image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'bg_media_selector_attachment_id' ) ); ?>' width='200'>
                                             </div>
@@ -254,7 +255,8 @@
                                             <textarea name="desc[]" id="" cols="21" rows="3" style="border: 1px solid #CDD9ED; color: #99A3BA;">Desc</textarea>
                                         </div>
                                         <hr class="my-3 ms-4" width="85%;">
-
+                                        <input type="hidden" name="id_img[]" value="">
+                                        
                                         <!-- end form-container -->
                                     </div>
                                     <!-- end multiple form -->
@@ -611,6 +613,7 @@
         });
     });
 </script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const deleteLinks = document.querySelectorAll(".delete-link");
@@ -649,38 +652,6 @@
     });
 </script>
 
-<script type='text/javascript'>
-    jQuery(document).ready(function($) {
-        var bg_file_frame;
-
-        $('#upload_bg_image_button').on('click', function(event) {
-            event.preventDefault();
-
-            if (bg_file_frame) {
-                bg_file_frame.open();
-                return;
-            }
-
-            bg_file_frame = wp.media.frames.bg_file_frame = wp.media({
-                title: 'Pilih gambar latar belakang',
-                button: {
-                    text: 'Gunakan gambar ini',
-                },
-                multiple: false
-            });
-
-            bg_file_frame.on('select', function() {
-                var bg_attachment = bg_file_frame.state().get('selection').first().toJSON();
-                $('#bg-image-preview').attr('src', bg_attachment.url);
-                $('#bg_image_attachment_id').val(bg_attachment.id); // Setel ID lampiran gambar latar belakang
-            });
-
-            bg_file_frame.open();
-        });
-    });
-</script>
-
-// script dibawah ini untuk memproses multiple upload image dengan field yang di copas
 
 <script type="text/javascript">
     $('.form-container').on('click', '#upload_image_button', function(event) {
@@ -695,7 +666,7 @@
                 button: {
                     text: 'Gunakan gambar ini'
                 },
-                multiple: false
+                multiple: false 
             });
 
             container.data('file_frame', file_frame);
@@ -711,24 +682,56 @@
     });
 </script>
 
+<script type='text/javascript'>
+    jQuery(document).ready(function($) {
+        $('.form-container').on('click', '#upload_bg_image_button', function(event) {
+            event.preventDefault();
+
+            var container = $(this).closest('.form-container');
+            var bg_file_frame = container.data('bg_file_frame');
+
+            if (!bg_file_frame) {
+                bg_file_frame = wp.media.frames.bg_file_frame = wp.media({
+                    title: 'Pilih gambar latar belakang',
+                    button: {
+                        text: 'Gunakan gambar ini'
+                    },
+                    multiple: false
+                });
+
+                container.data('bg_file_frame', bg_file_frame);
+            }
+
+            bg_file_frame.on('select', function() {
+                var bg_attachment = bg_file_frame.state().get('selection').first().toJSON();
+                container.find('#bg-image-preview').attr('src', bg_attachment.url);
+                container.find('#bg_image_attachment_id').val(bg_attachment.id);
+            });
+
+            bg_file_frame.open();
+        });
+    });
+</script>
+
 
 // script buat copas div untuk multiple field
 <script type='text/javascript'>
     $(document).ready(function() {
         var fieldCounter = 1; // To generate unique IDs for each field
         
+        // the function below is to foreach based on data in db
         function populateFormFields(savedData) {
             savedData.forEach(function(data) {
                 var additionalFields = $("#additional_fields");
                 var multiFormDiv = $("#multiple_form").clone();
-
 
                 // Populate fields with saved data
                 multiFormDiv.find("input[name='title[]']").val(data.title);
                 multiFormDiv.find("textarea[name='desc[]']").val(data.desc);
                 multiFormDiv.find("input[name='link[]']").val(data.link);
                 multiFormDiv.find("input[name='image_attachment_id[]']").val(data.img);
-                multiFormDiv.find("input[name='id_img']").val(data.id_img);
+                multiFormDiv.find("input[name='bg_image_attachment_id[]']").val(data.bg_img);
+                multiFormDiv.find("input[name='id_img[]']").val(data.id_img);
 
                 // Modify attributes and IDs of the cloned elements
                 multiFormDiv.find("input[name='title[]']").attr({
@@ -746,14 +749,58 @@
                     id: "field_link_" + fieldCounter
                 });
 
+                multiFormDiv.find("img[id='image-preview']").attr({
+                    src: data.img_url
+                });
+
+                multiFormDiv.find("img[id='bg-image-preview']").attr({
+                    src: data.bg_img_url
+                });
+
                 var br = $("<br>");
 
                 if (fieldCounter > 1) { 
-                    var deleteButton = $("<button>").attr({
-                        type: "button"
-                    }).text("Delete Field").click(function() {
-                        multiFormDiv.remove(); // Remove the cloned div
-                        br.remove();
+                    var deleteButton = $("<button>")
+                    .attr({
+                        type: "submit",
+                        id: "field_id_" + fieldCounter,
+                        "data-id": data.id_img,
+                        "data-title": data.title
+                    })
+                    .addClass("delete-button")
+                    .text("Delete Field")
+                    .click(function(event) {
+                        // multiFormDiv.remove();
+                        // br.remove();
+                        event.preventDefault();
+
+                        const id = $(this).data("id");
+                        const title = $(this).data("title");
+                        const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
+
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: `You won't be able to revert this for slider "${title}"!`,
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "Cancel",
+                            iconHtml: '<i class="fa fa-trash"></i>',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                setTimeout(function() {
+                                    window.location.href = url;
+                                }, 1000);
+                                // Show success alert immediately
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                );
+                            }
+                        });
                     });
                 }
 
@@ -771,12 +818,12 @@
         var savedData = [
             // Example saved data objects
             <?php foreach ($data_images as $key => $data) : ?>
-            { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>", img: "<?php echo $data->img ?>", id_img: "<?php echo $data->id_img ?>"  },
+            { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>", img: "<?php echo $data->img ?>", img_url: "<?php echo wp_get_attachment_url( $data->img ) ?>" , bg_img_url: "<?php echo wp_get_attachment_url( $data->bg_img ) ?>" ,bg_img: "<?php echo $data->bg_img ?>" , id_img: "<?php echo $data->id_img ?>"  },
             <?php endforeach; ?>
             // Add more saved data objects as needed
         ];
 
-        if (<?php echo $id_slider ?>) {
+        if (<?php echo $id_slider_exists ?>) {
             populateFormFields(savedData);
             $('#multiple_form').hide();
         } else {            
