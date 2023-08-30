@@ -12,7 +12,8 @@
     global $wpdb;
     $table_smt_img = $wpdb->prefix . 'smt_img';
     $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ");
-    if (!empty($data_images)) {?>
+    if (!empty($data_images)) {
+       ?>
     <div class="sec container-fluid bg-container">
         <div class="container">
             <div class="row">
@@ -22,20 +23,22 @@
                         <div class="dot-wrapper" onclick="showSlide(<?= $index ?>)">
                             <span class="dot <?= $index === 0 ? 'active' : '' ?>"><span class="dot-number"><?= $index + 1 ?></span></span>
                         </div>
+                        <div class="dot-connector"></div>
                     <?php endforeach; ?>
                 </div>
                 </div>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                    <h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1>
-                    <p class="my-md-4"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
+                    <div class="title_slide"><h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1></div>
+                    <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
                         untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
-                        <button class="btn btn-primary"> Explore </button>
+                        <button class="btn-custom"> Explore </button>
+                    </div>
                 </div>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                         <?php foreach ($data_images as $index => $data): ?>
-                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)">
+                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>">
                                 <img class="inner" src="<?= wp_get_attachment_url($data->img) ?>">
                                 <div class="slide-text">
                                     <h3><?= $data->title ?></h3>
@@ -48,13 +51,10 @@
                 </div>
                 <div class="slider-controls">
                     <button class="carousel-control-prev ms-md-3" onclick="moveSlide('prev')">
-                        <span class="carousel-control-prev-icon" 
-                            aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <i class="fa-solid fa-arrow-left" style="color: #13161b;"></i>
                     </button>
                     <button class="carousel-control-next" onclick="moveSlide('next')">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <i class="fa-solid fa-arrow-right" style="color: #13161b;"></i>
                     </button>
                 </div>
             </div>
@@ -72,86 +72,38 @@
                         <div class="dot-wrapper" onclick="showSlide(0)">
                             <span class="dot"><span class="dot-number">1</span></span>
                         </div>
-                        <div class="dot-wrapper" onclick="showSlide(1)">
-                            <span class="dot"><span class="dot-number">2</span></span>
-                        </div>
-                        <div class="dot-wrapper" onclick="showSlide(2)">
-                            <span class="dot"><span class="dot-number">3</span></span>
-                        </div>
-                        <div class="dot-wrapper" onclick="showSlide(3)">
-                            <span class="dot"><span class="dot-number">4</span></span>
-                        </div>
-                        <div class="dot-wrapper" onclick="showSlide(4)">
-                            <span class="dot"><span class="dot-number">5</span></span>
-                        </div>
+                        <div class="dot-connector"></div>
                     </div>
                     
                 </div>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                    <h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1>
-                    <p class="my-md-4"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
+                    <div class="title_slide"><h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1></div>
+                    <div class="desc_slide"><p class="my-md-4"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
                         untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
-                        <button class="btn btn-primary"> Explore </button>
+                        <button class="btn-custom"> Explore </button>
+                    </div>
                 </div>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                             <!-- Slide 1 -->
-                            <div class="slide slide1 col-md-4 active" onclick="showSlide(0)">
-                                <img class="inner" src="https://asset.kompas.com/crops/Tg1rEfwv-5GiWpbSb5-RuaBlkjk=/0x0:1800x1200/750x500/data/photo/2022/08/07/62ef3f9c2846d.jpg">
+                            <div class="slide col-md-4 active" onclick="showSlide(0)" data-background="https://www.pinhome.id/info-area/wp-content/uploads/2022/07/Gunung-Prau-1.jpg">
+                                <img class="inner" src="https://www.carrierstory.com/wp-content/uploads/2021/09/Jalur-Pendakian-Via-Patak-Banteng.jpg">
                                 <div class="slide-text">
-                                    <h3>Gunung Prau</h3>
-                                    <p>Deskripsi Gunung Prau.</p>
+                                    <h3 >Example 1</h3>
+                                    <p >Deskripsi Exapmle1.</p>
                                 </div>
                             </div>
 
-                            <!-- Slide 2 -->
-                            <div class="slide slide2 col-md-4" onclick="showSlide(1)">
-                                <img class="inner" src="https://asset.kompas.com/crops/SJBld7b2CtJC5zJMlFbu1zKopZY=/1x319:1024x1001/750x500/data/photo/2022/09/04/6314d47545313.jpg">
-                                <div class="slide-text">
-                                    <h3>Banda Neira</h3>
-                                    <p>Deskripsi Banda Neira.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 3 -->
-                            <div class="slide slide3 col-md-4" onclick="showSlide(2)">
-                                <img class="inner" src="https://awsimages.detik.net.id/community/media/visual/2022/12/28/sunset-di-pantai-kuta-kabupaten-badung-bali_169.jpeg?w=1200">
-                                <div class="slide-text">
-                                    <h3>Sunset Pantai</h3>
-                                    <p>Deskripsi Sunset Pantai.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 4 -->
-                            <div class="slide slide4 col-md-4" onclick="showSlide(3)">
-                                <img class="inner" src="https://www.nativeindonesia.com/foto/2022/06/gunung-slamet.jpg">
-                                <div class="slide-text">
-                                    <h3>Gunung Slamet</h3>
-                                    <p>Deskripsi Gunung Slamet.</p>
-                                </div>
-                            </div>
-
-                            <!-- Slide 5 -->
-                            <div class="slide slide5 col-md-4" onclick="showSlide(4)">
-                                <img class="inner" src="https://akcdn.detik.net.id/visual/2018/07/29/bc121b83-938b-4c7c-946c-1f6f22e75d6d_169.jpeg?w=650">
-                                <div class="slide-text">
-                                    <h3>Gunung Rinjani</h3>
-                                    <p>Deskripsi Gunung Rinjani.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="slider-controls">
                     <button class="carousel-control-prev ms-md-3" onclick="moveSlide('prev')">
-                        <span class="carousel-control-prev-icon" 
-                            aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <i class="fa-solid fa-arrow-left" style="color: #13161b;"></i>
                     </button>
                     <button class="carousel-control-next" onclick="moveSlide('next')">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <i class="fa-solid fa-arrow-right" style="color: #13161b;"></i>
                     </button>
                 </div>
             </div>
@@ -162,9 +114,15 @@
     ?>
 </body>
 </html>
+<?php
+global $wpdb;
+$table_smt_css = $wpdb->prefix . 'smt_style';
+$data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
 
+    $css_data = json_decode($data->style_data, true);{
+?>
 <style>
-    .sec {
+     .sec {
         margin: 0;
         padding: 0;
         height: 100vh;
@@ -179,13 +137,13 @@
 
     .slider-wrap {
     display: flex;
-    overflow-x: hidden; /* Add overflow property to hide overflowing content */
+    overflow-x: hidden;
     }
 
     .slider-pannel {
         display: flex;
-        transform: translateX(0); /* Initialize the position of the slider to the first slide */
-        transition: transform 0.5s ease; /* Add the transition property for smooth sliding */
+        transform: translateX(0);
+        transition: transform 0.5s ease; 
         height: 430px;
         transition: transform 0.5s ease;
     }
@@ -193,11 +151,11 @@
     .slide {
         position: relative;
         overflow: hidden;
-        width: 250px; /* Sesuaikan ukuran slide kotak */
-        height: 350px; /* Sesuaikan ukuran slide kotak */
+        width: 250px; 
+        height: 350px; 
         margin: 0px;
         border: 1px solid rgba(179, 179, 179, 0.671);
-        border-radius: 10px; /* Ubah nilai border-radius sesuai keinginan */
+        border-radius: 10px; 
         cursor: pointer;
         background: transparent;
         transition: transform 0.3s ease-in-out;
@@ -205,10 +163,8 @@
     }
 
     .slide.active {
-    /* ... properti lain ... */
     transform: scale(1.05);
-    /* ... properti lain ... */
-}
+    }
 
     .slide:not(.active) {
         transform: scale(0.8);
@@ -220,82 +176,91 @@
         object-fit: cover;
         position: absolute;
     }
+
     .indicator-dots {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.dot-wrapper {
-    position: relative;
-    margin-bottom: 30px; /* Jarak yang lebih besar antara nomor-nomor */
-}
-
-.dot {
-    width: 20px;
-    height: 20px;
-    background-color: aquamarine;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.dot.active {
-    background-color: pink;
-}
-
-.dot-number {
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.dot-wrapper::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -50%;
-    transform: translateY(-50%);
-    width: 2px;
-    height: calc(100% + 30px); /* Menyesuaikan tinggi garis vertikal */
-    background-color: aquamarine;
-    transform: translateX(-50%);
-}
-
-.slider-controls {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
-        
+        position: absolute;
+        left: 50px;
+        top: 55%;
+        transform: translateY(-50%);
+    
     }
 
-    .carousel-control-prev{
-        width: 30px;
-        height: 30px;
-        background-color: aquamarine;
+    .dot-wrapper {
+        position: relative;
+        margin-bottom: 100px; 
+        z-index: 3;
+    }
+
+    .dot {
+        width: 10px; 
+        height: 10px; 
+        background-color: <?php echo $css_data['dots_bg']; ?>;
         border-radius: 50%;
-        color: burlywood;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease; 
+    }
+
+    .dot.active {
+        background-color: <?php echo $css_data['dots_bg_active']; ?>;
+        width: 25px; 
+        height: 25px;
+    }
+
+
+    .dot:not(.active) .dot-number {
+        display: none;
+    }
+
+    .dot-number {
+        color:  <?php echo $css_data['dots_color']; ?>;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .dot-connector {
+        position: absolute;
+        width: 1px; 
+        height: calc(100% - 100px);
+        background-color: <?php echo $css_data['dots_line']; ?>;
+        left: 50%; 
+        top: 0; 
+        transform: translateX(-50%);
+    }
+
+    .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
+
+    .carousel-control-prev{
+        width: 35px;
+        height: 35px;
+        background-color:  <?php echo $css_data['control_color']; ?>;
+        border-radius: 50%;
+        color:  <?php echo $css_data['control_bg']; ?>;
         font-size: 24px;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.1s ease-in-out;
         cursor: pointer;
         top:70%;
         left: 50%;
     }
     
     .carousel-control-next {
-        width: 30px;
-        height: 30px;
-        background-color: aquamarine;
+        width: 35px;
+        height: 35px;
+        background-color:  <?php echo $css_data['control_color']; ?>;
         border-radius: 50%;
-        color: burlywood;
+        color:  <?php echo $css_data['control_bg']; ?>;
         font-size: 24px;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.1s ease-in-out;
         cursor: pointer;
         top:70%;
        
@@ -308,63 +273,166 @@
     }
 
     .bg-container {
-        background-image: url(''); /* Kosongkan URL gambar latar belakang */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        transition: background-image 0.5s ease; /* Tambahkan efek transisi saat latar belakang berubah */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: background-image 0.5s ease;
     }
-
     .slide.active {
-        background-image: none; /* Hapus latar belakang pada slide yang aktif */
+        background-image: none;
+    }
+    .slide_title{
+        font-family:Futura MD BT;
+        color:red;
+    }
+    .slide_desc{
+        font-family:Berlin Sans FB;
+        color:palevioletred;
+    }
+    .btn-custom{
+        background-color: brown;
+        padding: 7px;
+        width: 100px;
+    }
+    .slide_title {
+        transform: translateY(30px); 
+        opacity: 0; 
+        transition: transform 0.5s ease, opacity 0.5s ease; 
+    }
+    .slide_desc {
+        transform: translateY(30px); 
+        opacity: 0; 
+        transition: transform 0.5s ease, opacity 0.5s ease; 
+    }
+    .btn-custom {
+        transform: translateY(10px); 
+        opacity: 1;
+        transition: transform 0.5s ease, opacity 0.5s ease; 
+    }
+    .slide.active .slide_title,
+    .slide.active .slide_desc,
+    .slide.active .btn-custom {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+    .text-slider {
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .slide.active .text-slider {
+        opacity: 1;
+        transform: translateY(0);
     }
     
 
     @media (max-width: 767px) {
        
 
-        .col-md-6 {
-            margin-top: 20px; /* Menambahkan jarak antara slider dan tombol prev/next pada perangkat handphone */
-        }
+       .col-md-6 {
+           margin-top: 20px;
+       }
 
-        .slider-pannel {
-            height: 100%;
-            align-items: center;
-            margin: auto; /* Mengatur lebar slider agar penuh pada perangkat handphone */
-        }
+       .slider-pannel {
+           height: 100%;
+           align-items: center;
+           margin: auto; 
+       }
 
-        .slide {
-        width: 100%; /* Lebar slide di tampilan mobile 100% */
-        height: auto; /* Sesuaikan tinggi slide dengan konten */
-        margin: 10px auto; /* Pusatkan slide */ /* Mengatur agar slide berada di tengah pada perangkat handphone */
+       .slide {
+       width: 100%; 
+       height: auto;
+       margin: 10px auto; 
 
-        }
+       }
+       .indicator-dots {
+           flex-direction: row;
+           justify-content: center;
+           margin-top: 160px;
+           align-items: center;
+           margin-left: 23%; 
+       }
 
-        .indicator-dots {
-            flex-direction: row;
-            justify-content: center;
-            margin-top: 160px;
-            align-items: center;
-            margin-left: 30%; 
-        }
+       .dot-wrapper {
+           margin-right: 10px; 
+       }
 
-        .dot-wrapper {
-            margin-right: 10px; /* Mengatur jarak antara indicator dots pada perangkat handphone */
-        }
+       .dot-number {
+           font-size: 10px; 
+       }
 
-        .dot-number {
-            font-size: 10px; /* Mengatur ukuran nomor dot pada perangkat handphone */
-        }
+       .dot-connector{
+           display: none;
+       }
 
-        .carousel-control-prev,
-        .carousel-control-next {
-            font-size: 18px;
-            margin: auto;
-            margin-bottom:55%;
-        }
+       .carousel-control-prev{
+           font-size: 18px;
+           margin-top:10%;
+           margin-left: -50px;
+           
+         
+       }
+       .carousel-control-next{
+           margin-right: 200px;
+           display: flex;
+           font-size: 18px;
+           margin-top:10%;
+       }
+       
+   }
+   @media (min-width: 768px) and (max-width: 1023px){
+       .indicator-dots {
+           left: 10px;
+           transform: translateY(-65%);
+          
+       }
+       .dot-wrapper {
+           position: relative;
+           margin-bottom: 80px; /* Jarak yang lebih besar antara nomor-nomor */
+           z-index: 3;
+       }
+       .slider-pannel{
+           margin-top: 200px ;
+           display: flex;
+       }
+       .carousel-control-prev{
+           font-size: 25px;
+           margin-top: -10%;
+       }
+       .carousel-control-next{
+           margin-left: 30px;
+           display: flex;
+           font-size: 25px;
+           margin-top: -10%;
+       }
+   }
+    .title_slide {
+        font-family: <?php echo $css_data['title_fam']; ?>;
+        color: <?php echo $css_data['title_color']; ?>;
+    }
+
+    .desc_slide {
+        font-family: <?php echo $css_data['desc_fam']; ?>;
+        color: <?php echo $css_data['desc_color']; ?>;
+    }
+
+    .btn-custom {
+        font-family: <?php echo $css_data['btn_fam']; ?>;
+        color: <?php echo $css_data['btn_color']; ?>;
+        background-color: <?php echo $css_data['btn_bg']; ?>;
+        border: none;
+        padding: 7px;
+        border-radius: 10px;
+    }
+
+    .btn-custom:hover {
+        color: <?php echo $css_data['btn_color_hvr']; ?>;
+        background-color: <?php echo $css_data['btn_bg_hvr']; ?>;
     }
 </style>
+<?php
+}
+?>
 
+<!-- SCRIPT JS -->
 <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
@@ -374,7 +442,8 @@
     if (index >= 0 && index < slides.length) {
         slides[currentSlide].classList.remove('active');
         slides[index].classList.add('active');
-        bgContainer.style.backgroundImage = `url('${slides[index].querySelector('.inner').src}')`;
+        const backgroundURL = slides[index].getAttribute('data-background');
+        bgContainer.style.backgroundImage = `url('${backgroundURL}')`;
         currentSlide = index;
 
         const slideText = slides[index].querySelector('.slide-text');
@@ -382,12 +451,25 @@
         const description = slideText.querySelector('p').textContent;
 
         const textSlider = document.querySelector('.text-slider');
-        textSlider.querySelector('h1').textContent = title;
-        textSlider.querySelector('p').textContent = description;
+
+        // Apply sliding and fading animation
+        textSlider.querySelector('h1').style.transform = 'translateY(-10px)';
+        textSlider.querySelector('p').style.transform = 'translateY(-10px)';
+        textSlider.querySelector('.btn-custom').style.transform = 'translateY(-5px)';
+        textSlider.style.opacity = 0;
+
+        setTimeout(() => {
+            textSlider.querySelector('h1').textContent = title;
+            textSlider.querySelector('p').textContent = description;
+            textSlider.querySelector('h1').style.transform = 'translateY(0)';
+            textSlider.querySelector('p').style.transform = 'translateY(0)';
+            textSlider.querySelector('.btn-custom').style.transform = 'translateY(0)';
+            textSlider.style.opacity = 1;
+        }, 300); // Adjust the duration as needed
 
         const slideWidth = slides[0].offsetWidth; // Lebar slide
         const shift = -slideWidth * index; // Pergeseran
-        
+
         const sliderPanel = document.querySelector('.slider-pannel');
         sliderPanel.style.transform = `translateX(${shift}px)`;
 
@@ -402,8 +484,7 @@
         });
         updateIndicatorDots();
         updateSlideEffects();
-    }
-}
+    }}
 function moveSlide(direction) {
     if (direction === 'prev') {
         const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
