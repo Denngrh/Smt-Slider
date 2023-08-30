@@ -759,50 +759,49 @@
 
                 var br = $("<br>");
 
-                if (fieldCounter > 1) { 
-                    var deleteButton = $("<button>")
-                    .attr({
-                        type: "submit",
-                        id: "field_id_" + fieldCounter,
-                        "data-id": data.id_img,
-                        "data-title": data.title
-                    })
-                    .addClass("delete-button")
-                    .text("Delete Field")
-                    .click(function(event) {
-                        // multiFormDiv.remove();
-                        // br.remove();
-                        event.preventDefault();
+                var deleteButton = $("<button>")
+                .attr({
+                    type: "submit",
+                    id: "field_id_" + fieldCounter,
+                    "data-id": data.id_img,
+                    "data-title": data.title
+                })
+                .addClass("delete-button")
+                .text("Delete Field")
+                .click(function(event) {
+                    // multiFormDiv.remove();
+                    // br.remove();
+                    event.preventDefault();
 
-                        const id = $(this).data("id");
-                        const title = $(this).data("title");
-                        const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
+                    const id = $(this).data("id");
+                    const title = $(this).data("title");
+                    const url = `admin-post.php?action=delete_img&selected_slider=${id}&edit_id=<?php echo $_GET['id']; ?>`;
 
-                        Swal.fire({
-                            title: "Are you sure?",
-                            text: `You won't be able to revert this for slider "${title}"!`,
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Yes, delete it!",
-                            cancelButtonText: "Cancel",
-                            iconHtml: '<i class="fa fa-trash"></i>',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                setTimeout(function() {
-                                    window.location.href = url;
-                                }, 1000);
-                                // Show success alert immediately
-                                Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                );
-                            }
-                        });
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: `You won't be able to revert this for slider "${title}"!`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "Cancel",
+                        iconHtml: '<i class="fa fa-trash"></i>',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            setTimeout(function() {
+                                window.location.href = url;
+                            }, 1000);
+                            // Show success alert immediately
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            );
+                        }
                     });
-                }
+                });
+                
 
                 // Append the populated form fields
                 additionalFields.append(multiFormDiv);

@@ -19,7 +19,7 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1;");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
 
         ?>
         const type2 = false;
@@ -38,7 +38,7 @@
         });
     </script>
 
-    <style>
+    <!-- <style>
         .custom-popup {
             /* position: none; */
             /* top: 0;
@@ -69,6 +69,9 @@
             text-align: center;
             /* margin-bottom: 20px; */
             display: flex;
+
+            max-width: 100%;
+            height: auto;
         }
 
         .close-button {
@@ -98,8 +101,10 @@
         .popup-image {
             border-radius: 15px;
             object-fit: cover;
-            width: 350px;
-            height: 450px;
+            /* width: 350px;
+            height: 450px; */
+            max-width: 100%;
+            height: auto;
         }
 
         .jarak {
@@ -128,6 +133,63 @@
         .popup-text p {
             width: 100%;
             margin-bottom: 20px;
+        }
+    </style> -->
+
+    <style>
+        .custom-popup {
+            display: none;
+            /* By default, hide the popup */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent black background */
+            z-index: 9999;
+            /* Ensure the popup is on top of other content */
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            max-width: 90%;
+            /* Set a maximum width for the popup content */
+            overflow: auto;
+            /* Enable scrolling if content overflows */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup-image {
+            max-width: 100%;
+            /* Make the image responsive */
+            height: auto;
+        }
+
+        .popup-text {
+            margin-top: 20px;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .popup-content {
+                max-width: 100%;
+                /* Adjust the width for smaller screens */
+            }
         }
     </style>
 </head>
