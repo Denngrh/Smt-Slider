@@ -204,7 +204,8 @@
                                     update_option( 'media_selector_attachment_id', absint( $_POST['image_attachment_id'] ) );
                                 endif;
                                 wp_enqueue_media();
-                                ?><div class="mt-3 ms-md-4 ms-4">
+                                ?>
+                                <div class="mt-3 ms-md-4 ms-4">
                                     <form method='post' id="upload_img">
                                     <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
                                 </form>
@@ -221,6 +222,7 @@
                                     <div class="form-container">
                                         <input type="hidden" name="action" value="insert_img_callback">
                                         <!-- Upload Image  -->
+                                            <input id="upload_image_button" type="button" class="button" value="<?php _e( 'Upload image' ); ?>" />
                                             <input type='hidden' name='image_attachment_id[]' id='image_attachment_id' value='<?php echo get_option( 'media_selector_attachment_id' ); ?>'>
                                             <div class='image-preview-wrapper mt-3 ms-4 ms-md-4'>
                                                 <img id='image-preview' style="border: 2px solid black;" src='<?php echo wp_get_attachment_url( get_option( 'media_selector_attachment_id' ) ); ?>' width='200'>
@@ -230,7 +232,7 @@
                                             <?php
                                                 if (isset($_POST['bg_image_attachment_id'])) {
                                                    // update_option('bg_media_selector_attachment_id', absint($_POST['bg_image_attachment_id']));
-                                                    echo $_POST['bg_image_attachment_id'];
+                                                    echo $_POST['bg_image_attachment_id[]'];
                                                 }
                                                 wp_enqueue_media();
                                                 $bg_saved_attachment_post_id = get_option('bg_media_selector_attachment_id');

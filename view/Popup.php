@@ -19,7 +19,7 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
 
         ?>
         const type2 = false;
