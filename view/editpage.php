@@ -860,6 +860,7 @@
             });
 
         bg_file_frame.open();
+        });
     });
 </script>
 
@@ -971,7 +972,17 @@
             // Add more saved data objects as needed
         ];
 
-        if (<?php echo $id_slider_exists ?>) {
+        <?php 
+            $id_slider = $_GET['id']; 
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'smt_img'; 
+            $query = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE id_slider = %d", $id_slider);
+            $count = $wpdb->get_var($query);
+            $is_id_slider_exists = ($count > 0) ? $count : 0;
+            
+        ?>
+
+        if (<?php echo $is_id_slider_exists ?>) {
             populateFormFields(savedData);
             $('#multiple_form').hide();
         } else {            
@@ -981,7 +992,7 @@
         $("#add_field").click(function() {
             var additionalFields = $("#additional_fields");
 
-            if (<?php echo $id_slider ?>) {
+            if (<?php echo $is_id_slider_exists ?>) {
                 $('#multiple_form').css('display', 'block');
             }
 
@@ -1025,7 +1036,7 @@
 
             fieldCounter++; // Increment the field counter for the next field
 
-            if (<?php echo $id_slider ?>) {
+            if (<?php echo $is_id_slider_exists ?>) {
                 $('#multiple_form').css('display', 'none');
             }
         });
@@ -1039,7 +1050,7 @@
 </script>
 
 
-<script>
+<script type="text/javascript">
 function toggleCssForm(componentName) {
     var cssForm = document.getElementById(componentName + 'CssForm');
 
