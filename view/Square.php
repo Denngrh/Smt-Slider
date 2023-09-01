@@ -140,12 +140,25 @@ $css_data = json_decode($data->style_data, true); {
                                 <img id='image-preview' src='<?= wp_get_attachment_url($data->img) ?>' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                                 <div class="d-md-block text-center mb-5 mt-4">
                                     <h3 class="title_slide"><?= $data->title; ?></h3>
-                                    <div class="description col-md-5">
-                                        <?php echo $data->desc; ?>
+                                    <div class="description col-md-6">
+                                    <?php
+                                    $desc = $data->desc;
+                                    $desc_words = explode(" ", $desc);
+                                    if (count($desc_words) > 16) {
+                                        $short_desc = implode(" ", array_slice($desc_words, 0, 30));
+                                        $remaining_desc = implode(" ", array_slice($desc_words, 30));
+                                        echo $short_desc;
+                                    ?>
                                         <span id="dots">...</span>
-                                        <span id="more" style="display: none;"><?php echo substr($data->desc, 30); ?></span>
+                                        <span id="more" style="display: none;"><?php echo $remaining_desc; ?></span>
                                         <a id="readMoreLink" href="#" onclick="toggleDescription(); return false;">Read More</a>
-                                    </div>
+                                    <?php
+                                    } else {
+                                        echo $desc;
+                                    }
+                                    ?>
+                                </div>
+
                                     <div class="link">
                                         <?php if (!empty($data->link)) : ?>
                                             <a href="<?= $data->link; ?>" target="_blank">
