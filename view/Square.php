@@ -10,92 +10,113 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
-<style>
-    .carousel-indicators [data-bs-target] {
-        width: 7px;
-        height: 7px;
-        border-radius: 100%;
-        background-color: #E0E0E0 !important;
-    }
+<?php
+global $wpdb;
+$id = $_GET['id'];
+$table_smt_css = $wpdb->prefix . 'smt_style';
+$data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+$css_data = json_decode($data->style_data, true); {
+?>
+    <style>
+        .title_slide {
+            font-family: <?php echo $css_data['title_fam']; ?>;
+            color: <?php echo $css_data['title_color']; ?>;
+        }
 
-    .carousel-indicators .active {
-        background-color: #0652f8 !important;
-    }
+        .description {
+            font-family: <?php echo $css_data['desc_fam']; ?>;
+            color: <?php echo $css_data['desc_color']; ?>;
+            position: relative;
+            margin: auto;
+        }
 
-    .custom-carousel-button {
-        position: absolute;
-        top: 160px;
-        transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
-    }
+        #dots {
+            display: inline;
+        }
 
-    .custom-carousel-button.prev {
-        left: 70px;
-    }
+        #more {
+            display: none;
+        }
 
-    .custom-carousel-button.next {
-        right: 70px;
-    }
+        #readMoreLink {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
 
-    #readMore {
-        display: inline-block;
-        color: blue;
-    }
+        #readMoreLink:hover {
+            color: navy;
+        }
 
-    #readLess {
-        display: none;
-        color: blue;
-    }
+        .btn-custom {
+            font-family: <?php echo $css_data['btn_fam']; ?>;
+            color: <?php echo $css_data['btn_color']; ?>;
+            background-color: <?php echo $css_data['btn_bg']; ?>;
+            border: none;
+            padding: 7px;
+            border-radius: 10px;
+        }
 
-    #readMore:hover,
-    #readLess:hover {
-        color: navy;
-        cursor: pointer;
-        text-decoration: underline;
-    }
+        .btn-custom:hover {
+            color: <?php echo $css_data['btn_color_hvr']; ?>;
+            background-color: <?php echo $css_data['btn_bg_hvr']; ?>;
+        }
 
-    #moreText {
-        display: none;
-    }
+        .carousel-indicators [data-bs-target] {
+            width: 7px;
+            height: 7px;
+            border-radius: 100%;
+            background-color: <?php echo $css_data['dots_bg']; ?> !important;
+        }
 
-    .link {
-        margin: 10px;
-    }
+        .carousel-indicators .active {
+            background-color: <?php echo $css_data['dots_bg_active']; ?> !important;
+        }
 
-    .description {
-        max-height: 2.5em;
-        /* Batasi tinggi tampilan teks */
-        overflow: hidden;
-        /* Sembunyikan konten yang tidak muat */
-        position: relative;
-        /* Diperlukan untuk menampilkan teks tambahan */
-    }
-
-    .show-more {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: white;
-        padding: 0 5px;
-    }
-
-    @media (width: 260px) and (height: 503px) {
         .custom-carousel-button {
             position: absolute;
+            border: none;
             top: 160px;
             transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+        }
+
+        .custom-carousel-icon {
+            color: <?php echo $css_data['control_color']; ?> !important;
+            ;
+            font-size: 28px;
         }
 
         .custom-carousel-button.prev {
-            left: 50px;
+            left: 70px;
         }
 
         .custom-carousel-button.next {
-            right: 50px;
+            right: 70px;
         }
-    }
-</style>
+
+        .link {
+            margin: 10px;
+        }
+
+        .show-more {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: white;
+            padding: 0 5px;
+        }
+
+        @media (max-width: 767px) {
+            .custom-carousel-button {
+                display: none;
+            }
+        }
+    </style>
+<?php
+}
+?>
 
 <body>
     <form method='post'>
@@ -107,7 +128,7 @@
         if (!empty($data_images)) {
         ?>
             <div class="mx-auto">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4">
                     <div class="carousel-indicators">
                         <?php foreach ($data_images as $index => $data) : ?>
                             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?= $index ?>" <?= $index === 0 ? 'class="active"' : '' ?> aria-label="Slide <?= $index + 1 ?>"></button>
@@ -115,22 +136,20 @@
                     </div>
                     <div class="carousel-inner">
                         <?php foreach ($data_images as $index => $data) : ?>
-                            <div class="carousel-item<?= $index === 0 ? ' active' : '' ?>" data-bs-interval="1000">
+                            <div class="carousel-item<?= $index === 0 ? ' active' : '' ?>" data-bs-interval="">
                                 <img id='image-preview' src='<?= wp_get_attachment_url($data->img) ?>' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                                 <div class="d-md-block text-center mb-5 mt-4">
-                                    <h3><?= $data->title; ?></h3>
-                                    <div class="description col-md-5" style="margin: auto;">
-                                        <p><?= $data->desc; ?></p>
-                                        <?php if (str_word_count($data->desc) > 30) : ?>
-                                            <div class="show-more">
-                                                <a href="#" onclick="toggleDescription(this); return false;">Read More</a>
-                                            </div>
-                                        <?php endif; ?>
+                                    <h3 class="title_slide"><?= $data->title; ?></h3>
+                                    <div class="description col-md-5">
+                                        <?php echo $data->desc; ?>
+                                        <span id="dots">...</span>
+                                        <span id="more" style="display: none;"><?php echo substr($data->desc, 30); ?></span>
+                                        <a id="readMoreLink" href="#" onclick="toggleDescription(); return false;">Read More</a>
                                     </div>
                                     <div class="link">
                                         <?php if (!empty($data->link)) : ?>
                                             <a href="<?= $data->link; ?>" target="_blank">
-                                                <button type="button" class="btn btn-primary">Click Me Now</button>
+                                                <button type="button" class="btn-custom">Click Me Now</button>
                                             </a>
                                         <?php endif; ?>
                                     </div>
@@ -138,13 +157,14 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
-
                     <button class="carousel-control-prev custom-carousel-button prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="custom-carousel-icon" aria-hidden="true">
+                            < 
+                        </span>
+                                <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next custom-carousel-button next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="custom-carousel-icon" aria-hidden="true"> > </span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
@@ -154,20 +174,20 @@
             //example else
         ?>
             <div class="mx-auto">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="1000">
-                            <img id='image-preview' src='https://www.gstatic.com/meet/meet_google_one_carousel_promo_icon_0f14bf8fc61484b019827c071ed8111d.svg' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
+                        <div class="carousel-item active" data-bs-interval="">
+                            <img id='image-preview' src='https://github.com/Denngrh/smt-slider/assets/112230212/6cf04d3c-c81f-4fcc-9174-5222e5265cf9' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="Logo Smooets">
                             <div class="d-md-block text-center mb-5 mt-4">
                                 <h3>Example Title 1</h3>
                                 <p>This is an example description for slide 1.</p>
                             </div>
                         </div>
-                        <div class="carousel-item" data-bs-interval="1000">
+                        <div class="carousel-item" data-bs-interval="">
                             <img id='image-preview' src='path_to_example_image2.jpg' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                             <div class="d-md-block text-center mb-5 mt-4">
                                 <h3>Example Title 2</h3>
@@ -175,11 +195,11 @@
                             </div>
                         </div>
                         <button class="carousel-control-prev custom-carousel-button prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="carousel-control-prev-icon custom-carousel-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next custom-carousel-button next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="carousel-control-next-icon custom-carousel-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
@@ -190,17 +210,20 @@
     </form>
 </body>
 <script>
-    function toggleDescription(element) {
-        var description = element.parentNode.parentNode;
-        description.classList.toggle('expanded');
-        if (description.classList.contains('expanded')) {
-            element.innerHTML = 'Read Less';
-            description.style.maxHeight = 'none';
+    function toggleDescription() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var readMoreLink = document.getElementById("readMoreLink");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            readMoreLink.innerHTML = "Read More";
+            moreText.style.display = "none";
         } else {
-            element.innerHTML = 'Read More';
-            description.style.maxHeight = '2.5em'; // Ubah sesuai dengan nilai max-height di CSS
+            dots.style.display = "none";
+            readMoreLink.innerHTML = "Read Less";
+            moreText.style.display = "inline";
         }
     }
 </script>
-
 </html>
