@@ -17,6 +17,7 @@
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ORDER BY id_img DESC LIMIT 1;");
+        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
 
         ?>
         jQuery(document).ready(function($) {
@@ -110,7 +111,7 @@
                     $('.custom-popup').fadeOut();
                 });
 
-                const type2 = true;
+                const type2 = false;
 
                 if (type2) {
                     $('.popup-content').css({
