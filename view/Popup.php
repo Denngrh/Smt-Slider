@@ -67,16 +67,23 @@
             function showSlides(n) {
                 let i;
                 let slides = $(".popup-image-container");
+                let text = $(".text");
+
                 if (n > slides.length) {
                     slideIndex = 1;
                 }
+
                 if (n < 1) {
                     slideIndex = slides.length;
                 }
+
                 for (i = 0; i < slides.length; i++) {
                     slides.eq(i).css("display", "none");
+                    text.eq(i).css("display", "none");
                 }
+
                 slides.eq(slideIndex - 1).css("display", "block");
+                text.eq(slideIndex - 1).css("display", "block");
             }
         });
     </script>
@@ -291,23 +298,25 @@
                 <div class="custom-popup">
                     <div class="popup-content">
                         <?php foreach ($latest_data as $index => $data) : ?>
-                            <div class="mySlides popup-image-container">
+                            <div class="popup-image-container">
                                 <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                             </div>
                         <?php endforeach; ?>
                         <div class="popup-text-container">
                             <button title="close" class="close-button">&times;</button>
-                            <?php //foreach ($latest_data as $index => $data) : ?>
-                                <div class="popup-text">
-                                    <h3><?php echo $latest_data[0]->title ?></h3>
-                                    <p><?php echo $latest_data[0]->desc ?></p>
-                                    <div class="link">
-                                        <a href="<?php echo esc_url($latest_data[0]->link) ?>" target="_blank" rel="noopener noreferrer">
-                                            <button type="button" class="jarak btn btn-dark">Click Me Now</button>
-                                        </a>
+                            <div class="popup-text">
+                                <?php foreach ($latest_data as $index => $data) : ?>
+                                    <div class="text">
+                                        <h3><?php echo $data->title ?></h3>
+                                        <p><?php echo $data->desc ?></p>
                                     </div>
+                                <?php endforeach; ?>
+                                <div class="link">
+                                    <a href="<?php echo esc_url($latest_data[0]->link) ?>" target="_blank" rel="noopener noreferrer">
+                                        <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                                    </a>
                                 </div>
-                            <?php // endforeach; ?>
+                            </div>
                             <div>
                                 <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
                                 <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
