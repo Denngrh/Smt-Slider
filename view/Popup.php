@@ -87,174 +87,198 @@
             }
         });
     </script>
-
-    <style>
-        .custom-popup {
-            width: 85%;
-            /* background-color: rgba(0, 0, 0, 0.5); */
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 10px;
-            position: relative;
-            /* margin-left: 25%;
-            margin-right: 25%; */
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .popup-image {
-            max-height: 100%;
-            border-radius: 15px;
-            object-fit: cover;
-            height: 75vh;
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .popup-image-container {
-            flex: 1;
-            padding: 5px;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            display: inline-block;
-        }
-
-        .popup-text-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
-            position: rela;
-        }
-
-        .close-button {
-            position: absolute;
-            cursor: pointer;
-            top: 5px;
-            right: 5px;
-            font-size: 30px;
-            background: none;
-            border: none;
-            color: #000;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .slider-buttons {
-            position: absolute;
-            top: 45%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            z-index: 1;
-            pointer-events: none;
-
-        }
-
-        .next-button,
-        .prev-button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 30px;
-            pointer-events: auto;
-        }
-
-        .next-button {
-            margin-right: 18px;
-        }
-
-        .prev-button {
-            margin-left: 10px;
-        }
-
-        .close-button:hover {
-            color: white;
-            background: none;
-        }
-
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-
-        @keyframes fade {
-            from {
-                opacity: .4
+    <?php
+    global $wpdb;
+    $id = $_GET['id'];
+    $table_smt_css = $wpdb->prefix . 'smt_style';
+    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+    $css_data = json_decode($data->style_data, true); {
+    ?>
+        <style>
+            .custom-popup {
+                width: 85%;
+                /* background-color: rgba(0, 0, 0, 0.5); */
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            to {
-                opacity: 1
-            }
-        }
-
-        .jarak {
-            margin-right: 5%;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .link {
-            margin: 10px;
-        }
-
-        .popup-text h3 {
-            margin-bottom: 10px;
-        }
-
-        .popup-text p {
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 850px) {
             .popup-content {
-                margin-left: 10%;
-                margin-right: 10%;
-                background-color: yellow;
+                background-color: #fff;
+                padding: 10px;
+                position: relative;
+                /* margin-left: 25%;
+            margin-right: 25%; */
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                display: flex;
+                flex-direction: row;
             }
 
             .popup-image {
-                height: 55vh;
+                max-height: 100%;
+                border-radius: 15px;
+                object-fit: cover;
+                height: 75vh;
+                width: 100%;
+                transition: transform 0.5s ease-in-out;
             }
-        }
 
-        /* Media query for mobile screens */
-        @media (max-width: 480px) {
-            .popup-content {
-                margin: 5%;
-                background-color: red;
+            .popup-image-container {
+                flex: 1;
+                padding: 5px;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                display: inline-block;
             }
 
             .popup-text-container {
-                padding: 4px;
-                /* Adjust padding for smaller screens */
-                margin-right: 4vw;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
+                position: rela;
             }
 
-            .popup-image {
-                height: 50vh;
+            .close-button {
+                position: absolute;
+                cursor: pointer;
+                top: 5px;
+                right: 5px;
+                font-size: 30px;
+                background: none;
+                border: none;
+                color: #000;
+                padding: 0;
+                box-sizing: border-box;
             }
-        }
-    </style>
+
+            .slider-buttons {
+                position: absolute;
+                top: 45%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                z-index: 1;
+                pointer-events: none;
+
+            }
+
+            .next-button,
+            .prev-button {
+                background-color: <?php echo $css_data['control_bg'] ?>;
+                color: <?php echo $css_data['control_color'] ?>;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 30px;
+                pointer-events: auto;
+            }
+
+            .next-button {
+                margin-right: 18px;
+            }
+
+            .prev-button {
+                margin-left: 10px;
+            }
+
+            .close-button:hover {
+                color: white;
+                background: none;
+            }
+
+            .fade {
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+
+            @keyframes fade {
+                from {
+                    opacity: .4
+                }
+
+                to {
+                    opacity: 1
+                }
+            }
+
+            .tombol {
+                font-family: <?php echo $css_data['btn_fam'] ?>;
+                color: <?php echo $css_data['btn_color'] ?>;
+                background-color: <?php echo $css_data['btn_bg'] ?>;
+
+                margin-right: 5%;
+            }
+
+            .tombol:hover {
+                color: <?php echo $css_data['btn_color_hvr'] ?>;
+                background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .link {
+                margin: 10px;
+            }
+
+            .text h3 {
+                font-family: <?php echo $css_data['title_fam'] ?>;
+                color: <?php echo $css_data['title_color'] ?>;
+
+                margin-bottom: 10px;
+            }
+
+            .text p {
+                font-family: <?php echo $css_data['desc_fam'] ?>;
+                color: <?php echo $css_data['desc_color'] ?>;
+
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 850px) {
+                .popup-content {
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    background-color: yellow;
+                }
+
+                .popup-image {
+                    height: 55vh;
+                }
+            }
+
+            /* Media query for mobile screens */
+            @media (max-width: 480px) {
+                .popup-content {
+                    margin: 5%;
+                    background-color: red;
+                }
+
+                .popup-text-container {
+                    padding: 4px;
+                    /* Adjust padding for smaller screens */
+                    margin-right: 4vw;
+                }
+
+                .popup-image {
+                    height: 50vh;
+                }
+            }
+        </style>
+    <?php
+    }
+    ?>
 </head>
 
 <body>
@@ -285,7 +309,7 @@
                                 <?php endforeach; ?>
                                 <div class="link">
                                     <a href="<?php echo esc_url($latest_data[0]->link) ?>" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
                                     </a>
                                 </div>
                             </div>
