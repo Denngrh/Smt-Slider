@@ -12,7 +12,7 @@
     <script>
         <?php
         $delay = 3000;
-        $content = "Discount 50% For All Members";
+        $title = "Discount 50% For All Members";
         $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
         $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
 
@@ -68,6 +68,7 @@
                 let i;
                 let slides = $(".popup-image-container");
                 let text = $(".text");
+                let link = $(".link");
 
                 if (n > slides.length) {
                     slideIndex = 1;
@@ -80,10 +81,12 @@
                 for (i = 0; i < slides.length; i++) {
                     slides.eq(i).css("display", "none");
                     text.eq(i).css("display", "none");
+                    link.eq(i).css("display", "none");
                 }
 
                 slides.eq(slideIndex - 1).css("display", "block");
                 text.eq(slideIndex - 1).css("display", "block");
+                link.eq(slideIndex - 1).css("display", "block");
             }
         });
     </script>
@@ -112,7 +115,7 @@
                 position: relative;
                 /* margin-left: 25%;
             margin-right: 25%; */
-                border-radius: 5px;
+                border-radius: 15px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
                 text-align: center;
                 display: flex;
@@ -181,6 +184,7 @@
                 cursor: pointer;
                 font-size: 30px;
                 pointer-events: auto;
+                transition: 0.6s ease;
             }
 
             .next-button {
@@ -306,17 +310,13 @@
                                         <h3><?php echo $data->title ?></h3>
                                         <p><?php echo $data->desc ?></p>
                                     </div>
+                                    <div class="link">
+                                        <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
+                                            <button type="button" class="tombol btn btn-dark">Click Me Now</button>
+                                        </a>
+                                    </div>
                                 <?php endforeach; ?>
-                                <div class="link">
-                                    <a href="<?php echo esc_url($latest_data[0]->link) ?>" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
-                                    </a>
-                                </div>
                             </div>
-                            <!-- <div>
-                                <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -327,25 +327,25 @@
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
-                        <div class="mySlides popup-image-container">
+                        <div class="popup-image-container">
+                            <div class="slider-buttons">
+                                <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
+                                <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
+                            </div>
                             <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
                         </div>
                         <div class="popup-text-container">
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <div class="text">
-                                    <h3><?php echo $content ?></h3>
+                                    <h3><?php echo $title ?></h3>
                                     <p><?php echo $paragraf ?></p>
                                 </div>
                                 <div class="link">
-                                    <a href="https://google.com" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="jarak btn btn-dark">Click Me Now</button>
+                                    <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
                                     </a>
                                 </div>
-                            </div>
-                            <div>
-                                <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
                             </div>
                         </div>
                     </div>
