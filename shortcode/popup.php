@@ -9,10 +9,10 @@
     <script>
         <?php
         $delay = 2500;
-        $content = "Discount 50% For All Members";
-        $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
-        $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
-        $link = "http://example.com";
+        $content =  array("Discount 50% For All Members", "dfjksfhdsjfdsjhf");
+        $image = array("https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80", "https://images.unsplash.com/photo-1684138941724-319bb655748c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
+        $paragraf = array("Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.", "Do esse esse ex commodo voluptate magna et qui. Cillum incididunt quis minim culpa nisi dolore nisi irure eu excepteur ut. Ullamco nostrud elit elit ut minim laborum. Labore labore deserunt fugiat laborum consequat sit tempor amet mollit. Eu adipisicing ad mollit laboris nisi ullamco mollit excepteur.");
+        $link = array("http://example.com", "google.com");
 
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
@@ -25,6 +25,8 @@
                     "visibility": "visible",
                     "opacity": "1"
                 });
+
+                // $('.popup-image').addClass('fade');
             }, <?php echo $delay ?>);
 
             $('.close-button').click(function() {
@@ -70,6 +72,10 @@
                 plusSlides(1);
             });
 
+            $(".dot").click(function() {
+                currentSlide($(this).index() + 1);
+            });
+
             function plusSlides(n) {
                 showSlides(slideIndex += n);
             }
@@ -83,6 +89,7 @@
                 let slides = $(".popup-image-container");
                 let text = $(".text");
                 let link = $(".link");
+                let dots = $(".dot");
 
                 if (n > slides.length) {
                     slideIndex = 1;
@@ -98,9 +105,15 @@
                     link.eq(i).css("display", "none");
                 }
 
-                slides.eq(slideIndex - 1).css("display", "block");
-                text.eq(slideIndex - 1).css("display", "block");
-                link.eq(slideIndex - 1).css("display", "block");
+                for (i = 0; i < dots.length; i++) {
+                    dots.eq(i).removeClass("active");
+                }
+
+                slides.eq(slideIndex - slides.length).css("display", "block");
+                text.eq(slideIndex - slides.length).css("display", "block");
+                link.eq(slideIndex - slides.length).css("display", "block");
+                dots.eq(slideIndex - slides.length).addClass("active");
+
             }
         });
     </script>
@@ -112,215 +125,249 @@
     $css_data = json_decode($data->style_data, true); {
     ?>
 
-    <style>
-        .row {
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s ease;
-
-        }
-
-        .custom-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 10px;
-            position: relative;
-            margin-left: 25%;
-            margin-right: 25%;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .popup-image {
-            max-height: 100%;
-            border-radius: 15px;
-            object-fit: cover;
-            height: 75vh;
-            width: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .popup-image-container {
-            flex: 1;
-            padding: 5px;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            display: inline-block;
-        }
-
-        .popup-text-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
-            position: rela;
-        }
-
-        .close-button {
-            position: absolute;
-            cursor: pointer;
-            top: 5px;
-            right: 5px;
-            font-size: 30px;
-            background: none;
-            border: none;
-            color: #000;
-            padding: 0;
-            transition: 0.3s ease;
-            box-sizing: border-box;
-            opacity: 0.5;
-        }
-
-        .slider-buttons {
-            position: absolute;
-            top: 45%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            z-index: 1;
-            pointer-events: none;
-
-        }
-
-        .next-button,
-        .prev-button {
-            background-color: <?php echo $css_data['control_bg'] ? $css_data['control_bg'] : '#ababab' ?>;
-            color: <?php echo $css_data['control_color'] ?>;
-            border: none;
-            opacity: 0.3;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 30px;
-            pointer-events: auto;
-            transition: 0.6s ease;
-        }
-
-        .next-button {
-            margin-right: 18px;
-        }
-
-        .prev-button {
-            margin-left: 10px;
-        }
-
-        .next-button:hover {
-            opacity: 1;
-        }
-
-        .prev-button:hover {
-            opacity: 1;
-        }
-
-        .close-button:hover {
-            color: #000;
-            background: none;
-            opacity: 1;
-        }
-
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-
-        @keyframes fade {
-            from {
-                opacity: 0.4
+        <style>
+            .row {
+                visibility: hidden;
+                opacity: 0;
+                transition: 0.3s ease;
             }
 
-            to {
-                opacity: 1
+            .custom-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-        }
 
-        .tombol {
-            font-family: <?php echo $css_data['btn_fam'] ?>;
-            color: <?php echo $css_data['btn_color'] ?>;
-            background-color: <?php echo $css_data['btn_bg'] ?>;
-            opacity: 0.5;
-            margin-right: 5%;
-            transition: 0.4s ease;
-
-        }
-
-        .tombol:hover {
-            opacity: 1;
-            color: <?php echo $css_data['btn_color_hvr'] ?>;
-            background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .link {
-            margin: 10px;
-        }
-
-        .text h3 {
-            font-family: <?php echo $css_data['title_fam'] ?>;
-            color: <?php echo $css_data['title_color'] ?>;
-
-            margin-bottom: 10px;
-        }
-
-        .text p {
-            font-family: <?php echo $css_data['desc_fam'] ?>;
-            color: <?php echo $css_data['desc_color'] ?>;
-
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 850px) {
             .popup-content {
-                margin-left: 10%;
-                margin-right: 10%;
-                background-color: yellow;
+                background-color: #fff;
+                padding: 10px;
+                position: relative;
+                margin-left: 25%;
+                margin-right: 25%;
+                border-radius: 15px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                display: flex;
+                flex-direction: row;
             }
 
             .popup-image {
-                height: 55vh;
-            }
-        }
+                max-height: 100%;
+                border-radius: 15px !important;
+                object-fit: cover;
+                height: 75vh !important;
+                width: 100%;
 
-        /* Media query for mobile screens */
-        @media (max-width: 480px) {
-            .popup-content {
-                margin: 5%;
-                background-color: red;
+            }
+
+            .percobaan {
+                flex: 1;
+                position: relative;
+                display: inline-block;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .popup-image-container {
+                padding: 5px;
             }
 
             .popup-text-container {
-                padding: 4px;
-                /* Adjust padding for smaller screens */
-                margin-right: 4vw;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
             }
 
-            .popup-image {
-                height: 50vh;
+            .close-button {
+                position: absolute;
+                cursor: pointer;
+                top: 5px;
+                right: 5px;
+                font-size: 30px;
+                background: none;
+                border: none;
+                color: #000;
+                padding: 0;
+                transition: 0.3s ease;
+                box-sizing: border-box;
+                opacity: 0.5;
             }
-        }
-    </style>
+
+            .slider-buttons {
+                position: absolute;
+                top: 45%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                z-index: 1;
+                pointer-events: none;
+
+            }
+
+            .next-button,
+            .prev-button {
+                background-color: <?php echo $css_data['control_bg'] ?>;
+                color: <?php echo $css_data['control_color'] ?>;
+                border: none;
+                opacity: 0.3;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 30px;
+                pointer-events: auto;
+                transition: 0.4s ease;
+            }
+
+            .next-button {
+                margin-right: 18px;
+            }
+
+            .prev-button {
+                margin-left: 10px;
+            }
+
+            .next-button:hover {
+                opacity: 1;
+                background-color: <?php echo $css_data['control_bg'] ?>;
+            }
+
+            .prev-button:hover {
+                opacity: 1;
+                background-color: <?php echo $css_data['control_bg'] ?>;
+
+            }
+
+            .close-button:hover {
+                color: #000;
+                background: none;
+                opacity: 1;
+            }
+
+            .fade {
+                animation-name: fade;
+                animation-duration: 1s;
+            }
+
+            @keyframes fade {
+                0% {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+
+            }
+
+            .tombol {
+                font-family: <?php echo $css_data['btn_fam'] ?>;
+                color: <?php echo $css_data['btn_color'] ?>;
+                background-color: <?php echo $css_data['btn_bg'] ?>;
+                opacity: 0.5;
+                margin-right: 5%;
+                transition: 0.4s ease;
+
+            }
+
+            .tombol:hover {
+                opacity: 1;
+                color: <?php echo $css_data['btn_color_hvr'] ?>;
+                background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .link {
+                margin: 10px;
+            }
+
+            .text h3 {
+                font-family: <?php echo $css_data['title_fam'] ?>;
+                color: <?php echo $css_data['title_color'] ?>;
+
+                margin-bottom: 10px;
+            }
+
+            .text p {
+                font-family: <?php echo $css_data['desc_fam'] ?>;
+                color: <?php echo $css_data['desc_color'] ?>;
+
+                margin-bottom: 10px;
+            }
+
+            .dot {
+                cursor: pointer;
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            .dot-div {
+                text-align: center;
+                position: absolute;
+                bottom: 10px;
+                /* Adjust this value to control the vertical position */
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+                /* Ensure dots are in front of images */
+            }
+
+            .active,
+            .dot:hover {
+                background-color: #717171;
+            }
+
+            @media (max-width: 850px) {
+                .popup-content {
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    background-color: yellow;
+                }
+
+                .popup-image {
+                    height: 55vh;
+                }
+            }
+
+            /* Media query for mobile screens */
+            @media (max-width: 480px) {
+                .popup-content {
+                    margin: 5%;
+                    background-color: red;
+                }
+
+                .popup-text-container {
+                    padding: 4px;
+                    /* Adjust padding for smaller screens */
+                    margin-right: 4vw;
+                }
+
+                .popup-image {
+                    height: 50vh;
+                }
+            }
+        </style>
     <?php } ?>
 </head>
 
@@ -332,15 +379,22 @@
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
-                        <?php foreach ($latest_data as $index => $data) : ?>
-                            <div class="popup-image-container">
-                                <div class="slider-buttons">
-                                    <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                    <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
+                        <div class="percobaan">
+                            <?php foreach ($latest_data as $index => $data) : ?>
+                                <div class="popup-image-container">
+                                    <div class="slider-buttons">
+                                        <button class="prev-button" >&#8249;</button>
+                                        <button class="next-button" >&#8250;</button>
+                                    </div>
+                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                                 </div>
-                                <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
+                            <?php endforeach; ?>
+                            <div class="dot-div" style="text-align:center">
+                                <?php foreach ($latest_data as $index => $data) : ?>
+                                    <span class="dot" onclick="currentSlide(<?php echo $index ?>)"></span>
+                                <?php endforeach; ?>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
                         <div class="popup-text-container">
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
@@ -366,25 +420,36 @@
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
-                        <div class="popup-image-container">
-                            <div class="slider-buttons">
-                                <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
+                        <div class="percobaan">
+                            <?php foreach ($latest_data as $index => $data) : ?>
+                                <div class="popup-image-container">
+                                    <div class="slider-buttons">
+                                        <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
+                                        <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
+                                    </div>
+                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="dot-div" style="text-align:center">
+                                <?php foreach ($latest_data as $index => $data) : ?>
+                                    <span class="dot" onclick="currentSlide(<?php echo $index ?>)"></span>
+                                <?php endforeach; ?>
                             </div>
-                            <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
                         </div>
                         <div class="popup-text-container">
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
-                                <div class="text">
-                                    <h3><?php echo $title ?></h3>
-                                    <p><?php echo $paragraf ?></p>
-                                </div>
-                                <div class="link">
-                                    <a href="https://example.com" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
-                                    </a>
-                                </div>
+                                <?php foreach ($latest_data as $index => $data) : ?>
+                                    <div class="text">
+                                        <h3><?php echo $data->title ?></h3>
+                                        <p><?php echo $data->desc ?></p>
+                                    </div>
+                                    <div class="link">
+                                        <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
+                                            <button type="button" class="tombol btn btn-dark">Click Me Now</button>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

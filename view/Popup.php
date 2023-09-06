@@ -126,7 +126,7 @@
                 max-height: 100%;
                 border-radius: 15px;
                 object-fit: cover;
-                height: 75vh;
+                height: 75vh !important;
                 width: 100%;
                 transition: transform 0.5s ease-in-out;
             }
