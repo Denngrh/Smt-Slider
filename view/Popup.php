@@ -179,12 +179,21 @@
                 background-color: <?php echo $css_data['control_bg'] ?>;
                 color: <?php echo $css_data['control_color'] ?>;
                 border: none;
+                opacity: 0.3;
                 padding: 8px 12px;
                 border-radius: 5px;
                 cursor: pointer;
                 font-size: 30px;
                 pointer-events: auto;
                 transition: 0.6s ease;
+            }
+
+            .prev-button:hover {
+                opacity: 1;
+            }
+
+            .next-button:hover {
+                opacity: 1;
             }
 
             .next-button {
@@ -219,11 +228,13 @@
                 font-family: <?php echo $css_data['btn_fam'] ?>;
                 color: <?php echo $css_data['btn_color'] ?>;
                 background-color: <?php echo $css_data['btn_bg'] ?>;
+                opacity: 0.5;
 
                 margin-right: 5%;
             }
 
             .tombol:hover {
+                opacity: 1;
                 color: <?php echo $css_data['btn_color_hvr'] ?>;
                 background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
             }

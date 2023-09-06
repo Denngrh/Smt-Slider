@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script>
         <?php
-        $delay = 2000;
+        $delay = 2500;
         $content = "Discount 50% For All Members";
         $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
         $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
@@ -16,7 +16,6 @@
 
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ORDER BY id_img DESC LIMIT 1;");
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
 
         ?>
@@ -26,7 +25,7 @@
                     "visibility": "visible",
                     "opacity": "1"
                 });
-            }, 2000);
+            }, <?php echo $delay ?>);
 
             $('.close-button').click(function() {
                 $('.row').css({
@@ -106,10 +105,19 @@
         });
     </script>
 
+    <?php
+    global $wpdb;
+    $table_smt_css = $wpdb->prefix . 'smt_style';
+    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
+    $css_data = json_decode($data->style_data, true); {
+    ?>
+
     <style>
         .row {
             visibility: hidden;
             opacity: 0;
+            transition: 0.3s ease;
+
         }
 
         .custom-popup {
@@ -177,7 +185,9 @@
             border: none;
             color: #000;
             padding: 0;
+            transition: 0.3s ease;
             box-sizing: border-box;
+            opacity: 0.5;
         }
 
         .slider-buttons {
@@ -194,9 +204,10 @@
 
         .next-button,
         .prev-button {
-            background-color: <?php echo $css_data['control_bg'] ?>;
+            background-color: <?php echo $css_data['control_bg'] ? $css_data['control_bg'] : '#ababab' ?>;
             color: <?php echo $css_data['control_color'] ?>;
             border: none;
+            opacity: 0.3;
             padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
@@ -213,9 +224,18 @@
             margin-left: 10px;
         }
 
+        .next-button:hover {
+            opacity: 1;
+        }
+
+        .prev-button:hover {
+            opacity: 1;
+        }
+
         .close-button:hover {
-            color: white;
+            color: #000;
             background: none;
+            opacity: 1;
         }
 
         .fade {
@@ -225,7 +245,7 @@
 
         @keyframes fade {
             from {
-                opacity: .4
+                opacity: 0.4
             }
 
             to {
@@ -237,11 +257,14 @@
             font-family: <?php echo $css_data['btn_fam'] ?>;
             color: <?php echo $css_data['btn_color'] ?>;
             background-color: <?php echo $css_data['btn_bg'] ?>;
-
+            opacity: 0.5;
             margin-right: 5%;
+            transition: 0.4s ease;
+
         }
 
         .tombol:hover {
+            opacity: 1;
             color: <?php echo $css_data['btn_color_hvr'] ?>;
             background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
         }
@@ -298,6 +321,7 @@
             }
         }
     </style>
+    <?php } ?>
 </head>
 
 <body>
