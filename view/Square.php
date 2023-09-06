@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <?php
 global $wpdb;
@@ -83,9 +84,7 @@ $css_data = json_decode($data->style_data, true); {
         }
 
         .custom-carousel-icon {
-            color: <?php echo $css_data['control_color']; ?> !important;
-            ;
-            font-size: 28px;
+            color: <?php echo $css_data['control_color']; ?> !important; 
         }
 
         .custom-carousel-button.prev {
@@ -128,7 +127,7 @@ $css_data = json_decode($data->style_data, true); {
         if (!empty($data_images)) {
         ?>
             <div class="mx-auto">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide mt-4" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <?php foreach ($data_images as $index => $data) : ?>
                             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?= $index ?>" <?= $index === 0 ? 'class="active"' : '' ?> aria-label="Slide <?= $index + 1 ?>"></button>
@@ -141,23 +140,23 @@ $css_data = json_decode($data->style_data, true); {
                                 <div class="d-md-block text-center mb-5 mt-4">
                                     <h3 class="title_slide"><?= $data->title; ?></h3>
                                     <div class="description col-md-6">
-                                    <?php
-                                    $desc = $data->desc;
-                                    $desc_words = explode(" ", $desc);
-                                    if (count($desc_words) > 16) {
-                                        $short_desc = implode(" ", array_slice($desc_words, 0, 30));
-                                        $remaining_desc = implode(" ", array_slice($desc_words, 30));
-                                        echo $short_desc;
-                                    ?>
-                                        <span id="dots">...</span>
-                                        <span id="more" style="display: none;"><?php echo $remaining_desc; ?></span>
-                                        <a id="readMoreLink" href="#" onclick="toggleDescription(); return false;">Read More</a>
-                                    <?php
-                                    } else {
-                                        echo $desc;
-                                    }
-                                    ?>
-                                </div>
+                                        <?php
+                                        $desc = $data->desc;
+                                        $desc_words = explode(" ", $desc);
+                                        if (count($desc_words) > 16) {
+                                            $short_desc = implode(" ", array_slice($desc_words, 0, 30));
+                                            $remaining_desc = implode(" ", array_slice($desc_words, 30));
+                                            echo $short_desc;
+                                        ?>
+                                            <span id="dots">...</span>
+                                            <span id="more" style="display: none;"><?php echo $remaining_desc; ?></span>
+                                            <a id="readMoreLink" href="#" onclick="toggleDescription(); return false;">Read More</a>
+                                        <?php
+                                        } else {
+                                            echo $desc;
+                                        }
+                                        ?>
+                                    </div>
 
                                     <div class="link">
                                         <?php if (!empty($data->link)) : ?>
@@ -171,13 +170,11 @@ $css_data = json_decode($data->style_data, true); {
                         <?php endforeach; ?>
                     </div>
                     <button class="carousel-control-prev custom-carousel-button prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="custom-carousel-icon" aria-hidden="true">
-                            < 
-                        </span>
-                                <span class="visually-hidden">Previous</span>
+                        <span class="custom-carousel-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next custom-carousel-button next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="custom-carousel-icon" aria-hidden="true"> > </span>
+                        <span class="custom-carousel-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
@@ -239,4 +236,5 @@ $css_data = json_decode($data->style_data, true); {
         }
     }
 </script>
+
 </html>
