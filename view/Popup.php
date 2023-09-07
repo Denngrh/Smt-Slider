@@ -176,7 +176,9 @@
                 cursor: pointer;
                 top: 5px;
                 right: 5px;
-                font-size: 30px;
+                height: 30px;
+                width: 30px;
+                font-size: 25;
                 background: none;
                 border: none;
                 color: #000;
@@ -184,6 +186,7 @@
                 transition: 0.3s ease;
                 box-sizing: border-box;
                 opacity: 0.5;
+                z-index: 2;
             }
 
             .slider-buttons {
@@ -359,6 +362,7 @@
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
+                        <button title="close" class="close-button"><i class="fa-solid fa-x"></i></button>
                         <div class="percobaan">
                             <?php foreach ($latest_data as $index => $data) : ?>
                                 <div class="popup-image-container">
@@ -376,7 +380,6 @@
                             </div>
                         </div>
                         <div class="popup-text-container">
-                            <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <?php foreach ($latest_data as $index => $data) : ?>
                                     <div class="text">
@@ -411,15 +414,15 @@
 
                             <div class="popup-image-container">
                                 <div class="slider-buttons">
-                                    <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                    <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
+                                    <button class="prev-button">&#8249;</button>
+                                    <button class="next-button">&#8250;</button>
                                 </div>
                                 <img src="<?php echo $image2 ?>" alt="inigambar" class="popup-image">
                             </div>
 
                             <div class="dot-div" style="text-align:center">
+                                <span class="dot" onclick="currentSlide(0)"></span>
                                 <span class="dot" onclick="currentSlide(1)"></span>
-                                <span class="dot" onclick="currentSlide(2)"></span>
                             </div>
                         </div>
                         <div class="popup-text-container">

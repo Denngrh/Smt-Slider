@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shortcode View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d367ac3a48.js" crossorigin="anonymous"></script>
     <script>
         <?php
         $delay = 3000;
@@ -201,7 +202,9 @@
                 cursor: pointer;
                 top: 5px;
                 right: 5px;
-                font-size: 30px;
+                height: 30px;
+                width: 30px;
+                font-size: 25;
                 background: none;
                 border: none;
                 color: #000;
@@ -209,6 +212,7 @@
                 transition: 0.3s ease;
                 box-sizing: border-box;
                 opacity: 0.5;
+                z-index: 2;
             }
 
             .slider-buttons {
@@ -384,6 +388,7 @@
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
+                        <button title="close" class="close-button"><i class="fa-solid fa-x"></i></button>
                         <div class="percobaan">
                             <?php foreach ($latest_data as $index => $data) : ?>
                                 <div class="popup-image-container">
@@ -401,7 +406,6 @@
                             </div>
                         </div>
                         <div class="popup-text-container">
-                            <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <?php foreach ($latest_data as $index => $data) : ?>
                                     <div class="text">
@@ -426,7 +430,6 @@
                 <div class="custom-popup">
                     <div class="popup-content">
                         <div class="percobaan">
-
                             <div class="popup-image-container">
                                 <div class="slider-buttons">
                                     <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
