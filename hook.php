@@ -5,6 +5,7 @@ function ListMenu()
     add_menu_page('Plugin Slider', 'Smt Slider', '', 'list', 'list_menu',$icon_url, '20');
     add_submenu_page('list', 'Dashboard', 'Dashboard', 'manage_options', 'dashboard', 'list_menu');
     add_submenu_page('', 'Edit-Page', 'Edit2', 'manage_options', 'edit2', 'list_menu_1');
+    add_submenu_page('', 'preview', 'preview', 'manage_options', 'preview', 'list_menu_2');
 }
 
 function list_menu()
@@ -14,6 +15,10 @@ function list_menu()
 function list_menu_1()
 {
     include_once 'view/editpage.php';
+}
+function list_menu_2()
+{
+    include_once 'view/preview.php';
 }
 
 // Insert Data
@@ -65,21 +70,23 @@ function insert_slide_callback()
             
             // Data yang ingin dimasukkan ke tabel smt_style
             $style_data = array(
+                'title_size' => 'h1', // Ganti dengan nama gaya yang sesuai
                 'title_fam' => 'sans-serif', // Ganti dengan nama gaya yang sesuai
-                'title_color' => 'black',
+                'title_color' => '#ffffff',
                 'desc_fam' => 'sans-serif',
-                'desc_color' => 'black',
+                'desc_color' => '#ffffff',
                 'btn_fam' => 'fantasy',
-                'btn_color' => 'white',
-                'btn_bg' => 'blue',
-                'btn_color_hvr' => 'white',
-                'btn_bg_hvr' => 'cyan',
-                'dots_color' => 'white',
-                'dots_bg' => 'blue',
-                'dots_line' => 'blue',
-                'dots_bg_active' => 'red',
-                'control_color' => 'black',
-                'control_bg' => 'white',
+                'btn_color' => '#ffffff',
+                'btn_bg' => '#1d5595',
+                'btn_color_hvr' => '#ffffff',
+                'btn_bg_hvr' => '#79a1bc',
+                'dots_color' => '#ffffff',
+                'dots_bg' => '#b0b7d0',
+                'dots_line' => '#b0b7d0',
+                'dots_bg_active' => '#b0b7d0',
+                'control_color' => '#000',
+                'control_bg' => '#b0b7d0',
+                'border' => '1px solid #d2d2d2',
             );
 
             $json_style_data = json_encode($style_data);
@@ -88,7 +95,7 @@ function insert_slide_callback()
             $result_style = $wpdb->insert(
                 $table_css,
                 array('style_data' => $json_style_data,
-                'id_slider' => $id )
+                'id_slider' => $inserted_id )
             );
 
             if ($result_style) {
@@ -124,43 +131,137 @@ function delete_data_callback()
         echo 'Terjadi kesalahan saat menghapus data.';
     }
 }
-function insert_img_callback()
-{
+function insert_img_callback() {
     global $wpdb;
 
     if (isset($_POST['submit'])) {
+        $table_smt_slide = $wpdb->prefix . 'smt_slider';
+        $slider_name = sanitize_text_field($_POST['slider_name']); // Ambil nama slider dari form
+        $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
+        if ($edit_id) {
+            // Mode edit: Lakukan operasi UPDATE pada tabel smt_slider
+            $wpdb->update(
+                $table_smt_slide,
+                array('name' => $slider_name), // Kolom yang akan diupdate
+                array('id' => $edit_id), // Kondisi WHERE untuk data yang akan diupdate
+                array('%s'), // Format data untuk kolom 'name'
+                array('%d') // Format data untuk kolom 'id'
+            );
+        } else {
+            // Mode insert: Lakukan operasi INSERT baru ke dalam tabel smt_slider
+            $wpdb->insert(
+                $table_smt_slide,
+                array('name' => $slider_name), // Data yang akan diinsert
+                array('%s') // Format data untuk kolom 'name'
+            );
 
-    if (isset($_POST['submit'])) {
+            // Dapatkan ID yang baru saja diinsert
+            $inserted_id = $wpdb->insert_id;
 
-        // Proses form kedua
+            if ($inserted_id) {
+                // Redirect ke halaman edit dengan ID yang baru saja diinsert
+                wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
+                exit;
+            } else {
+                wp_die('Terjadi kesalahan saat mengirim data slider.');
+            }
+        }
+
+
+        // Proses form pertama (Gambar)
         $table_smt_img = $wpdb->prefix . 'smt_img';
         $titles = array_map('sanitize_text_field', $_POST['title']);
         $descs = array_map('sanitize_textarea_field', $_POST['desc']);
         $links = array_map('sanitize_textarea_field', $_POST['link']);
-        $image_id = array_map('absint', $_POST['image_attachment_id']); // Gunakan ID gambar yang dipilih
-        $bg_image_id = array_map('absint', $_POST['bg_image_attachment_id']); // Gunakan ID gambar yang dipilih
+        $button_links = array_map('sanitize_textarea_field', $_POST['button_link']);
+        $image_id = array_map('absint', $_POST['image_attachment_id']);
+        $bg_image_id = array_map('absint', $_POST['bg_image_attachment_id']);
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
-
         $id_img = array_map('absint' ,$_POST['id_img']);
+        
+        // Proses form kedua (CSS)
+        $table_smt_css = $wpdb->prefix . 'smt_style';
+        $title_size= sanitize_text_field($_POST['title_size']);
+        $title_fam = sanitize_text_field($_POST['title_fam']);
+        $title_color = sanitize_text_field($_POST['title_color']);
+        $desc_fam = sanitize_text_field($_POST['desc_fam']);
+        $desc_color = sanitize_text_field($_POST['desc_color']);
+        $btn_fam = sanitize_text_field($_POST['btn_fam']);
+        $btn_color = sanitize_text_field($_POST['btn_color']);
+        $btn_bg = sanitize_text_field($_POST['btn_bg']);
+        $btn_color_hvr = sanitize_text_field($_POST['btn_color_hvr']);
+        $btn_bg_hvr = sanitize_text_field($_POST['btn_bg_hvr']);
+        $dots_color = sanitize_text_field($_POST['dots_color']);
+        $dots_bg = sanitize_text_field($_POST['dots_bg']);
+        $dots_line = sanitize_text_field($_POST['dots_line']);
+        $dots_bg_active = sanitize_text_field($_POST['dots_bg_active']);
+        $control_color = sanitize_text_field($_POST['control_color']);
+        $control_bg = sanitize_text_field($_POST['control_bg']);
+        $border = sanitize_text_field($_POST['border_option']);
+        $get_id_css = isset($_POST['get_id_css']) ? $_POST['get_id_css'] : null;
 
+        // Format data sebagai array asosiatif untuk CSS
+        $css_data = array(
+            'title_size' => $title_size,
+            'title_fam' => $title_fam,
+            'title_color' => $title_color,
+            'desc_fam' => $desc_fam,
+            'desc_color' => $desc_color,
+            'btn_fam' => $btn_fam,
+            'btn_color' => $btn_color,
+            'btn_bg' => $btn_bg,
+            'btn_color_hvr' => $btn_color_hvr,
+            'btn_bg_hvr' => $btn_bg_hvr,
+            'dots_color' => $dots_color,
+            'dots_bg' => $dots_bg,
+            'dots_line' => $dots_line,
+            'dots_bg_active' => $dots_bg_active,
+            'control_color' => $control_color,
+            'control_bg' => $control_bg,
+            'border' => $border,
+        );
+
+        // Konversi data CSS menjadi JSON
+        $json_data = json_encode($css_data);
+
+        // Mulai transaksi database
+        $wpdb->query('START TRANSACTION');
+
+        // Lakukan operasi untuk setiap elemen dalam data gambar
         for ($i = 0; $i < count($titles); $i++) {
 
             $custom_query = "
-                INSERT INTO $table_smt_img (id_img, img, bg_img, title, `desc`, link, id_slider)
-                VALUES ($id_img[$i], $image_id[$i], $bg_image_id[$i], '$titles[$i]', '$descs[$i]', '$links[$i]', $edit_id)
+                INSERT INTO $table_smt_img (id_img, img, bg_img, title, `desc`, link, button_link, id_slider)
+                VALUES ($id_img[$i], $image_id[$i], $bg_image_id[$i], '$titles[$i]', '$descs[$i]', '$links[$i]', '$button_links[$i]', $edit_id)
                 ON DUPLICATE KEY UPDATE
                     img = CASE WHEN VALUES(img) <> img THEN VALUES(img) ELSE img END,
                     bg_img = CASE WHEN VALUES(bg_img) <> bg_img THEN VALUES(bg_img) ELSE bg_img END,
                     title = CASE WHEN VALUES(title) <> title THEN VALUES(title) ELSE title END,
                     `desc` = CASE WHEN VALUES(`desc`) <> `desc` THEN VALUES(`desc`) ELSE `desc` END,
                     link = CASE WHEN VALUES(link) <> link THEN VALUES(link) ELSE link END,
+                    button_link = CASE WHEN VALUES(button_link) <> button_link THEN VALUES(button_link) ELSE button_link END,
                     id_slider = CASE WHEN VALUES(id_slider) <> id_slider THEN VALUES(id_slider) ELSE id_slider END;
             ";
 
             $hasil = $wpdb->query($custom_query);
         }
 
-        if ($hasil !== false) {
+
+        $css_query = "UPDATE $table_smt_css SET style_data = %s WHERE id_slider = %d;";
+
+        try {
+            // Masukkan data gambar dan CSS ke database dalam satu transaksi
+            $wpdb->query('BEGIN');
+
+            foreach ($titles as $i => $title) {
+                $wpdb->query($wpdb->prepare($hasil, $id_img[$i], $image_id[$i], $bg_image_id[$i], $title, $descs[$i], $links[$i], $edit_id));
+            }
+
+            $wpdb->query($wpdb->prepare($css_query, $json_data, $get_id_css));
+
+            // Commit transaksi
+            $wpdb->query('COMMIT');
+
             // Jika data berhasil diinsert, periksa apakah ada $edit_id
             if ($edit_id) {
                 wp_redirect(admin_url('admin.php?page=edit2&id=' . $edit_id));
@@ -174,11 +275,9 @@ function insert_img_callback()
                 }
             }
             exit;
-        } else {
-            wp_die('Terjadi kesalahan saat mengirim data gambar. :( ');
+        } catch (Exception $e) {
+            wp_die('Terjadi kesalahan saat mengirim data: ' . $e->getMessage());
         }
-
-    }
     }
 }
 
@@ -200,67 +299,7 @@ function delete_img_callback()
     }
 }
 
-//Insert CSS
-// Insert CSS
-function insert_css_callback() {
-    global $wpdb;
-    $table_smt_css = $wpdb->prefix . 'smt_style';
 
-    $title_fam = sanitize_text_field($_POST['title_fam']);
-    $title_color = sanitize_text_field($_POST['title_color']);
-    $desc_fam = sanitize_text_field($_POST['desc_fam']);
-    $desc_color = sanitize_text_field($_POST['desc_color']);
-    $btn_fam = sanitize_text_field($_POST['btn_fam']);
-    $btn_color = sanitize_text_field($_POST['btn_color']);
-    $btn_bg = sanitize_text_field($_POST['btn_bg']);
-    $btn_color_hvr = sanitize_text_field($_POST['btn_color_hvr']);
-    $btn_bg_hvr = sanitize_text_field($_POST['btn_bg_hvr']);
-    $dots_color = sanitize_text_field($_POST['dots_color']);
-    $dots_bg = sanitize_text_field($_POST['dots_bg']);
-    $dots_line = sanitize_text_field($_POST['dots_line']);
-    $dots_bg_active = sanitize_text_field($_POST['dots_bg_active']);
-    $control_color = sanitize_text_field($_POST['control_color']);
-    $control_bg = sanitize_text_field($_POST['control_bg']);
-    $get_id_css = isset($_POST['get_id_css']) ? $_POST['get_id_css'] : null;
-
-    // Format data sebagai array asosiatif
-    $css_data = array(
-        'title_fam' => $title_fam,
-        'title_color' => $title_color,
-        'desc_fam' => $desc_fam,
-        'desc_color' => $desc_color,
-        'btn_fam' => $btn_fam,
-        'btn_color' => $btn_color,
-        'btn_bg' => $btn_bg,
-        'btn_color_hvr' => $btn_color_hvr,
-        'btn_bg_hvr' => $btn_bg_hvr,
-        'dots_color' => $dots_color,
-        'dots_bg' => $dots_bg,
-        'dots_line' => $dots_line,
-        'dots_bg_active' => $dots_bg_active,
-        'control_color' => $control_color,
-        'control_bg' => $control_bg,
-    );
-
-    // Konversi data menjadi JSON
-    $json_data = json_encode($css_data);
-
-    $data = array(
-        'style_data' => $json_data, // Simpan data sebagai JSON
-    );
-
-    $where = array(
-        'id_slider' => $get_id_css
-    );
-
-    $css_result = $wpdb->update($table_smt_css, $data, $where);
-
-    if ($css_result) {
-        wp_redirect(admin_url('admin.php?page=edit2&id=' . $get_id_css));
-    } else {
-        wp_die('Terjadi kesalahan saat mengirim data CSS.');
-    }
-}
 
 
 //shortcode

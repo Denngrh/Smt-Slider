@@ -6,10 +6,13 @@
     <title>Tets</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
     <?php
     global $wpdb;
+
     $table_smt_img = $wpdb->prefix . 'smt_img';
     $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ");
     if (!empty($data_images)) {
@@ -27,18 +30,28 @@
                     <?php endforeach; ?>
                 </div>
                 </div>
+                <?php
+                global $wpdb;
+                $table_smt_css = $wpdb->prefix . 'smt_style';
+                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
+                $css_data = json_decode($data->style_data, true);
+                {
+                ?>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                    <div class="title_slide"><h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1></div>
+                    <div class="title_slide mt-5 pt-3 pt-md-0"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
                     <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
                         untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
-                        <button class="btn-custom"> Explore </button>
+                            <button class="btn-custom"> Explore </button>
                     </div>
                 </div>
+                <?php
+                }
+                ?>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                         <?php foreach ($data_images as $index => $data): ?>
-                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>">
+                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>" data-text="<?= $data->button_link ?>">
                                 <img class="inner" src="<?= wp_get_attachment_url($data->img) ?>">
                                 <div class="slide-text">
                                     <h3><?= $data->title ?></h3>
@@ -72,38 +85,57 @@
                         <div class="dot-wrapper" onclick="showSlide(0)">
                             <span class="dot"><span class="dot-number">1</span></span>
                         </div>
+                        <div class="dot-wrapper" onclick="showSlide(1)">
+                            <span class="dot"><span class="dot-number">2</span></span>
+                        </div>
                         <div class="dot-connector"></div>
                     </div>
                     
                 </div>
+                <?php
+                global $wpdb;
+                $table_smt_css = $wpdb->prefix . 'smt_style';
+                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+                $css_data = json_decode($data->style_data, true);{
+                ?>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                    <div class="title_slide"><h1 class="mt-5 pt-3 pt-md-0"> Judul Slider 1 </h1></div>
-                    <div class="desc_slide"><p class="my-md-4"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
+                    <div class="title_slide mt-5 pt-3 pt-md-0"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
+                    <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
                         untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
                         <button class="btn-custom"> Explore </button>
                     </div>
                 </div>
+                <?php
+                }
+                ?>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
                             <!-- Slide 1 -->
-                            <div class="slide col-md-4 active" onclick="showSlide(0)" data-background="https://www.pinhome.id/info-area/wp-content/uploads/2022/07/Gunung-Prau-1.jpg">
+                            <div class="slide col-md-4 active" onclick="showSlide(0)" data-background="https://www.pinhome.id/info-area/wp-content/uploads/2022/07/Gunung-Prau-1.jpg" data-text="Explore 1">
                                 <img class="inner" src="https://www.carrierstory.com/wp-content/uploads/2021/09/Jalur-Pendakian-Via-Patak-Banteng.jpg">
                                 <div class="slide-text">
                                     <h3 >Example 1</h3>
                                     <p >Deskripsi Exapmle1.</p>
                                 </div>
                             </div>
-
+                            <!-- Slide 2 -->
+                            <div class="slide slide2 col-md-4" onclick="showSlide(1)"  data-background="https://sikidang.com/wp-content/uploads/Gunung-Prau-Wonosobo.jpg" data-text="Explore 2" >
+                                <img class="inner" src="https://asset.kompas.com/crops/SJBld7b2CtJC5zJMlFbu1zKopZY=/1x319:1024x1001/750x500/data/photo/2022/09/04/6314d47545313.jpg">
+                                <div class="slide-text">
+                                    <h3 >Banda Neira</h3>
+                                    <p >Deskripsi Banda Neira.</p>     
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="slider-controls">
                     <button class="carousel-control-prev ms-md-3" onclick="moveSlide('prev')">
-                        <i class="fa-solid fa-arrow-left" style="color: #13161b;"></i>
+                        <i class="fa-solid fa-arrow-left" ></i>
                     </button>
                     <button class="carousel-control-next" onclick="moveSlide('next')">
-                        <i class="fa-solid fa-arrow-right" style="color: #13161b;"></i>
+                        <i class="fa-solid fa-arrow-right" ></i>
                     </button>
                 </div>
             </div>
@@ -118,8 +150,7 @@
 global $wpdb;
 $table_smt_css = $wpdb->prefix . 'smt_style';
 $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
-
-    $css_data = json_decode($data->style_data, true);{
+$css_data = json_decode($data->style_data, true);{
 ?>
 <style>
      .sec {
@@ -131,8 +162,6 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        
-        
     }
 
     .slider-wrap {
@@ -243,9 +272,9 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
     .carousel-control-prev{
         width: 35px;
         height: 35px;
-        background-color:  <?php echo $css_data['control_color']; ?>;
+        background-color:  <?php echo $css_data['control_bg']; ?>;
         border-radius: 50%;
-        color:  <?php echo $css_data['control_bg']; ?>;
+        color:  <?php echo $css_data['control_color']; ?>;
         font-size: 24px;
         transition: opacity 0.1s ease-in-out;
         cursor: pointer;
@@ -256,9 +285,9 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
     .carousel-control-next {
         width: 35px;
         height: 35px;
-        background-color:  <?php echo $css_data['control_color']; ?>;
+        background-color:  <?php echo $css_data['control_bg']; ?>;
         border-radius: 50%;
-        color:  <?php echo $css_data['control_bg']; ?>;
+        color:  <?php echo $css_data['control_color']; ?>;
         font-size: 24px;
         transition: opacity 0.1s ease-in-out;
         cursor: pointer;
@@ -325,8 +354,6 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
     
 
     @media (max-width: 767px) {
-       
-
        .col-md-6 {
            margin-top: 20px;
        }
@@ -427,12 +454,9 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
         color: <?php echo $css_data['btn_color_hvr']; ?>;
         background-color: <?php echo $css_data['btn_bg_hvr']; ?>;
     }
-</style>
-<?php
-}
-?>
 
-<!-- SCRIPT JS -->
+</style>
+
 <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
@@ -451,17 +475,19 @@ $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_
         const description = slideText.querySelector('p').textContent;
 
         const textSlider = document.querySelector('.text-slider');
-
+        const buttonText = slides[index].getAttribute('data-text');
+        const btnCustom = document.querySelector('.btn-custom');
+        btnCustom.textContent = buttonText;
         // Apply sliding and fading animation
-        textSlider.querySelector('h1').style.transform = 'translateY(-10px)';
+        textSlider.querySelector('<?php echo $css_data['title_size']; ?>').style.transform = 'translateY(-10px)';
         textSlider.querySelector('p').style.transform = 'translateY(-10px)';
         textSlider.querySelector('.btn-custom').style.transform = 'translateY(-5px)';
         textSlider.style.opacity = 0;
 
         setTimeout(() => {
-            textSlider.querySelector('h1').textContent = title;
+            textSlider.querySelector('<?php echo $css_data['title_size']; ?>').textContent = title;
             textSlider.querySelector('p').textContent = description;
-            textSlider.querySelector('h1').style.transform = 'translateY(0)';
+            textSlider.querySelector('<?php echo $css_data['title_size']; ?>').style.transform = 'translateY(0)';
             textSlider.querySelector('p').style.transform = 'translateY(0)';
             textSlider.querySelector('.btn-custom').style.transform = 'translateY(0)';
             textSlider.style.opacity = 1;
@@ -528,6 +554,9 @@ function updateSlideEffects() {
         showSlide(nextIndex);
     }
 
-    // Panggil showSlide() untuk memastikan latar belakang awal sesuai dengan slide pertama
     showSlide(currentSlide);
 </script>
+
+<?php
+}
+?>
