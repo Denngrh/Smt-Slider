@@ -42,24 +42,7 @@
                 })
             });
 
-            const type2 = false;
 
-            if (type2) {
-                $('.popup-content').css({
-                    "background-image": "url('<?php echo wp_get_attachment_url($latest_data[0]->img); ?>')",
-                    "background-size": "cover",
-                    "background-position": "center center",
-                    "height": "50vh",
-                });
-
-                $('.popup-image-container').css({
-                    "flex": "0"
-                });
-
-                $('.popup-image').remove();
-
-
-            }
 
 
         });
@@ -119,6 +102,28 @@
                 text.eq(slideIndex - slides.length).css("display", "block");
                 link.eq(slideIndex - slides.length).css("display", "block");
                 dots.eq(slideIndex - slides.length).addClass("active");
+
+                const type2 = true;
+
+                if (type2) {
+                    const slides = $('.popup-image-container');
+
+                    const backgroundURL = slides.eq(slideIndex - slides.length).data('background');
+                    $('.popup-content').css({
+                        'background-image': `url('${backgroundURL}')`,
+                        "background-size": "cover",
+                        "background-position": "center center",
+                        "height": "50vh",
+                    });
+
+                    $('.percobaan').css({
+                        "flex": "0"
+                    });
+
+                    $('.popup-image').remove();
+
+
+                }
 
             }
         });
@@ -396,7 +401,7 @@
                                         <button class="prev-button">&#8249;</button>
                                         <button class="next-button">&#8250;</button>
                                     </div>
-                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
+                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" data-background="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                                 </div>
                             <?php endforeach; ?>
                             <div class="dot-div" style="text-align:center">
