@@ -4,20 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Popup</title>
+    <title>Shortcode View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script>
         <?php
-        $delay = 2500;
-        $content =  array("Discount 50% For All Members", "dfjksfhdsjfdsjhf");
-        $image = array("https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80", "https://images.unsplash.com/photo-1684138941724-319bb655748c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
-        $paragraf = array("Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.", "Do esse esse ex commodo voluptate magna et qui. Cillum incididunt quis minim culpa nisi dolore nisi irure eu excepteur ut. Ullamco nostrud elit elit ut minim laborum. Labore labore deserunt fugiat laborum consequat sit tempor amet mollit. Eu adipisicing ad mollit laboris nisi ullamco mollit excepteur.");
-        $link = array("http://example.com", "google.com");
+        $delay = 3000;
+
+        $title = "Lorem Ipsum Doloer Sit Amet!";
+        $image = "https://images.unsplash.com/photo-1609017604163-e4ca9c619b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80";
+        $paragraf = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
+        $link = "https://youtube.com";
+
+        $title2 = "Insert title here";
+        $image2 = "https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1889&q=80";
+        $paragraf2 = "Reprehenderit dolor irure in in incididunt eiusmod qui. Aliqua nisi laborum laboris adipisicing ea. Exercitation consequat ex fugiat magna esse aliqua.";
+        $link2 = "https://google.com";
 
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
-
         ?>
         jQuery(document).ready(function($) {
             setTimeout(() => {
@@ -383,8 +388,8 @@
                             <?php foreach ($latest_data as $index => $data) : ?>
                                 <div class="popup-image-container">
                                     <div class="slider-buttons">
-                                        <button class="prev-button" >&#8249;</button>
-                                        <button class="next-button" >&#8250;</button>
+                                        <button class="prev-button">&#8249;</button>
+                                        <button class="next-button">&#8250;</button>
                                     </div>
                                     <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                                 </div>
@@ -421,35 +426,50 @@
                 <div class="custom-popup">
                     <div class="popup-content">
                         <div class="percobaan">
-                            <?php foreach ($latest_data as $index => $data) : ?>
-                                <div class="popup-image-container">
-                                    <div class="slider-buttons">
-                                        <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                        <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
-                                    </div>
-                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
+
+                            <div class="popup-image-container">
+                                <div class="slider-buttons">
+                                    <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
+                                    <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
                                 </div>
-                            <?php endforeach; ?>
+                                <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
+                            </div>
+
+                            <div class="popup-image-container">
+                                <div class="slider-buttons">
+                                    <button class="prev-button">&#8249;</button>
+                                    <button class="next-button">&#8250;</button>
+                                </div>
+                                <img src="<?php echo $image2 ?>" alt="inigambar" class="popup-image">
+                            </div>
+
                             <div class="dot-div" style="text-align:center">
-                                <?php foreach ($latest_data as $index => $data) : ?>
-                                    <span class="dot" onclick="currentSlide(<?php echo $index ?>)"></span>
-                                <?php endforeach; ?>
+                                <span class="dot" onclick="currentSlide(0)"></span>
+                                <span class="dot" onclick="currentSlide(1)"></span>
                             </div>
                         </div>
                         <div class="popup-text-container">
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
-                                <?php foreach ($latest_data as $index => $data) : ?>
-                                    <div class="text">
-                                        <h3><?php echo $data->title ?></h3>
-                                        <p><?php echo $data->desc ?></p>
-                                    </div>
-                                    <div class="link">
-                                        <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
-                                            <button type="button" class="tombol btn btn-dark">Click Me Now</button>
-                                        </a>
-                                    </div>
-                                <?php endforeach; ?>
+                                <div class="text">
+                                    <h3><?php echo $title ?></h3>
+                                    <p><?php echo $paragraf ?></p>
+                                </div>
+                                <div class="link">
+                                    <a href="<?php echo esc_url($link) ?>" target="_blank" rel="noopener noreferrer">
+                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
+                                    </a>
+                                </div>
+
+                                <div class="text">
+                                    <h3><?php echo $title2 ?></h3>
+                                    <p><?php echo $paragraf2 ?></p>
+                                </div>
+                                <div class="link">
+                                    <a href="<?php echo esc_url($link2) ?>" target="_blank" rel="noopener noreferrer">
+                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
