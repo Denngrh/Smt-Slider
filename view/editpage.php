@@ -153,7 +153,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" required style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -161,11 +161,11 @@
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> button link </label>
-                                                                    <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol"  autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
                                                                     <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
+                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" required placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -229,7 +229,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" autocomplete="off" required style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -240,8 +240,8 @@
                                                                     <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
-                                                                    <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
+                                                                    <label class="form-label">Description </label> 
+                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description" required></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -765,7 +765,7 @@
         background-color: #3498db; /* Ganti dengan warna latar belakang yang sesuai */
         color: #fff; /* Ganti dengan warna teks yang sesuai */
     }
-
+   
     </style>
 
     <script>
@@ -1113,11 +1113,18 @@
                     id: "field_button_link_" + fieldCounter
                 });
 
+                multiFormDiv.find("img[id='image-preview']").attr({
+                    src: "https://i.pinimg.com/736x/1e/1c/cc/1e1cccfcfc3dcb8485629af64ff4f650.jpg"
+                });
+
+                multiFormDiv.find("img[id='bg-image-preview']").attr({
+                    src: "https://i.pinimg.com/736x/1e/1c/cc/1e1cccfcfc3dcb8485629af64ff4f650.jpg"
+                });
                 var br = $("<br>");
 
                 var deleteButton = $("<button>").attr({
                     type: "button"
-                }).text("Delete Field").click(function() {
+                }).text("Delete Field").addClass("delete-button").click(function() {
                     multiFormDiv.remove(); // Remove the cloned div
                     br.remove();
                 });
