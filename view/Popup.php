@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Page View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d367ac3a48.js" crossorigin="anonymous"></script>
     <script>
         <?php
         $delay = 3000;
@@ -27,28 +25,10 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        // $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
-        $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
+        // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
+        $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
 
         ?>
-        const type2 = false;
-
-        jQuery(document).ready(function($) {
-            if (type2) {
-                $('.popup-content').css({
-                    "background-image": "url('<?php echo wp_get_attachment_url($latest_data[0]->img); ?>')",
-                    "background-size": "cover",
-                    "background-position": "center center",
-                    "height": "50vh",
-                });
-
-                $('.popup-image-container').css({
-                    "flex": "0"
-                });
-
-                $('.popup-image').remove();
-            }
-        });
     </script>
 
     <script>
@@ -104,6 +84,28 @@
                 text.eq(slideIndex - slides.length).css("display", "block");
                 link.eq(slideIndex - slides.length).css("display", "block");
                 dots.eq(slideIndex - slides.length).addClass("active");
+
+                const type2 = false;
+
+                if (type2) {
+                    const slides = $('.popup-image-container');
+
+                    const backgroundURL = slides.eq(slideIndex - slides.length).data('background');
+                    $('.popup-content').css({
+                        'background-image': `url('${backgroundURL}')`,
+                        "background-size": "cover",
+                        "background-position": "center center",
+                        "height": "50vh",
+                    });
+
+                    $('.percobaan').css({
+                        "flex": "0"
+                    });
+
+                    $('.popup-image').remove();
+
+
+                }
 
             }
         });
@@ -357,33 +359,33 @@
 <body>
     <?php
     // check jika data dari table ada pada kondisi true
-    if (!empty($latest_data)) { ?>
+    if (!empty($data_images)) { ?>
         <div class="row">
             <div class="col">
                 <div class="custom-popup">
                     <div class="popup-content">
                         <button title="close" class="close-button"><i class="fa-solid fa-x"></i></button>
                         <div class="percobaan">
-                            <?php foreach ($latest_data as $index => $data) : ?>
+                            <?php foreach ($data_images as $index => $data) : ?>
                                 <div class="popup-image-container">
                                     <div class="slider-buttons">
                                         <button class="prev-button">&#8249;</button>
                                         <button class="next-button">&#8250;</button>
                                     </div>
-                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
+                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" data-background="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
                                 </div>
                             <?php endforeach; ?>
                             <div class="dot-div" style="text-align:center">
-                                <?php foreach ($latest_data as $index => $data) : ?>
+                                <?php foreach ($data_images as $index => $data) : ?>
                                     <span class="dot" onclick="currentSlide(<?php echo $index ?>)"></span>
                                 <?php endforeach; ?>
                             </div>
                         </div>
                         <div class="popup-text-container">
                             <div class="popup-text">
-                                <?php foreach ($latest_data as $index => $data) : ?>
+                                <?php foreach ($data_images as $index => $data) : ?>
                                     <div class="text">
-                                        <h3><?php echo $data->title ?></h3>
+                                        <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
                                         <p><?php echo $data->desc ?></p>
                                     </div>
                                     <div class="link">
@@ -429,7 +431,7 @@
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <div class="text">
-                                    <h3><?php echo $title ?></h3>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title ?></ <?php echo $css_data['title_size']; ?>>
                                     <p><?php echo $paragraf ?></p>
                                 </div>
                                 <div class="link">
@@ -439,7 +441,7 @@
                                 </div>
 
                                 <div class="text">
-                                    <h3><?php echo $title2 ?></h3>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title2 ?></ <?php echo $css_data['title_size']; ?>>
                                     <p><?php echo $paragraf2 ?></p>
                                 </div>
                                 <div class="link">
