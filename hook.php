@@ -324,7 +324,6 @@ function shortcode_smt_slider($atts)
         }
     }
 }
-
 function custom_admin_menu_styles() {
     echo '<style>
         #toplevel_page_list .wp-menu-image img {
