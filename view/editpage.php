@@ -153,7 +153,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" required style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -161,11 +161,11 @@
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> button link </label>
-                                                                    <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol"  autocomplete="off" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
                                                                     <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" required placeholder="Description"></textarea>
+                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -229,7 +229,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" autocomplete="off" required style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -240,8 +240,8 @@
                                                                     <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
-                                                                    <label class="form-label">Description </label> 
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description" required></textarea>
+                                                                    <label class="form-label">Description </label>
+                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -351,7 +351,7 @@
                                                 <option value="h6" style="font-size:16px;">h6</option>
                                             </select>
                                         </div>
-                                        <div class="select px-md-4 px-4 d-flex justify-content-between">
+                                        <div class="select px-md-4 px-4 mt-2 d-flex justify-content-between">
                                             <label>Font</label>
                                             <select name="title_fam" id="title_fam">
                                                 <option value="<?php echo $css_data['title_fam']; ?>"><?php echo $css_data['title_fam']; ?></option>
@@ -500,7 +500,7 @@
                                     <div class="accordion-body d-flex justify-content-between">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="border_option" id="border_none_input" value="none">
-                                        <label class="form-check-label" for="border_none" id_="border_none_label">
+                                        <label class="form-check-label" for="border_none" id_="border_none_label" >
                                             None
                                         </label>
                                     </div>
@@ -765,7 +765,7 @@
         background-color: #3498db; /* Ganti dengan warna latar belakang yang sesuai */
         color: #fff; /* Ganti dengan warna teks yang sesuai */
     }
-   
+
     </style>
 
     <script>
@@ -1114,12 +1114,13 @@
                 });
 
                 multiFormDiv.find("img[id='image-preview']").attr({
-                    src: "https://i.pinimg.com/736x/1e/1c/cc/1e1cccfcfc3dcb8485629af64ff4f650.jpg"
+                    src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
                 });
 
                 multiFormDiv.find("img[id='bg-image-preview']").attr({
-                    src: "https://i.pinimg.com/736x/1e/1c/cc/1e1cccfcfc3dcb8485629af64ff4f650.jpg"
+                    src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
                 });
+
                 var br = $("<br>");
 
                 var deleteButton = $("<button>").attr({
@@ -1141,11 +1142,27 @@
                 }
             });
 
-            if (<?php echo $is_id_slider_exists ?>) {
-                $('#submit').on('click', function() {
+            $('#submit').on('click', function() {
                 $('#multiple_form').remove();
             });
-            }
+
 
         });
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const borderOption = "<?php echo $css_data['border']; ?>";
+
+        // Cari elemen radio button dengan ID yang sesuai
+        var borderNoneInput = document.getElementById('border_none_input');
+        var borderShowInput = document.getElementById('border_show_input');
+
+        // Tentukan radio button mana yang harus dicentang berdasarkan nilai borderOption
+        if (borderOption === 'none') {
+            borderNoneInput.checked = true;
+        } else if (borderOption === '1px solid #d2d2d2') {
+            borderShowInput.checked = true;
+        }
+    });
+</script>

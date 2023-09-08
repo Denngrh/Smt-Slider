@@ -62,7 +62,7 @@
                                 <td class="text-center"> 
                                     <button class="copy-button" style="border: none; background: transparent;"><i class="fa-solid fa-copy" style="color: white;background-color:blue; padding:5px;border-radius:5px;"></i></button>
                                     <a href="<?php echo esc_url($update_url); ?>"target="_blank"><i class="fa-solid fa-pen-to-square" style="color: white;background-color:#c9dd00; padding:5px;border-radius:5px;"></i></a>
-                                     <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_data&id=' . $result->id)); ?>" class="delete-link"><i class="fa-solid fa-trash-can" style="color: white;background-color:red; padding:5px;border-radius:5px;"></i></a>
+                                     <a href="<?php echo esc_url(admin_url('admin-post.php?action=delete_slide&id=' . $result->id)); ?>" class="delete-link"><i class="fa-solid fa-trash-can" style="color: white;background-color:red; padding:5px;border-radius:5px;"></i></a>
                                 </td>
                             </tr>
                             <?php }} ?>

@@ -13,6 +13,9 @@
     $id = $_GET['id'];
     $table_smt_img = $wpdb->prefix . 'smt_img';
     $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ");
+    $table_smt_css = $wpdb->prefix . 'smt_style';
+    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+    $css_data = json_decode($data->style_data, true);
     if (!empty($data_images)) {
        ?>
     <div class="sec container-fluid bg-container">
@@ -28,13 +31,6 @@
                     <?php endforeach; ?>
                 </div>
                 </div>
-                <?php
-                global $wpdb;
-                $table_smt_css = $wpdb->prefix . 'smt_style';
-                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
-                $css_data = json_decode($data->style_data, true);
-                {
-                ?>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
                     <div class="title_slide mt-5 pt-3 pt-md-0"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
                     <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
@@ -42,9 +38,6 @@
                             <button class="btn-custom"> Explore </button>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">

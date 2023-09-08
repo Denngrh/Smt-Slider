@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tets</title>
+    <title>Paralax View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
     <?php
     global $wpdb;
 
     $table_smt_img = $wpdb->prefix . 'smt_img';
+    $table_smt_css = $wpdb->prefix . 'smt_style';
     $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id ");
+    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
+    $css_data = json_decode($data->style_data, true);
     if (!empty($data_images)) {
        ?>
     <div class="sec container-fluid bg-container">
@@ -29,14 +31,7 @@
                         <div class="dot-connector"></div>
                     <?php endforeach; ?>
                 </div>
-                </div>
-                <?php
-                global $wpdb;
-                $table_smt_css = $wpdb->prefix . 'smt_style';
-                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
-                $css_data = json_decode($data->style_data, true);
-                {
-                ?>
+                </div>        
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
                     <div class="title_slide mt-5 pt-3 pt-md-0"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
                     <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
@@ -44,9 +39,6 @@
                             <button class="btn-custom"> Explore </button>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
                 <div class="col-md-6 my-md-5 pt-md-5">
                     <div class="slider-wrap my-auto">
                         <div class="slider-pannel col-md-12">
@@ -95,7 +87,7 @@
                 <?php
                 global $wpdb;
                 $table_smt_css = $wpdb->prefix . 'smt_style';
-                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+                $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $project_id ");
                 $css_data = json_decode($data->style_data, true);{
                 ?>
                 <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">

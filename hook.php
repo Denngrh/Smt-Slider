@@ -110,7 +110,7 @@ function insert_slide_callback()
     }
 }
 // Delete data
-function delete_data_callback()
+function delete_slide_callback()
 {
     global $wpdb;
     $table_slider = $wpdb->prefix . 'smt_slider';
@@ -299,10 +299,6 @@ function delete_img_callback()
     }
 }
 
-
-
-
-//shortcode
 function shortcode_smt_slider($atts)
 {
     if (isset($atts['slider'])) {
@@ -355,6 +351,6 @@ add_action('admin_post_nopriv_insert_css_callback', 'insert_css_callback');
 add_action('admin_post_insert_slide_callback', 'insert_slide_callback');
 add_action('admin_post_nopriv_insert_slide_callback', 'insert_slide_callback');
 // Action Delete
-add_action('admin_post_delete_data', 'delete_data_callback');
+add_action('admin_post_delete_slide', 'delete_slide_callback');
 // ADD MENU
 add_action('admin_menu', 'ListMenu');
