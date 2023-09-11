@@ -245,6 +245,7 @@
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
+                                                                <!-- <input type="hidden" name="edit_id" value="0"> -->
                                                                 <!-- end form-container -->
                                                             </div>
                                                         </div>
@@ -547,6 +548,7 @@
                                 include 'Popup.php'; 
                             } else {
                                 echo "Tipe tidak dikenali atau terjadi kesalahan.";
+                                echo var_dump($slider_data);
                             }
                         } else {
                             echo "Data slider tidak ditemukan.";
@@ -1142,9 +1144,12 @@
                 }
             });
 
-            $('#submit').on('click', function() {
-                $('#multiple_form').remove();
-            });
+            if (<?php echo $is_id_slider_exists ?>) {
+                $('#submit').on('click', function() {
+                    $('#multiple_form').remove();
+                });
+            }
+
 
 
         });
