@@ -259,14 +259,12 @@
                 font-family: <?php echo $css_data['btn_fam'] ?>;
                 color: <?php echo $css_data['btn_color'] ?>;
                 background-color: <?php echo $css_data['btn_bg'] ?>;
-                opacity: 0.5;
                 margin-right: 5%;
                 transition: 0.4s ease;
 
             }
 
             .tombol:hover {
-                opacity: 1;
                 color: <?php echo $css_data['btn_color_hvr'] ?>;
                 background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
             }
@@ -298,7 +296,7 @@
                 height: 15px;
                 width: 15px;
                 margin: 0 2px;
-                background-color: #bbb;
+                background-color: <?php echo $css_data['dots_bg'] ?>;
                 border-radius: 50%;
                 display: inline-block;
                 transition: background-color 0.6s ease;
@@ -317,7 +315,7 @@
 
             .active,
             .dot:hover {
-                background-color: #717171;
+                background-color: <?php echo $css_data['dots_bg_active'] ?>;
             }
 
             @media (max-width: 850px) {
