@@ -201,6 +201,7 @@
                 justify-content: center;
                 overflow: hidden;
                 position: relative;
+                margin: 0;
             }
 
             .close-button {
@@ -292,14 +293,12 @@
                 font-family: <?php echo $css_data['btn_fam'] ?>;
                 color: <?php echo $css_data['btn_color'] ?>;
                 background-color: <?php echo $css_data['btn_bg'] ?>;
-                opacity: 0.5;
                 margin-right: 5%;
                 transition: 0.4s ease;
 
             }
 
             .tombol:hover {
-                opacity: 1;
                 color: <?php echo $css_data['btn_color_hvr'] ?>;
                 background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
             }
@@ -331,7 +330,7 @@
                 height: 15px;
                 width: 15px;
                 margin: 0 2px;
-                background-color: #bbb;
+                background-color: <?php echo $css_data['dots_bg'] ?>;
                 border-radius: 50%;
                 display: inline-block;
                 transition: background-color 0.6s ease;
@@ -350,14 +349,13 @@
 
             .active,
             .dot:hover {
-                background-color: #717171;
+                background-color: <?php echo $css_data['dots_bg_active'] ?>;
             }
 
             @media (max-width: 850px) {
                 .popup-content {
                     margin-left: 10%;
                     margin-right: 10%;
-                    background-color: yellow;
                 }
 
                 .popup-image {
@@ -369,18 +367,23 @@
             @media (max-width: 480px) {
                 .popup-content {
                     margin: 5%;
-                    background-color: red;
                 }
 
                 .popup-text-container {
-                    padding: 4px;
+                    padding: 2px;
                     /* Adjust padding for smaller screens */
-                    margin-right: 4vw;
+                    margin-right: 0;
                 }
 
                 .popup-image {
                     height: 50vh;
                 }
+
+                .next-button,
+                .prev-button{
+                    font-size: 20px;
+                }
+
             }
         </style>
     <?php } ?>

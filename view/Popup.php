@@ -322,7 +322,6 @@
                 .popup-content {
                     margin-left: 10%;
                     margin-right: 10%;
-                    background-color: yellow;
                 }
 
                 .popup-image {
@@ -334,16 +333,23 @@
             @media (max-width: 480px) {
                 .popup-content {
                     margin: 5%;
-                    background-color: red;
                 }
 
                 .popup-text-container {
-                    padding: 4px;
+                    padding: 2px;
+                    /* Adjust padding for smaller screens */
+                    margin-right: 0;
                 }
 
                 .popup-image {
                     height: 50vh;
                 }
+
+                .next-button,
+                .prev-button{
+                    font-size: 20px;
+                }
+
             }
         </style>
     <?php
