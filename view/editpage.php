@@ -1076,6 +1076,17 @@
                 $('#multiple_form').css('display', 'block');
             }
 
+            
+            let imageDiv = $("#multiple_form");
+
+            imageDiv.find("img[id='image-preview']").attr({
+                src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
+            });
+
+            imageDiv.find("img[id='bg-image-preview']").attr({
+                src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
+            });
+
             $("#add_field").click(function() {
                 var additionalFields = $("#additional_fields");
                 
