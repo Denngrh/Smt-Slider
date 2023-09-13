@@ -245,6 +245,7 @@
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
+                                                                <!-- <input type="hidden" name="edit_id" value="0"> -->
                                                                 <!-- end form-container -->
                                                             </div>
                                                         </div>
@@ -315,6 +316,7 @@
 
                             // Mengambil elemen form border
                             var borderForm = document.getElementById("border-form");
+                            var tpye_popup = document.getElementById("accordionPanelsStayOpenExample5");
 
                             // Fungsi untuk menampilkan atau menyembunyikan elemen form border
                             function toggleBorderForm() {
@@ -322,6 +324,13 @@
                                     borderForm.style.display = "block"; // Tampilkan elemen form border jika jenis slider adalah "square"
                                 } else {
                                     borderForm.style.display = "none"; // Sembunyikan elemen form border jika jenis slider bukan "square"
+                                }
+
+                                // di bawah ini untuk type kondisi type popup
+                                if (sliderType === "Popup") {
+                                    tpye_popup.style.display = "none"; // Tampilkan elemen form border jika jenis slider adalah "square"
+                                } else {
+                                    tpye_popup.style.display = "block"; // Sembunyikan elemen form border jika jenis slider bukan "square"
                                 }
                             }
 
@@ -468,7 +477,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="accordion my-3" id="accordionPanelsStayOpenExample5">
+                            <div class="accordion my-3 tpyePopup" id="accordionPanelsStayOpenExample5">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse5" aria-expanded="false" aria-controls="panelsStayOpen-collapse5">
@@ -521,7 +530,7 @@
                         }
                         ?>
                     </div>
-                    <div class="footer_sidebar col justify-content-between d-flex mx-m5px-md-5 px-4 " >
+                    <div class="footer_sidebar col justify-content-between d-flex mx-m5px-md-5 px-4 ">
                         <input type="hidden" name="get_id_css" value="<?php echo esc_attr($id); ?>">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back_btn mt-1"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></a>
                         <a href="<?php echo esc_url(admin_url('admin.php?page=preview&id=' . $id)); ?>" class="preview_btn mt-1"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></i></a>
@@ -547,6 +556,7 @@
                                 include 'Popup.php'; 
                             } else {
                                 echo "Tipe tidak dikenali atau terjadi kesalahan.";
+                                echo var_dump($slider_data);
                             }
                         } else {
                             echo "Data slider tidak ditemukan.";
@@ -1066,6 +1076,17 @@
                 $('#multiple_form').css('display', 'block');
             }
 
+            
+            let imageDiv = $("#multiple_form");
+
+            imageDiv.find("img[id='image-preview']").attr({
+                src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
+            });
+
+            imageDiv.find("img[id='bg-image-preview']").attr({
+                src: "https://lms.adhkediri.ac.id/resources/admin/uploads/default.jpg"
+            });
+
             $("#add_field").click(function() {
                 var additionalFields = $("#additional_fields");
                 
@@ -1142,9 +1163,12 @@
                 }
             });
 
-            $('#submit').on('click', function() {
-                $('#multiple_form').remove();
-            });
+            if (<?php echo $is_id_slider_exists ?>) {
+                $('#submit').on('click', function() {
+                    $('#multiple_form').remove();
+                });
+            }
+
 
         
         });
