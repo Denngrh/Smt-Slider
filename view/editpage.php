@@ -165,7 +165,7 @@
                                                                 </div>
                                                                 <div class="my-3">
                                                                     <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
+                                                                    <textarea name="desc[]" id="" cols="25" rows="3" maxlength="400" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -1054,7 +1054,15 @@
             var savedData = [
                 // Example saved data objects
                 <?php foreach ($data_images as $key => $data) : ?>
-                { title: "<?php echo $data->title ?>", desc: "<?php echo $data->desc ?>", link: "<?php echo $data->link ?>",button_link: "<?php echo $data->button_link ?>", img: "<?php echo $data->img ?>", img_url: "<?php echo wp_get_attachment_url( $data->img ) ?>" , bg_img_url: "<?php echo wp_get_attachment_url( $data->bg_img ) ?>" ,bg_img: "<?php echo $data->bg_img ?>" , id_img: "<?php echo $data->id_img ?>"  },
+                {   title: "<?php echo $data->title ?>",
+                    desc: "<?php echo $string = trim(preg_replace('/\s+/', ' ', $data->desc)); ?>",
+                    link: "<?php echo $data->link ?>", 
+                    button_link: "<?php echo $data->button_link ?>", 
+                    img: "<?php echo $data->img ?>", 
+                    img_url: "<?php echo wp_get_attachment_url( $data->img ) ?>", 
+                    bg_img_url: "<?php echo wp_get_attachment_url( $data->bg_img ) ?>", 
+                    bg_img: "<?php echo $data->bg_img ?>",
+                    id_img: "<?php echo $data->id_img ?>", }
                 <?php endforeach; ?>
                 // Add more saved data objects as needed
             ];

@@ -199,7 +199,6 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                overflow: hidden;
                 position: relative;
                 margin: 0;
             }
@@ -323,6 +322,8 @@
                 color: <?php echo $css_data['desc_color'] ?>;
 
                 margin-bottom: 10px;
+                font-size: 16px;
+                overflow: hidden;
             }
 
             .dot {
@@ -382,6 +383,11 @@
                 .next-button,
                 .prev-button{
                     font-size: 20px;
+                }
+
+                .text p {
+                    max-height: 30vh;
+                    overflow: scroll;
                 }
 
             }
