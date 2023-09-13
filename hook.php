@@ -72,9 +72,9 @@ function insert_slide_callback()
             $style_data = array(
                 'title_size' => 'h1', // Ganti dengan nama gaya yang sesuai
                 'title_fam' => 'sans-serif', // Ganti dengan nama gaya yang sesuai
-                'title_color' => '#ffffff',
+                'title_color' => '#000000',
                 'desc_fam' => 'sans-serif',
-                'desc_color' => '#ffffff',
+                'desc_color' => '#000000',
                 'btn_fam' => 'fantasy',
                 'btn_color' => '#ffffff',
                 'btn_bg' => '#1d5595',

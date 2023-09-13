@@ -116,7 +116,7 @@
     ?>
         <style>
             .custom-popup {
-                width: 85%;
+                width: 87%;
                 /* background-color: rgba(0, 0, 0, 0.5); */
                 margin-left: auto;
                 margin-right: auto;
