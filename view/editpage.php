@@ -1163,11 +1163,14 @@
                 }
             });
 
-            if (<?php echo $is_id_slider_exists ?>) {
-                $('#submit').on('click', function() {
+            // console.log(statusDiv);
+            
+            $('#submit').on('click', function() {
+                let statusDiv = $('#multiple_form').css("display");
+                if (statusDiv === "none"){
                     $('#multiple_form').remove();
-                });
-            }
+                } 
+            });
 
 
 
