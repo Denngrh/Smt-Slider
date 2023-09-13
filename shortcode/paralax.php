@@ -357,15 +357,15 @@ $css_data = json_decode($data->style_data, true);{
        }
 
        .slide {
-       width: 100%; 
-       height: auto;
+       width: 90%; 
+       height: 100%;
        margin: 10px auto; 
 
        }
        .indicator-dots {
            flex-direction: row;
            justify-content: center;
-           margin-top: 160px;
+           margin-top: 10px;
            align-items: center;
            margin-left: 23%; 
        }
@@ -384,7 +384,7 @@ $css_data = json_decode($data->style_data, true);{
 
        .carousel-control-prev{
            font-size: 18px;
-           margin-top:10%;
+           margin-top:-40%;
            margin-left: -50px;
            
          
@@ -393,7 +393,7 @@ $css_data = json_decode($data->style_data, true);{
            margin-right: 200px;
            display: flex;
            font-size: 18px;
-           margin-top:10%;
+           margin-top:-40%;
        }
        
    }
