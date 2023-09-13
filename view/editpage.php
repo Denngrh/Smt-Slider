@@ -530,7 +530,7 @@
                         }
                         ?>
                     </div>
-                    <div class="footer_sidebar col justify-content-between d-flex mx-m5px-md-5 px-4 ">
+                    <div class="footer_sidebar col justify-content-between d-flex  px-4 ">
                         <input type="hidden" name="get_id_css" value="<?php echo esc_attr($id); ?>">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=dashboard')); ?>" class="back_btn mt-1"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></a>
                         <a href="<?php echo esc_url(admin_url('admin.php?page=preview&id=' . $id)); ?>" class="preview_btn mt-1"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></i></a>
@@ -754,7 +754,7 @@
         }
         .footer_sidebar{
             background:#000;
-            width:310px;
+            width: 24.3vw;
             position: fixed;
             bottom: 0;
             left: 0;
