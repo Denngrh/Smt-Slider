@@ -1062,7 +1062,7 @@
                     img_url: "<?php echo wp_get_attachment_url( $data->img ) ?>", 
                     bg_img_url: "<?php echo wp_get_attachment_url( $data->bg_img ) ?>", 
                     bg_img: "<?php echo $data->bg_img ?>",
-                    id_img: "<?php echo $data->id_img ?>", }
+                    id_img: "<?php echo $data->id_img ?>", },
                 <?php endforeach; ?>
                 // Add more saved data objects as needed
             ];
