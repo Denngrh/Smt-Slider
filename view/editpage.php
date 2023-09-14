@@ -160,7 +160,7 @@
                                                                     <input class="form-control" type="text" name="link[]" placeholder="Https" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
-                                                                    <label> button link </label>
+                                                                    <label> Button Text </label>
                                                                     <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
@@ -236,7 +236,7 @@
                                                                     <input class="form-control" type="text" name="link[]" placeholder="Https" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
-                                                                    <label> button link </label>
+                                                                    <label> Button Text </label>
                                                                     <input class="form-control" type="text" name="button_link[]" placeholder="Tautan Tombol" autocomplete="off" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="my-3">
@@ -295,8 +295,8 @@
                                     lineColorInput.style.display = 'none';
                                     dotsColorLabel.style.display = 'none';
                                     dotsColorInput.style.display = 'none';
-                                    bgcontrolinput.style.display = 'none';
-                                    bgcontrollabel.style.display = 'none';
+                                    bgcontrolinput.style.display = 'block';
+                                    bgcontrollabel.style.display = 'block';
 
                                     // Menghapus nilai elemen (contoh untuk input teks)
                                     if (lineColorInput.tagName === 'INPUT' && (lineColorInput.type === 'color')) {
@@ -315,8 +315,8 @@
                             const sliderType = "<?php echo $datas->type; ?>"; // Mengambil jenis slider dari PHP
 
                             // Mengambil elemen form border
-                            var borderForm = document.getElementById("border-form");
-                            var tpye_popup = document.getElementById("accordionPanelsStayOpenExample5");
+                            var borderForm = document.getElementById("border_form");
+                            var tpye_popup = document.getElementById("border_form");
 
                             // Fungsi untuk menampilkan atau menyembunyikan elemen form border
                             function toggleBorderForm() {
@@ -328,9 +328,9 @@
 
                                 // di bawah ini untuk type kondisi type popup
                                 if (sliderType === "Popup") {
-                                    tpye_popup.style.display = "none"; // Tampilkan elemen form border jika jenis slider adalah "square"
+                                    tpye_popup.style.display = "none"; // sembunyikan elemen jika type popup
                                 } else {
-                                    tpye_popup.style.display = "block"; // Sembunyikan elemen form border jika jenis slider bukan "square"
+                                    tpye_popup.style.display = "block"; // tamilkan jika selain type popup
                                 }
                             }
 
@@ -409,7 +409,7 @@
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse3" aria-expanded="false" aria-controls="panelsStayOpen-collapse3">
-                                    Button Link
+                                    Button Text
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapse3" class="accordion-collapse collapse show">
@@ -477,7 +477,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="accordion my-3 tpyePopup" id="accordionPanelsStayOpenExample5">
+                            <div class="accordion my-3 mb-4" id="accordionPanelsStayOpenExample5">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse5" aria-expanded="false" aria-controls="panelsStayOpen-collapse5">
@@ -498,7 +498,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div id="border-form" class="accordion my-3" id="accordionPanelsStayOpenExample5">
+                            <div id="border_form" class="accordion my-3" id="accordionPanelsStayOpenExample5">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse6" aria-expanded="false" aria-controls="panelsStayOpen-collapse6">
