@@ -391,7 +391,7 @@
                                     </div>
                                     <div class="link">
                                         <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
-                                            <button type="button" class="tombol btn btn-dark">Click Me Now</button>
+                                            <button type="button" class="tombol btn btn-dark"><?php echo $data->button_link ?></button>
                                         </a>
                                     </div>
                                 <?php endforeach; ?>
