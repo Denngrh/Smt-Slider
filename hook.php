@@ -170,6 +170,8 @@ function insert_img_callback() {
 
         // Proses form pertama (Gambar)
         $table_smt_img = $wpdb->prefix . 'smt_img';
+        $table_smt_slider = $wpdb->prefix . 'smt_slider';
+
         $titles = array_map('sanitize_text_field', $_POST['title']);
         $descs = array_map('sanitize_textarea_field', $_POST['desc']);
         $links = array_map('sanitize_textarea_field', $_POST['link']);
@@ -178,6 +180,7 @@ function insert_img_callback() {
         $bg_image_id = array_map('absint', $_POST['bg_image_attachment_id']);
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
         $id_img = array_map('absint' ,$_POST['id_img']);
+        $delay_popup = absint($_POST['delay_popup']);
         
         // Proses form kedua (CSS)
         $table_smt_css = $wpdb->prefix . 'smt_style';
@@ -242,10 +245,20 @@ function insert_img_callback() {
                     button_link = CASE WHEN VALUES(button_link) <> button_link THEN VALUES(button_link) ELSE button_link END,
                     id_slider = CASE WHEN VALUES(id_slider) <> id_slider THEN VALUES(id_slider) ELSE id_slider END;
             ";
+            
 
             $hasil = $wpdb->query($custom_query);
         }
 
+        $delay_query = "UPDATE $table_smt_slider
+                            SET delay_popup = $delay_popup
+                            WHERE id = $edit_id;
+        ";
+        // $query_delay = $wpdb->query($delay_query);
+        $wpdb->query($delay_query);
+
+        // var_dump($query_delay);
+        // wp_die($wpdb->last_error);
 
         $css_query = "UPDATE $table_smt_css SET style_data = %s WHERE id_slider = %d;";
 

@@ -7,7 +7,8 @@
     <title>Shortcode View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d367ac3a48.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <script>
         <?php
         $delay = 3000;
@@ -24,7 +25,10 @@
 
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
+        $table_name = $wpdb->prefix . 'smt_slider';
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
+        $data = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $project_id");
+
         ?>
         jQuery(document).ready(function($) {
             setTimeout(() => {
@@ -34,7 +38,7 @@
                 });
 
                 // $('.popup-image').addClass('fade');
-            }, <?php echo $delay ?>);
+            }, <?php echo $data->delay_popup ?>);
 
             $('.close-button').click(function() {
                 $('.row').css({

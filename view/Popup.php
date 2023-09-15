@@ -147,7 +147,7 @@
                 border-radius: 15px !important;
                 object-fit: cover;
                 height: 75vh !important;
-                width: 100%;
+                width: 100% !important;
 
             }
 
