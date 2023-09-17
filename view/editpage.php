@@ -60,8 +60,23 @@
                         </div>
                         <div class="form-group mt-3 d-flex justify-content-between" >
                             <label class="ms-md-2"> Type </label>
-                            <input class="form-control" type="text" value="<?php echo $data->type; ?>" readonly style="width:70%;height:5px;">
+                            <input class="form-control" id="type_text" type="text" value="<?php echo $data->type; ?>" readonly style="width:70%;height:5px;">
                         </div>
+                        <div id="delay_popup_div" class="form-group mt-3 d-flex justify-content-between" >
+                            <label class="ms-md-2"> Delay Popup</label>
+                            <input class="form-control" type="text" name="delay_popup" value="1000" style="width:70%;height:5px;">
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                let slider_type = $('#settingImageForm').find("input[id='type_text']").val();
+                                if (slider_type != 'Popup') {
+                                    $('#delay_popup_div').remove();
+                                }
+
+                                $('#settingImageForm').find("input[name='delay_popup']").val(<?php echo ($data->delay_popup == 0) ? 1000 : $data->delay_popup ?>);
+
+                            });
+                        </script>
                         <?php
                         }
                         ?>
@@ -966,6 +981,7 @@
                     multiFormDiv.find("input[name='image_attachment_id[]']").val(data.img);
                     multiFormDiv.find("input[name='bg_image_attachment_id[]']").val(data.bg_img);
                     multiFormDiv.find("input[name='id_img[]']").val(data.id_img);
+                    // $('#settingImageForm').find("input[name='delay_popup']").val(data.delay_popup);
 
                     // Modify attributes and IDs of the cloned elements
                     multiFormDiv.find("input[name='title[]']").attr({
@@ -1062,7 +1078,7 @@
                     img_url: "<?php echo wp_get_attachment_url( $data->img ) ?>", 
                     bg_img_url: "<?php echo wp_get_attachment_url( $data->bg_img ) ?>", 
                     bg_img: "<?php echo $data->bg_img ?>",
-                    id_img: "<?php echo $data->id_img ?>", },
+                    id_img: "<?php echo $data->id_img ?>" },
                 <?php endforeach; ?>
                 // Add more saved data objects as needed
             ];

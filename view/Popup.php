@@ -144,7 +144,7 @@
                 border-radius: 15px !important;
                 object-fit: cover;
                 height: 75vh !important;
-                width: 100%;
+                width: 100% !important;
 
             }
 
@@ -386,7 +386,7 @@
                             <div class="popup-text">
                                 <?php foreach ($data_images as $index => $data) : ?>
                                     <div class="text">
-                                        <h3><?php echo $data->title ?></h3>
+                                        <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
                                         <p><?php echo $data->desc ?></p>
                                     </div>
                                     <div class="link">
@@ -432,7 +432,7 @@
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <div class="text">
-                                    <h3><?php echo $title ?></h3>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title ?></ <?php echo $css_data['title_size']; ?>>
                                     <p><?php echo $paragraf ?></p>
                                 </div>
                                 <div class="link">
@@ -442,7 +442,7 @@
                                 </div>
 
                                 <div class="text">
-                                    <h3><?php echo $title2 ?></h3>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title2 ?></ <?php echo $css_data['title_size']; ?>>
                                     <p><?php echo $paragraf2 ?></p>
                                 </div>
                                 <div class="link">

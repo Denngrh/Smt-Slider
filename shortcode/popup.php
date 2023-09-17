@@ -7,7 +7,8 @@
     <title>Shortcode View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d367ac3a48.js" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <script>
         <?php
         $delay = 3000;
@@ -24,7 +25,10 @@
 
         global $wpdb;
         $table_smt_img = $wpdb->prefix . 'smt_img';
+        $table_name = $wpdb->prefix . 'smt_slider';
         $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
+        $data = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $project_id");
+
         ?>
         jQuery(document).ready(function($) {
             setTimeout(() => {
@@ -34,7 +38,7 @@
                 });
 
                 // $('.popup-image').addClass('fade');
-            }, <?php echo $delay ?>);
+            }, <?php echo $data->delay_popup ?>);
 
             $('.close-button').click(function() {
                 $('.row').css({
@@ -104,6 +108,7 @@
                 link.eq(slideIndex - slides.length).css("display", "block");
                 dots.eq(slideIndex - slides.length).addClass("active");
 
+                const type2 = false;
                 const type2 = false;
 
                 if (type2) {
@@ -424,8 +429,8 @@
                             <div class="popup-text">
                                 <?php foreach ($latest_data as $index => $data) : ?>
                                     <div class="text">
-                                        <h3><?php echo $data->title ?></h3>
-                                        <p><?php echo $data->desc ?></p>
+                                        <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
+                                            <p><?php echo $data->desc ?></p>
                                     </div>
                                     <div class="link">
                                         <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
@@ -470,8 +475,8 @@
                             <button title="close" class="close-button">&times;</button>
                             <div class="popup-text">
                                 <div class="text">
-                                    <h3><?php echo $title ?></h3>
-                                    <p><?php echo $paragraf ?></p>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title ?></<?php echo $css_data['title_size']; ?>>
+                                        <p><?php echo $paragraf ?></p>
                                 </div>
                                 <div class="link">
                                     <a href="<?php echo esc_url($link) ?>" target="_blank" rel="noopener noreferrer">
@@ -480,8 +485,8 @@
                                 </div>
 
                                 <div class="text">
-                                    <h3><?php echo $title2 ?></h3>
-                                    <p><?php echo $paragraf2 ?></p>
+                                    <<?php echo $css_data['title_size']; ?>><?php echo $title2 ?></<?php echo $css_data['title_size']; ?>>
+                                        <p><?php echo $paragraf2 ?></p>
                                 </div>
                                 <div class="link">
                                     <a href="<?php echo esc_url($link2) ?>" target="_blank" rel="noopener noreferrer">

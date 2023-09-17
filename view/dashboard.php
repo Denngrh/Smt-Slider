@@ -58,7 +58,7 @@
                                 <td class="text-center"><?php echo $no++; ?></td>
                                 <td><?php echo $result->name; ?></td>
                                 <td><?php echo $result->type; ?></td>
-                                <td class="shortcode"><?php echo $result->short_code; ?></td>
+                                <td class="shortcode"><?php echo "[smt_slider slider=$id]" ?></td>
                                 <td class="text-center"> 
                                     <button class="copy-button" style="border: none; background: transparent;"><i class="fa-solid fa-copy" style="color: white;background-color:blue; padding:5px;border-radius:5px;"></i></button>
                                     <a href="<?php echo esc_url($update_url); ?>"target="_blank"><i class="fa-solid fa-pen-to-square" style="color: white;background-color:#c9dd00; padding:5px;border-radius:5px;"></i></a>
