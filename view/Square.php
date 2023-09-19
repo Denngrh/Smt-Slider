@@ -144,10 +144,10 @@ $css_data = json_decode($data->style_data, true); {
                             <div class="carousel-item<?= $index === 0 ? ' active' : '' ?>" data-bs-interval="">
                                 <img id='image-preview' src='<?= wp_get_attachment_url($data->img) ?>' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="...">
                                 <div class="d-md-block text-center mb-5 mt-4">
-                                    <div class="title_slide">
+                                    <div class="title_slide" id="preview_title_<?php echo $index + 1; ?>">
                                         <<?php echo $css_data['title_size']; ?>> <?= $data->title; ?> </<?php echo $css_data['title_size']; ?>>
                                     </div>
-                                    <div class="description col-md-6">
+                                    <div class="description col-md-6" id="preview_desc_<?php echo $index + 1; ?>">
                                         <?php
                                         $desc = $data->desc;
                                         $desc_words = explode(" ", $desc);
@@ -166,7 +166,7 @@ $css_data = json_decode($data->style_data, true); {
                                         ?>
                                     </div>
 
-                                    <div class="link">
+                                    <div class="link" id="preview_link_<?php echo $index + 1; ?>">
                                         <?php if (!empty($data->link)) : ?>
                                             <a href="<?= $data->link; ?>" target="_blank">
                                                 <button type="button" class="btn-custom"><?= $data->button_link; ?></button>
@@ -199,7 +199,7 @@ $css_data = json_decode($data->style_data, true); {
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="">
-                            <img id='image-preview' src='https://github.com/Denngrh/smt-slider/assets/112230212/6cf04d3c-c81f-4fcc-9174-5222e5265cf9' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="Logo Smooets">
+                            <img id='image-preview' src='https://img.freepik.com/free-photo/man-with-hands-wide-open-standing-top-mountain-enjoying-incredible-view-lake_181624-50789.jpg?w=740&t=st=1695004716~exp=1695005316~hmac=0fbb8a709a1c9c94cc33c97fc7788f3ab153a76b0aacfc675ef1261934f7e6d9' class="img-fluid mx-auto d-block" style="border-radius: 50%; width: 330px; height: 330px;" alt="Logo Smooets">
                             <div class="d-md-block text-center mb-5 mt-4">
                                 <h3>Example Title 1</h3>
                                 <p>This is an example description for slide 1.</p>

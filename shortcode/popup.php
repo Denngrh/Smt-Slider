@@ -109,7 +109,6 @@
                 dots.eq(slideIndex - slides.length).addClass("active");
 
                 const type2 = false;
-                const type2 = false;
 
                 if (type2) {
                     const slides = $('.popup-image-container');

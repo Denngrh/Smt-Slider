@@ -385,11 +385,11 @@
                         <div class="popup-text-container">
                             <div class="popup-text">
                                 <?php foreach ($data_images as $index => $data) : ?>
-                                    <div class="text">
+                                    <div class="text" id="preview_title_<?php echo $index + 1; ?>">
                                         <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
                                         <p><?php echo $data->desc ?></p>
                                     </div>
-                                    <div class="link">
+                                    <div class="link" id="preview_link_<?php echo $index + 1; ?>">
                                         <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
                                             <button type="button" class="tombol btn btn-dark"><?php echo $data->button_link ?></button>
                                         </a>

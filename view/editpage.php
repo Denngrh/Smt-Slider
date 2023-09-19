@@ -168,7 +168,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" data-id="1" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" data-id="0" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -180,7 +180,7 @@
                                                                 </div>
                                                                 <div class="my-3">
                                                                     <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id=""  data-id="1" cols="25" rows="3" maxlength="400" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
+                                                                    <textarea name="desc[]" id=""  data-id="0" cols="25" rows="3" maxlength="400" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -989,7 +989,7 @@
                         id: "field_title_" + fieldCounter
                     });
 
-                    multiFormDiv.find("input[name='desc[]']").attr({
+                    multiFormDiv.find("textarea[name='desc[]']").attr({
                         name: "desc[]",
                         id: "field_desc_" + fieldCounter
                     });
@@ -1219,29 +1219,92 @@
 </script>
 
 <script>
+/**
+ *  Live preview for tpye popup
+ *  
+ */
 $(document).ready(function() {
-    // Mendengarkan perubahan pada setiap input "title" dalam multiform div
-    $("input[name='title[]']").on("input", function() {
-        // Mendapatkan ID dinamis dari input "title" yang sedang diedit
-        var dynamicId = $(this).data("id");
+    let accordion = $('#additional_fields > #multiple_form');
+    // console.log(accordion.length);  
+    <?php
+    $id = $_GET['id'];
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'smt_slider';
+    $data_tipe_slider = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $id"); 
+    ?>
+    let tipe_slider = "<?php echo $data_tipe_slider->type; ?>";
+    
+    for (let i=1; i <= accordion.length; i++){
 
-        // Mendapatkan nilai dari input "title" yang sedang diedit
-        var newTitle = $(this).val();
+        if(tipe_slider === "Popup"){
+            $(`#field_title_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_title_${dynamicId} > :first-child`).text(newTitle);
+            });
+    
+            $(`#field_desc_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_title_${dynamicId} > :nth-child(2)`).text(newTitle);
+            });
+    
+            $(`#field_button_link_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_link_${dynamicId} > :first-child > :first-child`).text(newTitle);
+            });
 
-        // Memperbarui elemen pratinjau yang sesuai berdasarkan ID dinamis
-        $(`#preview_title_${dynamicId} > :first-child`).text(newTitle);
-    });
+        } else if (tipe_slider === "Paralax") {
+            $(`#field_title_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_title_${dynamicId} > :first-child`).text(newTitle);
+            });
+    
+            $(`#field_desc_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_desc_${dynamicId} > :first-child`).text(newTitle);
+            });
+    
+            $(`#field_button_link_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_desc_${dynamicId} > :nth-child(2)`).text(newTitle);
+            });
+        } else if (tipe_slider === "Square") {
+            $(`#field_title_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_title_${dynamicId} > :first-child`).text(newTitle);
+            });
+    
+            $(`#field_desc_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_desc_${dynamicId}`).text(newTitle);
+            });
+    
+            $(`#field_button_link_${i}`).on("input", function() {
+                var dynamicId = i;
+                var newTitle = $(this).val();
+        
+                $(`#preview_link_${dynamicId} > :first-child :first-child`).text(newTitle);
+            });
 
-    $("textarea[name='desc[]']").on("input", function() {
-        // Mendapatkan ID dinamis dari input "title" yang sedang diedit
-        var dynamicId = $(this).data("id");
+        }
+        
+    }
 
-        // Mendapatkan nilai dari input "title" yang sedang diedit
-        var newTitle = $(this).val();
-
-        // Memperbarui elemen pratinjau yang sesuai berdasarkan ID dinamis
-        $(`#preview_desc_${dynamicId} > :first-child`).text(newTitle);
-    });
 });
 
 </script>

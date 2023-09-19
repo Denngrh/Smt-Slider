@@ -32,8 +32,8 @@
                     </div>
                 </div>
                     <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                        <div class="title_slide mt-5 pt-3 pt-md-0" id="preview_title_1"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
-                        <div class="desc_slide" id="preview_desc_1"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
+                        <div class="title_slide mt-5 pt-3 pt-md-0" id="preview_title_<?= $index + 1 ?>"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
+                        <div class="desc_slide" id="preview_desc_<?= $index + 1 ?>"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
                             untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
                                 <button class="btn-custom"> Explore </button>
                         </div>
