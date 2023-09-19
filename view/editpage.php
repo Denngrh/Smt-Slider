@@ -168,7 +168,7 @@
                                                                 <!-- End BG -->
                                                                 <div class="form-group mt-3 d-flex justify-content-between">
                                                                     <label> Title </label>
-                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" style="width:70%;height:5px;">
+                                                                    <input class="form-control" type="text" name="title[]" placeholder="Title" data-id="1" style="width:70%;height:5px;">
                                                                 </div>
                                                                 <div class="form-group d-flex justify-content-between mt-3">
                                                                     <label> Link </label>
@@ -180,7 +180,7 @@
                                                                 </div>
                                                                 <div class="my-3">
                                                                     <label class="form-label">Description </label>
-                                                                    <textarea name="desc[]" id="" cols="25" rows="3" maxlength="400" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
+                                                                    <textarea name="desc[]" id=""  data-id="1" cols="25" rows="3" maxlength="400" style="border: 1px solid #CDD9ED; color: #000;" placeholder="Description"></textarea>
                                                                 </div>
                                                                 <input type="hidden" name="id_img[]" value="">
                                                                 <input type="hidden" name="edit_id" value="<?php echo esc_attr($id_slider); ?>">
@@ -1197,7 +1197,7 @@
             });
 
 
-
+        
         });
     </script>
 
@@ -1217,3 +1217,32 @@
         }
     });
 </script>
+
+<script>
+$(document).ready(function() {
+    // Mendengarkan perubahan pada setiap input "title" dalam multiform div
+    $("input[name='title[]']").on("input", function() {
+        // Mendapatkan ID dinamis dari input "title" yang sedang diedit
+        var dynamicId = $(this).data("id");
+
+        // Mendapatkan nilai dari input "title" yang sedang diedit
+        var newTitle = $(this).val();
+
+        // Memperbarui elemen pratinjau yang sesuai berdasarkan ID dinamis
+        $(`#preview_title_${dynamicId} > :first-child`).text(newTitle);
+    });
+
+    $("textarea[name='desc[]']").on("input", function() {
+        // Mendapatkan ID dinamis dari input "title" yang sedang diedit
+        var dynamicId = $(this).data("id");
+
+        // Mendapatkan nilai dari input "title" yang sedang diedit
+        var newTitle = $(this).val();
+
+        // Memperbarui elemen pratinjau yang sesuai berdasarkan ID dinamis
+        $(`#preview_desc_${dynamicId} > :first-child`).text(newTitle);
+    });
+});
+
+</script>
+

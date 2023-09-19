@@ -22,45 +22,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-1 my-auto">
-                <div class="indicator-dots">
-                    <?php foreach ($data_images as $index => $data): ?>
-                        <div class="dot-wrapper" onclick="showSlide(<?= $index ?>)">
-                            <span class="dot <?= $index === 0 ? 'active' : '' ?>"><span class="dot-number"><?= $index + 1 ?></span></span>
-                        </div>
-                        <div class="dot-connector"></div>
-                    <?php endforeach; ?>
-                </div>
-                </div>
-                <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
-                    <div class="title_slide mt-5 pt-3 pt-md-0"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
-                    <div class="desc_slide"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
-                        untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
-                            <button class="btn-custom"> Explore </button>
-                    </div>
-                </div>
-                <div class="col-md-6 my-md-5 pt-md-5">
-                    <div class="slider-wrap my-auto">
-                        <div class="slider-pannel col-md-12">
+                    <div class="indicator-dots">
                         <?php foreach ($data_images as $index => $data): ?>
-                            <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>" data-text="<?= $data->button_link ?>">
-                                <img class="inner" src="<?= wp_get_attachment_url($data->img) ?>">
-                                <div class="slide-text">
-                                    <h3><?= $data->title ?></h3>
-                                    <p><?= $data->desc ?></p>
-                                </div>
+                            <div class="dot-wrapper" onclick="showSlide(<?= $index ?>)">
+                                <span class="dot <?= $index === 0 ? 'active' : '' ?>"><span class="dot-number"><?= $index + 1 ?></span></span>
                             </div>
+                            <div class="dot-connector"></div>
                         <?php endforeach; ?>
-                        </div>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="carousel-control-prev ms-md-3" onclick="moveSlide('prev')">
-                        <i class="fa-solid fa-arrow-left" style="color: #13161b;"></i>
-                    </button>
-                    <button class="carousel-control-next" onclick="moveSlide('next')">
-                        <i class="fa-solid fa-arrow-right" style="color: #13161b;"></i>
-                    </button>
-                </div>
+                    <div class="col-md-5 text-slider my-auto" style="font-family:Verdana, Geneva, Tahoma, sans-serif;">
+                        <div class="title_slide mt-5 pt-3 pt-md-0" id="preview_title_1"><<?php echo $css_data['title_size']; ?>> Judul Slider 1 </<?php echo $css_data['title_size']; ?>></div>
+                        <div class="desc_slide" id="preview_desc_1"><p class="my-md-4" class="desc_slide"> Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan 
+                            untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</p>
+                                <button class="btn-custom"> Explore </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-md-5 pt-md-5">
+                        <div class="slider-wrap my-auto">
+                            <div class="slider-pannel col-md-12">
+                            <?php foreach ($data_images as $index => $data): ?>
+                                <div class="slide col-md-4 <?= $index === 0 ? 'active' : '' ?>" onclick="showSlide(<?= $index ?>)" data-background="<?= wp_get_attachment_url($data->bg_img) ?>" data-text="<?= $data->button_link ?>">
+                                    <img class="inner" src="<?= wp_get_attachment_url($data->img) ?>">
+                                    <div class="slide-text">
+                                        <h3><?= $data->title ?></h3>
+                                        <p><?= $data->desc ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="carousel-control-prev ms-md-3" onclick="moveSlide('prev')">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button class="carousel-control-next" onclick="moveSlide('next')">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -278,20 +278,15 @@ $css_data = json_decode($data->style_data, true);{
         width: 35px;
         height: 35px;
         background-color:  <?php echo $css_data['control_bg']; ?>;
-        border-radius: 50%;
         color:  <?php echo $css_data['control_color']; ?>;
+        border-radius: 50%;
         font-size: 24px;
         transition: opacity 0.1s ease-in-out;
         cursor: pointer;
         top:70%;
-       
         left: 55%;
     }
 
-    .carousel-control-prev:hover,
-    .carousel-control-next:hover {
-        opacity: 0.7;
-    }
 
     .bg-container {
     background-size: cover;
@@ -357,15 +352,15 @@ $css_data = json_decode($data->style_data, true);{
        }
 
        .slide {
-       width: 100%; 
-       height: auto;
+       width: 90%; 
+       height: 100%;
        margin: 10px auto; 
 
        }
        .indicator-dots {
            flex-direction: row;
            justify-content: center;
-           margin-top: 160px;
+           margin-top: 10px;
            align-items: center;
            margin-left: 23%; 
        }
@@ -384,7 +379,7 @@ $css_data = json_decode($data->style_data, true);{
 
        .carousel-control-prev{
            font-size: 18px;
-           margin-top:10%;
+           margin-top:-40%;
            margin-left: -50px;
            
          
@@ -393,7 +388,7 @@ $css_data = json_decode($data->style_data, true);{
            margin-right: 200px;
            display: flex;
            font-size: 18px;
-           margin-top:10%;
+           margin-top:-40%;
        }
        
    }
