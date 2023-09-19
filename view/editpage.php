@@ -623,7 +623,7 @@
         }
         .active-button i {
             border-bottom : 4px solid #000;
-            color : #000;
+            color : #1c2431;
             transition: all 0.7s ease;
         }
         h6{
@@ -768,7 +768,7 @@
             width:270px;
         }
         .footer_sidebar{
-            background:#000;
+            background:#1c2431;
             width: 24.3vw;
             position: fixed;
             bottom: 0;
