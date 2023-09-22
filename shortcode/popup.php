@@ -154,7 +154,6 @@
             .popup-content {
                 background-color: #fff;
                 background-image: url('https://img.freepik.com/free-photo/abstract-background-blue-wallpaper-image_53876-108341.jpg?w=996&t=st=1695195401~exp=1695196001~hmac=6b2b45ea90321eda78cd0215461948dbd8c2a85ef10d9ba4fe035c9c48245302');
-                background-size: 100% 100%;
                 padding: 20px;
                 position: relative;
                 /* margin-left: 25%;
@@ -266,6 +265,10 @@
                 align-items: center;
             }
 
+            svg > path {
+                fill: black;
+            }
+
             .div-4 {
                 display: inline-flex;
                 align-items: flex-start;
@@ -302,7 +305,7 @@
             .text-wrapper-1 {
                 font-family: <?php echo $css_data['title_fam'] ?>;
                 color: <?php echo $css_data['title_color'] ?>;
-                font-size: 38px !important;
+                font-size: 38px;
                 font-weight: 800;
                 padding: 8px 0;
             }
@@ -352,29 +355,48 @@
             /* Media query for mobile screens */
             @media (max-width: 480px) {
                 .popup-content {
-                    margin: 5%;
+                    width: 328px;
+                    height: 328px;
+                }
+                .div-4 {
+                    top: 340px;
+                }
+                .tombol {
+                    width: 15%;
+                }
+                .caret-right{
+                    top: 142px;
+                    width: 32px;
+                    height: 32px;
+                }
+                .caret-left {
+                    top: 142px;
+                    width: 32px;
+                    height: 32px;
+                }
+                .caret-right > svg {
+                    width: 12px;
+                    height: 22px;   
+                }
+                .caret-left > svg {
+                    width: 12px;
+                    height: 22px;
+                }
+                .caret-right{
+                    left: 245px;
+                }
+                .close-button{
+                    left: 245px;
+                    top: 16px;
+                }
+
+                .text-wrapper-1 {
+                    font-size: 24px;
                 }
 
                 .popup-text-container {
-                    padding: 2px;
-                    /* Adjust padding for smaller screens */
-                    margin-right: 0;
+                    top: 50px;
                 }
-
-                .popup-image {
-                    height: 50vh;
-                }
-
-                .next-button,
-                .prev-button {
-                    font-size: 20px;
-                }
-
-                .text p {
-                    max-height: 30vh;
-                    overflow: scroll;
-                }
-
             }
         </style>
     <?php } ?>
