@@ -181,6 +181,7 @@ function insert_img_callback() {
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
         $id_img = array_map('absint' ,$_POST['id_img']);
         $delay_popup = absint($_POST['delay_popup']);
+        $popup_style = absint($_POST['popup_style']);
         
         // Proses form kedua (CSS)
         $table_smt_css = $wpdb->prefix . 'smt_style';
@@ -254,11 +255,13 @@ function insert_img_callback() {
                             SET delay_popup = $delay_popup
                             WHERE id = $edit_id;
         ";
-        // $query_delay = $wpdb->query($delay_query);
         $wpdb->query($delay_query);
 
-        // var_dump($query_delay);
-        // wp_die($wpdb->last_error);
+        $popup_style = "UPDATE $table_smt_slider
+                            SET popup_style = $popup_style
+                            WHERE id = $edit_id;
+        ";
+        $wpdb->query($popup_style);
 
         $css_query = "UPDATE $table_smt_css SET style_data = %s WHERE id_slider = %d;";
 

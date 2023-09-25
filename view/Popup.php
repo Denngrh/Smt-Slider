@@ -2,7 +2,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Page View</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d367ac3a48.js" crossorigin="anonymous"></script>
     <script>
         <?php
@@ -28,20 +27,25 @@
         ?>
     </script>
 
-    <script>
+<script>
         jQuery(document).ready(function($) {
             let slideIndex = 0;
             showSlides(slideIndex);
 
-            $(".prev-button").click(function() {
+            $(".caret-left").click(function() {
                 plusSlides(-1);
+
             });
 
-            $(".next-button").click(function() {
+            $(".caret-right").click(function() {
                 plusSlides(1);
+
             });
+
             $(".dot").click(function() {
-                currentSlide($(this).index() + 1);
+                let dot_num = $(this).index() + 1;
+                console.log(dot_num);
+                currentSlide(dot_num);
             });
 
             function plusSlides(n) {
@@ -54,7 +58,7 @@
 
             function showSlides(n) {
                 let i;
-                let slides = $(".popup-image-container");
+                let slides = $(".slides");
                 let text = $(".text");
                 let link = $(".link");
                 let dots = $(".dot");
@@ -66,6 +70,13 @@
                 if (n < 1) {
                     slideIndex = slides.length;
                 }
+
+                let img = $('.link');
+                img = img.eq(slideIndex - slides.length).attr('data-image');
+                $('.popup-content').css({
+                    'background-image': `url(${img})`
+                })
+
 
                 for (i = 0; i < slides.length; i++) {
                     slides.eq(i).css("display", "none");
@@ -82,31 +93,10 @@
                 link.eq(slideIndex - slides.length).css("display", "block");
                 dots.eq(slideIndex - slides.length).addClass("active");
 
-                const type2 = false;
-
-                if (type2) {
-                    const slides = $('.popup-image-container');
-
-                    const backgroundURL = slides.eq(slideIndex - slides.length).data('background');
-                    $('.popup-content').css({
-                        'background-image': `url('${backgroundURL}')`,
-                        "background-size": "cover",
-                        "background-position": "center center",
-                        "height": "50vh",
-                    });
-
-                    $('.percobaan').css({
-                        "flex": "0"
-                    });
-
-                    $('.popup-image').remove();
-
-
-                }
-
             }
         });
     </script>
+
     <?php
     global $wpdb;
     $id = $_GET['id'];
@@ -114,349 +104,18 @@
     $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
     $css_data = json_decode($data->style_data, true); {
     ?>
-        <style>
-            .custom-popup {
-                width: 87%;
-                /* background-color: rgba(0, 0, 0, 0.5); */
-                margin-left: auto;
-                margin-right: auto;
-                z-index: 9999;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
 
-            .popup-content {
-                background-color: #fff;
-                padding: 10px;
-                position: relative;
-                /* margin-left: 25%;
-                margin-right: 25%; */
-                border-radius: 15px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                text-align: center;
-                display: flex;
-                flex-direction: row;
-            }
-
-            .popup-image {
-                max-height: 100%;
-                border-radius: 15px !important;
-                object-fit: cover;
-                height: 75vh !important;
-                width: 100% !important;
-
-            }
-
-            .percobaan {
-                flex: 1;
-                position: relative;
-                display: inline-block;
-                justify-content: center;
-                align-items: center;
-
-            }
-
-            .popup-image-container {
-                padding: 5px;
-            }
-
-            .popup-text-container {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                overflow: hidden;
-                position: relative;
-            }
-
-            .close-button {
-                position: absolute;
-                cursor: pointer;
-                top: 5px;
-                right: 5px;
-                height: 30px;
-                width: 30px;
-                font-size: 25;
-                background: none;
-                border: none;
-                color: #000;
-                padding: 0;
-                transition: 0.3s ease;
-                box-sizing: border-box;
-                opacity: 0.5;
-                z-index: 2;
-            }
-
-            .slider-buttons {
-                position: absolute;
-                top: 45%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                z-index: 1;
-                pointer-events: none;
-
-            }
-
-            .next-button,
-            .prev-button {
-                background-color: <?php echo $css_data['control_bg'] ?>;
-                color: <?php echo $css_data['control_color'] ?>;
-                border: none;
-                opacity: 0.3;
-                padding: 8px 12px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 30px;
-                pointer-events: auto;
-                transition: 0.4s ease;
-            }
-
-            .next-button {
-                margin-right: 18px;
-            }
-
-            .prev-button {
-                margin-left: 10px;
-            }
-
-            .next-button:hover {
-                opacity: 1;
-                background-color: <?php echo $css_data['control_bg'] ?>;
-            }
-
-            .prev-button:hover {
-                opacity: 1;
-                background-color: <?php echo $css_data['control_bg'] ?>;
-
-            }
-
-            .close-button:hover {
-                color: #000;
-                background: none;
-                opacity: 1;
-            }
-
-            .fade {
-                animation-name: fade;
-                animation-duration: 1s;
-            }
-
-            @keyframes fade {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-
-            }
-
-            .tombol {
-                font-family: <?php echo $css_data['btn_fam'] ?>;
-                color: <?php echo $css_data['btn_color'] ?>;
-                background-color: <?php echo $css_data['btn_bg'] ?>;
-                margin-right: 5%;
-                transition: 0.4s ease;
-
-            }
-
-            .tombol:hover {
-                color: <?php echo $css_data['btn_color_hvr'] ?>;
-                background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
-            }
-
-            a {
-                text-decoration: none;
-            }
-
-            .link {
-                margin: 10px;
-            }
-
-            .text h3 {
-                font-family: <?php echo $css_data['title_fam'] ?>;
-                color: <?php echo $css_data['title_color'] ?>;
-
-                margin-bottom: 10px;
-            }
-
-            .text p {
-                font-family: <?php echo $css_data['desc_fam'] ?>;
-                color: <?php echo $css_data['desc_color'] ?>;
-
-                margin-bottom: 10px;
-            }
-
-            .dot {
-                cursor: pointer;
-                height: 15px;
-                width: 15px;
-                margin: 0 2px;
-                background-color: <?php echo $css_data['dots_bg'] ?>;
-                border-radius: 50%;
-                display: inline-block;
-                transition: background-color 0.6s ease;
-            }
-
-            .dot-div {
-                text-align: center;
-                position: absolute;
-                bottom: 10px;
-                /* Adjust this value to control the vertical position */
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 1;
-                /* Ensure dots are in front of images */
-            }
-
-            .active,
-            .dot:hover {
-                background-color: <?php echo $css_data['dots_bg_active'] ?>;
-            }
-
-            @media (max-width: 850px) {
-                .popup-content {
-                    margin-left: 10%;
-                    margin-right: 10%;
-                }
-
-                .popup-image {
-                    height: 55vh;
-                }
-            }
-
-            /* Media query for mobile screens */
-            @media (max-width: 480px) {
-                .popup-content {
-                    margin: 5%;
-                }
-
-                .popup-text-container {
-                    padding: 2px;
-                    /* Adjust padding for smaller screens */
-                    margin-right: 0;
-                }
-
-                .popup-image {
-                    height: 50vh;
-                }
-
-                .next-button,
-                .prev-button{
-                    font-size: 20px;
-                }
-
-            }
-        </style>
     <?php
     }
+    include 'popup_component/css/popup_css_style_1.php';
     ?>
 </head>
 
 <body>
-    <?php
-    // check jika data dari table ada pada kondisi true
-    if (!empty($data_images)) { ?>
-        <div class="row">
-            <div class="col">
-                <div class="custom-popup">
-                    <div class="popup-content">
-                        <button title="close" class="close-button"><i class="fa-solid fa-x"></i></button>
-                        <div class="percobaan">
-                            <?php foreach ($data_images as $index => $data) : ?>
-                                <div class="popup-image-container">
-                                    <div class="slider-buttons">
-                                        <button class="prev-button">&#8249;</button>
-                                        <button class="next-button">&#8250;</button>
-                                    </div>
-                                    <img src="<?php echo wp_get_attachment_url($data->img) ?>" data-background="<?php echo wp_get_attachment_url($data->img) ?>" alt="inigambar" class="popup-image">
-                                </div>
-                            <?php endforeach; ?>
-                            <div class="dot-div" style="text-align:center">
-                                <?php foreach ($data_images as $index => $data) : ?>
-                                    <span class="dot" onclick="currentSlide(<?php echo $index ?>)"></span>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                        <div class="popup-text-container">
-                            <div class="popup-text">
-                                <?php foreach ($data_images as $index => $data) : ?>
-                                    <div class="text" id="preview_title_<?php echo $index + 1; ?>">
-                                        <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
-                                        <p><?php echo $data->desc ?></p>
-                                    </div>
-                                    <div class="link" id="preview_link_<?php echo $index + 1; ?>">
-                                        <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">
-                                            <button type="button" class="tombol btn btn-dark"><?php echo $data->button_link ?></button>
-                                        </a>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } else { ?>
-        <div class="row">
-            <div class="col">
-                <div class="custom-popup">
-                    <div class="popup-content">
-                        <div class="percobaan">
-                            <div class="popup-image-container">
-                                <div class="slider-buttons">
-                                    <button class="prev-button" onclick="plusSlides(-1)">&#8249;</button>
-                                    <button class="next-button" onclick="plusSlides(1)">&#8250;</button>
-                                </div>
-                                <img src="<?php echo $image ?>" alt="inigambar" class="popup-image">
-                            </div>
+    <?php 
+        include 'popup_component/html/popup_html_style_1.php';
+    ?>
 
-                            <div class="popup-image-container">
-                                <div class="slider-buttons">
-                                    <button class="prev-button">&#8249;</button>
-                                    <button class="next-button">&#8250;</button>
-                                </div>
-                                <img src="<?php echo $image2 ?>" alt="inigambar" class="popup-image">
-                            </div>
-
-                            <div class="dot-div" style="text-align:center">
-                                <span class="dot" onclick="currentSlide(0)"></span>
-                                <span class="dot" onclick="currentSlide(1)"></span>
-                            </div>
-                        </div>
-                        <div class="popup-text-container">
-                            <button title="close" class="close-button">&times;</button>
-                            <div class="popup-text">
-                                <div class="text">
-                                    <<?php echo $css_data['title_size']; ?>><?php echo $title ?></ <?php echo $css_data['title_size']; ?>>
-                                    <p><?php echo $paragraf ?></p>
-                                </div>
-                                <div class="link">
-                                    <a href="<?php echo esc_url($link) ?>" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
-                                    </a>
-                                </div>
-
-                                <div class="text">
-                                    <<?php echo $css_data['title_size']; ?>><?php echo $title2 ?></ <?php echo $css_data['title_size']; ?>>
-                                    <p><?php echo $paragraf2 ?></p>
-                                </div>
-                                <div class="link">
-                                    <a href="<?php echo esc_url($link2) ?>" target="_blank" rel="noopener noreferrer">
-                                        <button type="button" class="tombol btn btn-dark">Click Me Now</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
 </body>
 
 </html>

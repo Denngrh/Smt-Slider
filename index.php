@@ -28,6 +28,7 @@ function smt_slider_table() {
             type VARCHAR(30) NOT NULL,   
             short_code VARCHAR(30) NOT NULL,
             delay_popup INT(11) NOT NULL,
+            popup_style INT(11) NOT NULL,
             created_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             created_modified datetime NOT NULL,
             PRIMARY KEY (id)

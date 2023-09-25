@@ -66,14 +66,24 @@
                             <label class="ms-md-2"> Delay Popup</label>
                             <input class="form-control" type="text" name="delay_popup" value="1000" style="width:70%;height:5px;">
                         </div>
+                        <div id="popup_style_div" class="form-group mt-3 d-flex justify-content-between" >
+                            <label class="ms-md-2">Popup Style</label>
+                            <select name="popup_style">
+                                <option value="1">Style Pertama</option>
+                                <option value="2">Style Kedua</option>
+                                <option value="3">Style Ketiga</option>
+                            </select>
+                        </div>
                         <script>
                             $(document).ready(function(){
                                 let slider_type = $('#settingImageForm').find("input[id='type_text']").val();
                                 if (slider_type != 'Popup') {
                                     $('#delay_popup_div').remove();
+                                    $('#popup_style_div').remove();
                                 }
 
                                 $('#settingImageForm').find("input[name='delay_popup']").val(<?php echo ($data->delay_popup == 0) ? 1000 : $data->delay_popup ?>);
+                                $('#settingImageForm').find("select[name='popup_style']").val(<?php echo ($data->popup_style == 0) ? 1 : $data->popup_style ?>);
 
                             });
                         </script>
