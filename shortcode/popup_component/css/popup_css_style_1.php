@@ -6,7 +6,7 @@ $css_data = json_decode($data->style_data, true); {
 ?>
 
     <style>
-        .row {
+        .visibility {
             visibility: hidden;
             opacity: 0;
             transition: 0.3s ease;
@@ -32,7 +32,7 @@ $css_data = json_decode($data->style_data, true); {
             background-image: url('https://img.freepik.com/free-photo/abstract-background-blue-wallpaper-image_53876-108341.jpg?w=996&t=st=1695195401~exp=1695196001~hmac=6b2b45ea90321eda78cd0215461948dbd8c2a85ef10d9ba4fe035c9c48245302');
             background-size: cover;
             background-position: center;
-            padding: 20px;
+            padding: 20px 50px;
             position: relative;
             /* margin-left: 25%;
                 margin-right: 25%; */
@@ -70,7 +70,7 @@ $css_data = json_decode($data->style_data, true); {
             position: absolute;
             cursor: pointer;
             top: 10px;
-            left: 470px;
+            left: 98%;
             height: 30px;
             width: 30px;
             font-size: 24px;
@@ -80,7 +80,6 @@ $css_data = json_decode($data->style_data, true); {
             padding: 0;
             transition: 0.3s ease;
             box-sizing: border-box;
-            opacity: 1;
             z-index: 10;
         }
 
@@ -91,7 +90,6 @@ $css_data = json_decode($data->style_data, true); {
         .close-button:hover {
             color: black;
             background: none;
-            opacity: 1;
         }
 
         .tombol {
@@ -130,7 +128,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: 470px;
+            left: 98%;
             width: 40px;
             height: 40px;
 
@@ -144,7 +142,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            /* left: 10px; */
+            left: -45px;
             width: 40px;
             height: 40px;
 
@@ -251,11 +249,11 @@ $css_data = json_decode($data->style_data, true); {
             }
 
             .div-4 {
-                top: 340px;
+                top: 98%;
             }
 
             .tombol {
-                width: 15%;
+                width: 25%;
             }
 
             .caret-right {
@@ -281,12 +279,12 @@ $css_data = json_decode($data->style_data, true); {
             }
 
             .caret-right {
-                left: 245px;
+                left: 108%;
             }
 
             .close-button {
-                left: 245px;
-                top: 16px;
+                left: 108%;
+                top: 10px;
             }
 
             .text-wrapper-1 {
