@@ -22,9 +22,9 @@
 
     global $wpdb;
     $table_smt_img = $wpdb->prefix . 'smt_img';
-    $table_name = $wpdb->prefix . 'smt_slider';
     $latest_data = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $project_id");
-    $data = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $project_id");
+    $table_name = $wpdb->prefix . 'smt_slider';
+    $smt_slider = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $project_id");
     ?>
     <script>
         jQuery(document).ready(function($) {
@@ -33,7 +33,7 @@
                     "visibility": "visible",
                     "opacity": "1"
                 });
-            }, <?php echo $data->delay_popup ?>);
+            }, <?php echo $smt_slider->delay_popup ?>);
 
             $('.close-button').click(function() {
                 $('.visibility').css({
@@ -116,22 +116,29 @@
     </script>
 
     <?php
-        include 'popup_component/css/popup_css_style_1.php';
-        
-    // if($data->popup_style === "1"){
-    // } else if ($data->popup_style == "2") {
-    //     include 'popup_component/css/popup_css_style_2.php';
-    //     include 'popup_component/html/popup_html_style_2.php';
-    // } else if ($data->popup_style == "3") {
-    //     include 'popup_component/css/popup_css_style_2.php';
-    //     include 'popup_component/html/popup_html_style_2.php';
-    // }
+        if ($smt_slider->popup_style == 1){
+            include 'popup_component/css/popup_css_style_1.php';
+        } else if ($smt_slider->popup_style == 2){
+            include 'popup_component/css/popup_css_style_2.php';
+        } else if ($smt_slider->popup_style == 3) {
+            include 'popup_component/css/popup_css_style_3.php';
+        } else {
+            include 'popup_component/css/popup_css_style_1.php';
+        }
     ?>
 </head>
 
 <body>
     <?php         
-    include 'popup_component/html/popup_html_style_1.php';
+    if ($smt_slider->popup_style == 1){
+        include 'popup_component/html/popup_html_style_1.php';
+    } else if ($smt_slider->popup_style == 2){
+        include 'popup_component/html/popup_html_style_2.php';
+    } else if ($smt_slider->popup_style == 3) {
+        include 'popup_component/html/popup_html_style_3php';
+    } else {
+        include 'popup_component/html/popup_html_style_default.php';
+    }
     ?>
 </body>
 

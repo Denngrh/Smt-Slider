@@ -3,8 +3,8 @@
         <div class="custom-popup">
             <div class="popup-content">
                 <div class="popup-text-container">
-                    <?php foreach ($data_images as $index => $data) : ?>
                     <div class="div_text">
+                    <?php foreach ($data_images as $index => $data) : ?>
                         <div class="text">
                             <div class="text-wrapper-1">
                             <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
@@ -16,7 +16,7 @@
                                 <div type="button" class="tombol"><?php echo $data->button_link ?></div>
                             </a>
                         </div>
-                    <?php endforeach; ?>    
+                        <?php endforeach; ?>    
                     </div>
                 </div>
                 <button title="close" class="close-button"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

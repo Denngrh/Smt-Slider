@@ -6,7 +6,7 @@ $css_data = json_decode($data->style_data, true); {
 ?>
 
     <style>
-        .row {
+        .visibility {
             visibility: hidden;
             opacity: 0;
             transition: 0.3s ease;
@@ -30,12 +30,14 @@ $css_data = json_decode($data->style_data, true); {
         .popup-content {
             background-color: #fff;
             background-image: url('https://img.freepik.com/free-photo/abstract-background-blue-wallpaper-image_53876-108341.jpg?w=996&t=st=1695195401~exp=1695196001~hmac=6b2b45ea90321eda78cd0215461948dbd8c2a85ef10d9ba4fe035c9c48245302');
+            background-size: cover;
+            background-position: center;
             padding: 20px;
             position: relative;
             /* margin-left: 25%;
                 margin-right: 25%; */
-            width: 500px;
-            height: 500px;
+            width: 460px;
+            height: 300px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: row;
@@ -56,17 +58,21 @@ $css_data = json_decode($data->style_data, true); {
             flex-direction: column;
             justify-content: left;
             position: relative;
-            top: 50px;
+            /* top: 50px; */
             margin: 0;
+        }
+
+        .div_text {
+            margin-top: 10%;
         }
 
         .close-button {
             position: absolute;
             cursor: pointer;
-            top: 20px;
-            left: 490px;
-            height: 30px;
-            width: 30px;
+            top: 16px;
+            left: 94%;
+            height: 24px;
+            width: 24px;
             font-size: 24px;
             background: none;
             border: none;
@@ -74,18 +80,16 @@ $css_data = json_decode($data->style_data, true); {
             padding: 0;
             transition: 0.3s ease;
             box-sizing: border-box;
-            opacity: 1;
             z-index: 10;
         }
 
         .close-button>svg>path {
-            fill: #000;
+            fill: <?php echo $css_data['control_color'] ?>;
         }
 
         .close-button:hover {
             color: black;
             background: none;
-            opacity: 1;
         }
 
         .tombol {
@@ -99,12 +103,17 @@ $css_data = json_decode($data->style_data, true); {
             padding: 4px 12px;
             border-radius: 4px;
             font-size: 11px;
-            width: 10%;
+            width: 15%;
+            height: 10%;
             margin-top: 1px;
             text-align: center;
             letter-spacing: normal;
             line-height: normal;
             gap: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .tombol:hover {
@@ -112,12 +121,19 @@ $css_data = json_decode($data->style_data, true); {
             background-color: <?php echo $css_data['btn_bg_hvr'] ?>;
         }
 
+        .caret-right > svg > path {
+            fill: <?php echo $css_data['control_color'] ?>;
+        }
+
+        .caret-left > svg > path {
+            fill: <?php echo $css_data['control_color'] ?>;
+        }
 
         .caret-right {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: 490px;
+            left: 98%;
             width: 40px;
             height: 40px;
 
@@ -131,7 +147,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: 10px;
+            left: -45px;
             width: 40px;
             height: 40px;
 
@@ -139,10 +155,6 @@ $css_data = json_decode($data->style_data, true); {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        svg>path {
-            fill: black;
         }
 
         .div-4 {
@@ -184,6 +196,12 @@ $css_data = json_decode($data->style_data, true); {
             font-size: 38px;
             font-weight: 800;
             padding: 8px 0;
+        }
+
+        .text-wrapper-1 > :first-child {
+            line-height: normal !important;
+            margin: 0;
+
         }
 
         .text-wrapper-2 {
@@ -231,22 +249,27 @@ $css_data = json_decode($data->style_data, true); {
         /* Media query for mobile screens */
         @media (max-width: 480px) {
             .popup-content {
-                width: 328px;
-                height: 328px;
+                width: 360px;
+                height: 474px;
             }
-
             .div-4 {
-                top: 340px;
+                top: 98%;
             }
-
+            .popup-text-container {
+                text-align: center;
+                top: 50%;
+            }
             .tombol {
-                width: 15%;
+                position: relative;
+                width: 25%;
+                left: 30%;
             }
 
             .caret-right {
                 top: 142px;
                 width: 32px;
                 height: 32px;
+                left: 80%;
             }
 
             .caret-left {
@@ -265,21 +288,18 @@ $css_data = json_decode($data->style_data, true); {
                 height: 22px;
             }
 
-            .caret-right {
-                left: 245px;
-            }
 
             .close-button {
-                left: 245px;
+                left: 85%;
                 top: 16px;
             }
 
             .text-wrapper-1 {
                 font-size: 24px;
+                padding-bottom: 8px;
             }
-
-            .popup-text-container {
-                top: 50px;
+            .text-wrapper-1 {
+                padding-bottom: 8px;
             }
         }
     </style>

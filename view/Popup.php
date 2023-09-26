@@ -21,9 +21,11 @@
         global $wpdb;
         $id = $_GET['id'];
         $table_smt_img = $wpdb->prefix . 'smt_img';
-        // $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id ORDER BY id_img DESC LIMIT 1");
         $data_images = $wpdb->get_results("SELECT * FROM $table_smt_img WHERE id_slider = $id");
 
+        $table_name = $wpdb->prefix . 'smt_slider';
+        $smt_slider = $wpdb->get_row("SELECT * FROM $table_name WHERE id = $id");
+    
         ?>
     </script>
 
@@ -96,24 +98,32 @@
             }
         });
     </script>
-
+    
     <?php
-    global $wpdb;
-    $id = $_GET['id'];
-    $table_smt_css = $wpdb->prefix . 'smt_style';
-    $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
-    $css_data = json_decode($data->style_data, true); {
-    ?>
-
-    <?php
+    if ($smt_slider->popup_style == 1){
+        include 'popup_component/css/popup_css_style_1.php';
+    } else if ($smt_slider->popup_style == 2){
+        include 'popup_component/css/popup_css_style_2.php';
+    } else if ($smt_slider->popup_style == 3) {
+        include 'popup_component/css/popup_css_style_3.php';
+    } else {
+        include 'popup_component/css/popup_css_style_1.php';
     }
-    include 'popup_component/css/popup_css_style_1.php';
+
     ?>
 </head>
 
 <body>
     <?php 
+    if ($smt_slider->popup_style == 1){
         include 'popup_component/html/popup_html_style_1.php';
+    } else if ($smt_slider->popup_style == 2){
+        include 'popup_component/html/popup_html_style_2.php';
+    } else if ($smt_slider->popup_style == 3) {
+        include 'popup_component/html/popup_html_style_3php';
+    } else {
+        include 'popup_component/html/popup_html_style_default.php';
+    }
     ?>
 
 </body>

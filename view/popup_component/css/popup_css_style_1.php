@@ -62,7 +62,7 @@ $css_data = json_decode($data->style_data, true); {
             position: absolute;
             cursor: pointer;
             top: 10px;
-            left: 98%;
+            left: 92%;
             height: 30px;
             width: 30px;
             font-size: 24px;
@@ -118,7 +118,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: 98%;
+            left: 92%;
             width: 40px;
             height: 40px;
             cursor: pointer;
@@ -131,7 +131,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: -45px;
+            left: 1%;
             width: 40px;
             height: 40px;
 
@@ -146,7 +146,7 @@ $css_data = json_decode($data->style_data, true); {
             align-items: flex-start;
             gap: 4px;
             position: absolute;
-            top: 98%;
+            top: 95%;
             left: 50%;
         }
 
