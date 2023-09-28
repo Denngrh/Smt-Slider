@@ -38,6 +38,7 @@ $css_data = json_decode($data->style_data, true); {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: row;
+            border-radius: <?php echo $css_data['border_radius'] ?>;
         }
 
         .percobaan {
@@ -97,20 +98,30 @@ $css_data = json_decode($data->style_data, true); {
                 height: 23px; */
             transition: 0.4s ease;
             font-weight: 400;
-            padding: 4px 12px;
             border-radius: 4px;
             font-size: 11px;
             width: 20%;
             height: 10%;
-            margin-top: 1px;
             text-align: center;
             letter-spacing: normal;
             line-height: normal;
             gap: 10px;
 
+            /* padding: 4px 12px;
+            margin-top: 1px; */
+            
             display: flex;
             justify-content: center;
             align-items: center;
+
+            padding-top: <?php echo $css_data['pd_top_btn'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_btn'] ?>;
+            padding-right: <?php echo $css_data['pd_right_btn'] ?>;
+            padding-left: <?php echo $css_data['pd_left_btn'] ?>;
+            margin-top: <?php echo $css_data['mg_top_btn'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_btn'] ?>;
+            margin-right: <?php echo $css_data['mg_right_btn'] ?>;
+            margin-left: <?php echo $css_data['mg_left_btn'] ?>;
         }
 
         .tombol:hover {
@@ -188,26 +199,34 @@ $css_data = json_decode($data->style_data, true); {
         }
 
         .text-wrapper-1 {
-            font-family: <?php echo $css_data['title_fam'] ?>;
-            color: <?php echo $css_data['title_color'] ?>;
+            font-family: <?php echo $css_data['title_fam'] ?> !important;
+            color: <?php echo $css_data['title_color'] ?> !important;
             font-size: 38px;
             font-weight: 800;
-            padding: 8px 0;
-        }
-
-        .text-wrapper-1 > :first-child {
-            line-height: normal !important;
-            margin: 0;
-
+            padding-top: <?php echo $css_data['pd_top_title'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>;
+            padding-right: <?php echo $css_data['pd_right_title'] ?>;
+            padding-left: <?php echo $css_data['pd_left_title'] ?>;
+            margin-top: <?php echo $css_data['mg_top_title'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_title'] ?>;
+            margin-right: <?php echo $css_data['mg_right_title'] ?>;
+            margin-left: <?php echo $css_data['mg_left_title'] ?>;
         }
 
         .text-wrapper-2 {
-            font-family: <?php echo $css_data['desc_fam'] ?>;
-            color: <?php echo $css_data['desc_color'] ?>;
+            font-family: <?php echo $css_data['desc_fam'] ?> !important;
+            color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
             font-size: 11px;
             overflow: hidden;
-
+            padding-top: <?php echo $css_data['pd_top_desc'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?>;
+            padding-right: <?php echo $css_data['pd_right_desc'] ?>;
+            padding-left: <?php echo $css_data['pd_left_desc'] ?>;
+            margin-top: <?php echo $css_data['mg_top_desc'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?>;
+            margin-right: <?php echo $css_data['mg_right_desc'] ?>;
+            margin-left: <?php echo $css_data['mg_left_desc'] ?>;
         }
 
         .dot {

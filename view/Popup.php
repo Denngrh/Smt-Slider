@@ -100,14 +100,26 @@
     </script>
     
     <?php
-    if ($smt_slider->popup_style == 1){
-        include 'popup_component/css/popup_css_style_1.php';
+    $style1 = 'popup_component/css/popup_css_style_1.php';
+    $style2 = 'popup_component/css/popup_css_style_2.php';
+    $style3 = 'popup_component/css/popup_css_style_3.php';
+
+    if (!empty($data_images)){
+        if ($smt_slider->popup_style == 1){
+            include $style1;
+        } else if ($smt_slider->popup_style == 2){
+            include $style2;
+        } else if ($smt_slider->popup_style == 3) {
+            include $style3;
+        } else {
+            include 'popup_component/css/popup_css_style_1.php';
+        }
     } else if ($smt_slider->popup_style == 2){
-        include 'popup_component/css/popup_css_style_2.php';
-    } else if ($smt_slider->popup_style == 3) {
-        include 'popup_component/css/popup_css_style_3.php';
+        include $style2;
+    } else if ($smt_slider->popup_style == 3){
+        include '';
     } else {
-        include 'popup_component/css/popup_css_style_1.php';
+        include $style1;
     }
 
     ?>
@@ -115,14 +127,26 @@
 
 <body>
     <?php 
-    if ($smt_slider->popup_style == 1){
-        include 'popup_component/html/popup_html_style_1.php';
-    } else if ($smt_slider->popup_style == 2){
-        include 'popup_component/html/popup_html_style_2.php';
-    } else if ($smt_slider->popup_style == 3) {
-        include 'popup_component/html/popup_html_style_3php';
+    $html1 = 'popup_component/html/popup_html_style_1.php';
+    $html2 = 'popup_component/html/popup_html_style_2.php';
+    $html3 = 'popup_component/html/popup_html_style_3.php';
+
+    if (!empty($data_images)){
+        if ($smt_slider->popup_style == 1){
+            include $html1;
+        } else if ($smt_slider->popup_style == 2){
+            include $html2;
+        } else if ($smt_slider->popup_style == 3) {
+            include $html3;
+        } else {
+        include 'popup_component/default/style_1.php';
+        }
+    } else if ($smt_slider->popup_style == 2) {
+        include 'popup_component/default/style_2.php';
+    } else if ($smt_slider->popup_style == 3){
+        include '';
     } else {
-        include 'popup_component/html/popup_html_style_default.php';
+        include 'popup_component/default/style_1.php';
     }
     ?>
 

@@ -63,7 +63,7 @@ $css_data = json_decode($data->style_data, true); {
         }
 
         .div_text {
-            margin-top: 10%;
+            margin-top: 2%;
         }
 
         .close-button {

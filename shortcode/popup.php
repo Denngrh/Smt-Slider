@@ -29,19 +29,20 @@
     <script>
         jQuery(document).ready(function($) {
             setTimeout(() => {
-                $('.visibility').css({
+                $('.custom-popup').css({
                     "visibility": "visible",
-                    "opacity": "1"
+                    "opacity": "1",
+                    "transition": "0.3s ease"
                 });
             }, <?php echo $smt_slider->delay_popup ?>);
 
             $('.close-button').click(function() {
-                $('.visibility').css({
+                $('.custom-popup').css({
                     "visibility": "hidden",
-                    "opacity": "0"
+                    "opacity": "0",
+                    "transition": "0.3s ease"
                 })
             });
-
         });
     </script>
 
@@ -116,28 +117,52 @@
     </script>
 
     <?php
+    $style1 = 'popup_component/css/popup_css_style_1.php';
+    $style2 = 'popup_component/css/popup_css_style_2.php';
+    $style3 = 'popup_component/css/popup_css_style_3.php';
+
+    if (!empty($latest_data)){
         if ($smt_slider->popup_style == 1){
-            include 'popup_component/css/popup_css_style_1.php';
+            include $style1;
         } else if ($smt_slider->popup_style == 2){
-            include 'popup_component/css/popup_css_style_2.php';
+            include $style2;
         } else if ($smt_slider->popup_style == 3) {
-            include 'popup_component/css/popup_css_style_3.php';
+            include $style3;
         } else {
             include 'popup_component/css/popup_css_style_1.php';
         }
+    } else if ($smt_slider->popup_style == 2){
+        include $style2;
+    } else if ($smt_slider->popup_style == 3){
+        include '';
+    } else {
+        include 'popup_component/css/popup_css_style_1.php';
+    }
     ?>
 </head>
 
 <body>
     <?php         
-    if ($smt_slider->popup_style == 1){
-        include 'popup_component/html/popup_html_style_1.php';
-    } else if ($smt_slider->popup_style == 2){
-        include 'popup_component/html/popup_html_style_2.php';
-    } else if ($smt_slider->popup_style == 3) {
-        include 'popup_component/html/popup_html_style_3php';
+    $html1 = 'popup_component/html/popup_html_style_1.php';
+    $html2 = 'popup_component/html/popup_html_style_2.php';
+    $html3 = 'popup_component/html/popup_html_style_3.php';
+
+    if (!empty($latest_data)){
+        if ($smt_slider->popup_style == 1){
+            include $html1;
+        } else if ($smt_slider->popup_style == 2){
+            include $html2;
+        } else if ($smt_slider->popup_style == 3) {
+            include $html3;
+        } else {
+        include 'popup_component/default/style_1.php';
+        }
+    } else if ($smt_slider->popup_style == 2) {
+        include 'popup_component/default/style_2.php';
+    } else if ($smt_slider->popup_style == 3){
+        include '';
     } else {
-        include 'popup_component/html/popup_html_style_default.php';
+        include 'popup_component/default/style_1.php';
     }
     ?>
 </body>

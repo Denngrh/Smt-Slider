@@ -6,9 +6,8 @@ $css_data = json_decode($data->style_data, true); {
 ?>
 
     <style>
+
         .visibility {
-            visibility: hidden;
-            opacity: 0;
             transition: 0.3s ease;
         }
 
@@ -25,6 +24,10 @@ $css_data = json_decode($data->style_data, true); {
             display: flex;
             justify-content: center;
             align-items: center;
+            
+            transition: 0.3s ease;
+            visibility: hidden;
+            opacity: 0;
         }
 
         .popup-content {
@@ -41,6 +44,7 @@ $css_data = json_decode($data->style_data, true); {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: row;
+            border-radius: <?php echo $css_data['border_radius'] ?>;
         }
 
         .percobaan {
@@ -63,14 +67,14 @@ $css_data = json_decode($data->style_data, true); {
         }
 
         .div_text {
-            margin-top: 35px;
+            margin-top: 5%;
         }
 
         .close-button {
             position: absolute;
             cursor: pointer;
             top: 10px;
-            left: 98%;
+            left: 92%;
             height: 30px;
             width: 30px;
             font-size: 24px;
@@ -96,8 +100,6 @@ $css_data = json_decode($data->style_data, true); {
             font-family: <?php echo $css_data['btn_fam'] ?>;
             color: <?php echo $css_data['btn_color'] ?>;
             background-color: <?php echo $css_data['btn_bg'] ?>;
-            /* width: 59px;
-                height: 23px; */
             transition: 0.4s ease;
             font-weight: 400;
             padding: 4px 12px;
@@ -109,6 +111,22 @@ $css_data = json_decode($data->style_data, true); {
             letter-spacing: normal;
             line-height: normal;
             gap: 10px;
+
+            /* padding: 4px 12px;
+            margin-top: 1px; */
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding-top: <?php echo $css_data['pd_top_btn'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_btn'] ?>;
+            padding-right: <?php echo $css_data['pd_right_btn'] ?>;
+            padding-left: <?php echo $css_data['pd_left_btn'] ?>;
+            margin-top: <?php echo $css_data['mg_top_btn'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_btn'] ?>;
+            margin-right: <?php echo $css_data['mg_right_btn'] ?>;
+            margin-left: <?php echo $css_data['mg_left_btn'] ?>;
         }
 
         .tombol:hover {
@@ -128,10 +146,9 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: 98%;
+            left: 92%;
             width: 40px;
             height: 40px;
-
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -142,7 +159,7 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
             position: absolute;
             top: 230px;
-            left: -45px;
+            left: 1%;
             width: 40px;
             height: 40px;
 
@@ -157,7 +174,7 @@ $css_data = json_decode($data->style_data, true); {
             align-items: flex-start;
             gap: 4px;
             position: absolute;
-            top: 500px;
+            top: 95%;
             left: 50%;
         }
 
@@ -186,26 +203,34 @@ $css_data = json_decode($data->style_data, true); {
         }
 
         .text-wrapper-1 {
-            font-family: <?php echo $css_data['title_fam'] ?>;
-            color: <?php echo $css_data['title_color'] ?>;
+            font-family: <?php echo $css_data['title_fam'] ?> !important;
+            color: <?php echo $css_data['title_color'] ?> !important;
             font-size: 38px;
             font-weight: 800;
-            padding: 8px 0;
-        }
-
-        .text-wrapper-1 > :first-child {
-            line-height: normal !important;
-            margin: 0;
-
+            padding-top: <?php echo $css_data['pd_top_title'] ?> !important;
+            padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>!important;
+            padding-right: <?php echo $css_data['pd_right_title'] ?> !important;
+            padding-left: <?php echo $css_data['pd_left_title'] ?> !important;
+            margin-top: <?php echo $css_data['mg_top_title'] ?> !important;
+            margin-bottom: <?php echo $css_data['mg_bottom_title'] ?> !important;
+            margin-right: <?php echo $css_data['mg_right_title'] ?> !important;
+            margin-left: <?php echo $css_data['mg_left_title'] ?> !important;
         }
 
         .text-wrapper-2 {
-            font-family: <?php echo $css_data['desc_fam'] ?>;
-            color: <?php echo $css_data['desc_color'] ?>;
+            font-family: <?php echo $css_data['desc_fam'] ?> !important;
+            color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
             font-size: 11px;
             overflow: hidden;
-
+            padding-top: <?php echo $css_data['pd_top_desc'] ?> !important;
+            padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?> !important;
+            padding-right: <?php echo $css_data['pd_right_desc'] ?> !important;
+            padding-left: <?php echo $css_data['pd_left_desc'] ?> !important;
+            margin-top: <?php echo $css_data['mg_top_desc'] ?> !important;
+            margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?> !important;
+            margin-right: <?php echo $css_data['mg_right_desc'] ?> !important;
+            margin-left: <?php echo $css_data['mg_left_desc'] ?> !important;
         }
 
         .dot {
@@ -218,11 +243,9 @@ $css_data = json_decode($data->style_data, true); {
             text-align: center;
             position: absolute;
             bottom: 10px;
-            /* Adjust this value to control the vertical position */
             left: 50%;
             transform: translateX(-50%);
             z-index: 1;
-            /* Ensure dots are in front of images */
         }
 
         .active,
@@ -249,7 +272,7 @@ $css_data = json_decode($data->style_data, true); {
             }
 
             .div-4 {
-                top: 98%;
+                top: 340px;
             }
 
             .tombol {
@@ -279,17 +302,18 @@ $css_data = json_decode($data->style_data, true); {
             }
 
             .caret-right {
-                left: 108%;
+                left: 85%;
             }
 
             .close-button {
-                left: 108%;
-                top: 10px;
+                left: 85%;
+                top: 16px;
             }
 
             .text-wrapper-1 {
                 font-size: 24px;
             }
         }
+           
     </style>
 <?php } ?>

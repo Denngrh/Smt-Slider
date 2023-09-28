@@ -87,6 +87,31 @@ function insert_slide_callback()
                 'control_color' => '#000',
                 'control_bg' => '#b0b7d0',
                 'border' => '1px solid #d2d2d2',
+                'pd_top_title' => '8px',
+                'pd_bottom_title' => '8px',
+                'pd_right_title' => '0',
+                'pd_left_title' => '0',
+                'mg_top_title' => '0',
+                'mg_bottom_title' => '0',
+                'mg_right_title' => '0',
+                'mg_left_title' => '0',
+                'pd_top_desc' => '0',
+                'pd_bottom_desc' => '0',
+                'pd_right_desc' => '0',
+                'pd_left_desc' => '0',
+                'mg_top_desc' => '0',
+                'mg_bottom_desc' => '0',
+                'mg_right_desc' => '0',
+                'mg_left_desc' => '0',
+                'pd_top_btn' => '0',
+                'pd_bottom_btn' => '0',
+                'pd_right_btn' => '0',
+                'pd_left_btn' => '0',
+                'mg_top_btn' => '0',
+                'mg_bottom_btn' => '0',
+                'mg_right_btn' => '0',
+                'mg_left_btn' => '0',
+                'border_radius' => '10px',
             );
 
             $json_style_data = json_encode($style_data);
@@ -202,6 +227,38 @@ function insert_img_callback() {
         $control_color = sanitize_text_field($_POST['control_color']);
         $control_bg = sanitize_text_field($_POST['control_bg']);
         $border = sanitize_text_field($_POST['border_option']);
+        
+        // dibawah untuk padding dan margin
+        $pd_top_title = sanitize_text_field($_POST['pd_top_title']);
+        $pd_bottom_title = sanitize_text_field($_POST['pd_bottom_title']);
+        $pd_right_title = sanitize_text_field($_POST['pd_right_title']);
+        $pd_left_title = sanitize_text_field($_POST['pd_left_title']);
+        $mg_top_title = sanitize_text_field($_POST['mg_top_title']);
+        $mg_bottom_title = sanitize_text_field($_POST['mg_bottom_title']);
+        $mg_right_title = sanitize_text_field($_POST['mg_right_title']);
+        $mg_left_title = sanitize_text_field($_POST['mg_left_title']);
+
+        $pd_top_desc = sanitize_text_field($_POST['pd_top_desc']);
+        $pd_bottom_desc = sanitize_text_field($_POST['pd_bottom_desc']);
+        $pd_right_desc = sanitize_text_field($_POST['pd_right_desc']);
+        $pd_left_desc = sanitize_text_field($_POST['pd_left_desc']);
+        $mg_top_desc = sanitize_text_field($_POST['mg_top_desc']);
+        $mg_bottom_desc = sanitize_text_field($_POST['mg_bottom_desc']);
+        $mg_right_desc = sanitize_text_field($_POST['mg_right_desc']);
+        $mg_left_desc = sanitize_text_field($_POST['mg_left_desc']);
+
+        $pd_top_btn = sanitize_text_field($_POST['pd_top_btn']);
+        $pd_bottom_btn = sanitize_text_field($_POST['pd_bottom_btn']);
+        $pd_right_btn = sanitize_text_field($_POST['pd_right_btn']);
+        $pd_left_btn = sanitize_text_field($_POST['pd_left_btn']);
+        $mg_top_btn = sanitize_text_field($_POST['mg_top_btn']);
+        $mg_bottom_btn = sanitize_text_field($_POST['mg_bottom_btn']);
+        $mg_right_btn = sanitize_text_field($_POST['mg_right_btn']);
+        $mg_left_btn = sanitize_text_field($_POST['mg_left_btn']);
+
+        $border_radius = sanitize_text_field($_POST['border_radius']);
+        // ---
+
         $get_id_css = isset($_POST['get_id_css']) ? $_POST['get_id_css'] : null;
 
         // Format data sebagai array asosiatif untuk CSS
@@ -223,6 +280,31 @@ function insert_img_callback() {
             'control_color' => $control_color,
             'control_bg' => $control_bg,
             'border' => $border,
+            'pd_top_title' => $pd_top_title,
+            'pd_bottom_title' => $pd_bottom_title,
+            'pd_right_title' => $pd_right_title,
+            'pd_left_title' => $pd_left_title,
+            'mg_top_title' => $mg_top_title,
+            'mg_bottom_title' => $mg_bottom_title,
+            'mg_right_title' => $mg_right_title,
+            'mg_left_title' => $mg_left_title,
+            'pd_top_desc' => $pd_top_desc,
+            'pd_bottom_desc' => $pd_bottom_desc,
+            'pd_right_desc' => $pd_right_desc,
+            'pd_left_desc' => $pd_left_desc,
+            'mg_top_desc' => $mg_top_desc,
+            'mg_bottom_desc' => $mg_bottom_desc,
+            'mg_right_desc' => $mg_right_desc,
+            'mg_left_desc' => $mg_left_desc,
+            'pd_top_btn' => $pd_top_btn,
+            'pd_bottom_btn' => $pd_bottom_btn,
+            'pd_right_btn' => $pd_right_btn,
+            'pd_left_btn' => $pd_left_btn,
+            'mg_top_btn' => $mg_top_btn,
+            'mg_bottom_btn' => $mg_bottom_btn,
+            'mg_right_btn' => $mg_right_btn,
+            'mg_left_btn' => $mg_left_btn,
+            'border_radius' => $border_radius,
         );
 
         // Konversi data CSS menjadi JSON
@@ -234,21 +316,28 @@ function insert_img_callback() {
         // Lakukan operasi untuk setiap elemen dalam data gambar
         for ($i = 0; $i < count($titles); $i++) {
 
-            $custom_query = "
-                INSERT INTO $table_smt_img (id_img, img, bg_img, title, `desc`, link, button_link, id_slider)
-                VALUES ($id_img[$i], $image_id[$i], $bg_image_id[$i], '$titles[$i]', '$descs[$i]', '$links[$i]', '$button_links[$i]', $edit_id)
-                ON DUPLICATE KEY UPDATE
-                    img = CASE WHEN VALUES(img) <> img THEN VALUES(img) ELSE img END,
-                    bg_img = CASE WHEN VALUES(bg_img) <> bg_img THEN VALUES(bg_img) ELSE bg_img END,
-                    title = CASE WHEN VALUES(title) <> title THEN VALUES(title) ELSE title END,
-                    `desc` = CASE WHEN VALUES(`desc`) <> `desc` THEN VALUES(`desc`) ELSE `desc` END,
-                    link = CASE WHEN VALUES(link) <> link THEN VALUES(link) ELSE link END,
-                    button_link = CASE WHEN VALUES(button_link) <> button_link THEN VALUES(button_link) ELSE button_link END,
-                    id_slider = CASE WHEN VALUES(id_slider) <> id_slider THEN VALUES(id_slider) ELSE id_slider END;
-            ";
-            
+            if (empty($titles[$i])){
+                break;
+            } else {
 
-            $hasil = $wpdb->query($custom_query);
+                var_dump($edit_id);
+                $custom_query = "
+                    INSERT INTO $table_smt_img (id_img, img, bg_img, title, `desc`, link, button_link, id_slider)
+                    VALUES ($id_img[$i], $image_id[$i], $bg_image_id[$i], '$titles[$i]', '$descs[$i]', '$links[$i]', '$button_links[$i]', $edit_id)
+                    ON DUPLICATE KEY UPDATE
+                        img = CASE WHEN VALUES(img) <> img THEN VALUES(img) ELSE img END,
+                        bg_img = CASE WHEN VALUES(bg_img) <> bg_img THEN VALUES(bg_img) ELSE bg_img END,
+                        title = CASE WHEN VALUES(title) <> title THEN VALUES(title) ELSE title END,
+                        `desc` = CASE WHEN VALUES(`desc`) <> `desc` THEN VALUES(`desc`) ELSE `desc` END,
+                        link = CASE WHEN VALUES(link) <> link THEN VALUES(link) ELSE link END,
+                        button_link = CASE WHEN VALUES(button_link) <> button_link THEN VALUES(button_link) ELSE button_link END,
+                        id_slider = CASE WHEN VALUES(id_slider) <> id_slider THEN VALUES(id_slider) ELSE id_slider END;
+                ";
+                
+    
+                $hasil = $wpdb->query($custom_query);
+
+            }
         }
 
         $delay_query = "UPDATE $table_smt_slider
@@ -287,7 +376,8 @@ function insert_img_callback() {
                 if ($inserted_id) {
                     wp_redirect(admin_url('admin.php?page=edit2&id=' . $inserted_id));
                 } else {
-                    wp_die('Terjadi kesalahan saat mengirim data gambar.');
+                    global $wpdb;
+                    wp_die($wpdb->last_query);
                 }
             }
             exit;

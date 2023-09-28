@@ -8,8 +8,10 @@
                         <div class="text">
                             <div class="text-wrapper-1">
                             <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
-                        </div>
-                            <div class="text-wrapper-2"><?php echo $data->desc ?></div>
+                            </div>
+                            <div class="text-wrapper-2">
+                                <?php echo $data->desc ?>
+                            </div>
                         </div>
                         <div class="link" data-id="0" data-image="<?php echo wp_get_attachment_url($data->img);  ?>">
                             <a href="<?php echo esc_url($data->link) ?>" target="_blank" rel="noopener noreferrer">

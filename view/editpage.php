@@ -43,7 +43,7 @@
                 </div>
                 <hr style="margin-top:-5px;">
                 <div class="col">
-                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post" class="needs-validation">
                 <input type="hidden" name="action" value="insert_img_callback">
                     <div class="setting-image-form mt-5 pt-5" id="settingImageForm">
                         <?php
@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group mt-3 d-flex justify-content-between" >
                             <label class="ms-md-2"> Type </label>
-                            <input class="form-control" id="type_text" type="text" value="<?php echo $data->type; ?>" readonly style="width:70%;height:5px;">
+                            <input readonly class="form-control-plaintext" id="type_text" type="text" value="<?php echo $data->type; ?>" style="width:70%;height:5px;">
                         </div>
                         <div id="delay_popup_div" class="form-group mt-3 d-flex justify-content-between" >
                             <label class="ms-md-2"> Delay Popup</label>
@@ -373,7 +373,7 @@
                                 </h2>
                                 <div id="panelsStayOpen-accordion_1" class="accordion-collapse collapse show">
                                     <div class="accordion-body">
-                                    <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between">
+                                    <div class="form-group px-md-4 px-2 mt-2 d-flex justify-content-between">
                                             <label>Title Size</label>
                                             <select name="title_size" id="title_size">
                                             <option value="<?php echo $css_data['title_size']; ?>"><?php echo $css_data['title_size']; ?></option>
@@ -395,11 +395,46 @@
                                                 <option value="Verdana" style="font-family:Verdana;">Verdana</option>
                                             </select>
                                         </div>
-                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                        <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between" >
                                             <label> Color </label>
                                             <input class="form-control" type="color" name ="title_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['title_color']; ?>">
                                         </div>        
-                                    </div>
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Top </label>
+                                            <input class="form-control" type="input" name="pd_top_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_top_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Bottom </label>
+                                            <input class="form-control" type="input" name="pd_bottom_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_bottom_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Right </label>
+                                            <input class="form-control" type="input" name="pd_right_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_right_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding left </label>
+                                            <input class="form-control" type="input" name="pd_left_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_left_title']; ?>">
+                                        </div>        
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Top</label>
+                                            <input class="form-control" type="input" name="mg_top_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_top_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Bottom</label>
+                                            <input class="form-control" type="input" name="mg_bottom_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_bottom_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Right</label>
+                                            <input class="form-control" type="input" name="mg_right_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_right_title']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin left</label>
+                                            <input class="form-control" type="input" name="mg_left_title" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_left_title']; ?>">
+                                        </div>        
+
+                                    </div> 
                                 </div>
                                 </div>
                             </div>
@@ -425,6 +460,40 @@
                                         <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
                                             <label>  Color </label>
                                             <input class="form-control" type="color" name ="desc_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['desc_color']; ?>">
+                                        </div>
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Top </label>
+                                            <input class="form-control" type="input" name="pd_top_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_top_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Bottom </label>
+                                            <input class="form-control" type="input" name="pd_bottom_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_bottom_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Right </label>
+                                            <input class="form-control" type="input" name="pd_right_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_right_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding left </label>
+                                            <input class="form-control" type="input" name="pd_left_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_left_desc']; ?>">
+                                        </div>        
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Top</label>
+                                            <input class="form-control" type="input" name="mg_top_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_top_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Bottom</label>
+                                            <input class="form-control" type="input" name="mg_bottom_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_bottom_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Right</label>
+                                            <input class="form-control" type="input" name="mg_right_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_right_desc']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin left</label>
+                                            <input class="form-control" type="input" name="mg_left_desc" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_left_desc']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -465,7 +534,41 @@
                                         </div>
                                         <div class="form-group px-md-4 px-4 mt-2 d-flex justify-content-between" >
                                             <label> Background </label>
-                                            <input class="form-control" type="color" name ="btn_bg_hvr" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_bg_hvr']; ?>">
+                                            <input class="form-control" type="color" name ="btn_bg_hvr" placeholder="color" style="width:50%;height:25px;" value="  <?php echo $css_data['btn_bg_hvr']; ?>">
+                                        </div>
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Top </label>
+                                            <input class="form-control" type="input" name="pd_top_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_top_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Bottom </label>
+                                            <input class="form-control" type="input" name="pd_bottom_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_bottom_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding Right </label>
+                                            <input class="form-control" type="input" name="pd_right_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_right_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label> Padding left </label>
+                                            <input class="form-control" type="input" name="pd_left_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['pd_left_btn']; ?>">
+                                        </div>        
+                                        <hr class="my-3 ms-4" width="75%;">
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Top</label>
+                                            <input class="form-control" type="input" name="mg_top_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_top_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Bottom</label>
+                                            <input class="form-control" type="input" name="mg_bottom_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_bottom_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin Right</label>
+                                            <input class="form-control" type="input" name="mg_right_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_right_btn']; ?>">
+                                        </div>        
+                                        <div class="form-group px-md-2 px-2  mt-2 d-flex justify-content-between" >
+                                            <label>Margin left</label>
+                                            <input class="form-control" type="input" name="mg_left_btn" placeholder="e.g: 4px" style="width:40%;height:25px;" value="<?php echo $css_data['mg_left_btn']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -502,7 +605,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="accordion my-3 mb-4" id="accordionPanelsStayOpenExample5">
+                            <div class="accordion my-3" id="accordionPanelsStayOpenExample5">
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse5" aria-expanded="false" aria-controls="panelsStayOpen-collapse5">
@@ -518,6 +621,23 @@
                                         <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
                                             <label id="bg_control_label"> Background  </label>
                                             <input class="form-control" type="color" name ="control_bg" id="bg_control_input" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['control_bg']; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="accordion my-3" id="accordionPanelsStayOpenExample6">
+                                <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse6" aria-expanded="false" aria-controls="panelsStayOpen-collapse6">
+                                    Popup Frame
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapse6" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                            <label id="bg_control_label"> Border Radius  </label>
+                                            <input class="form-control" type="input" name ="border_radius" id="bg_control_input" placeholder="color" style="width:40%;height:25px;" value="<?php echo $css_data['border_radius']; ?>">
                                         </div>
                                     </div>
                                 </div>

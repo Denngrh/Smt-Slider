@@ -1,6 +1,6 @@
-<div class="row" id="popup">
+<div class="row " id="popup">
     <div class="col ">
-        <div class="custom-popup visibility">
+        <div class="custom-popup ">
             <div class="popup-content">
                 <div class="popup-text-container">
                     <?php foreach ($latest_data as $index => $data) : ?>
