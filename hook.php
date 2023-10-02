@@ -112,6 +112,9 @@ function insert_slide_callback()
                 'mg_right_btn' => '0',
                 'mg_left_btn' => '0',
                 'border_radius' => '10px',
+                'close_btn_color' => '#030303',
+                'close_btn_size' => '16px',
+                'delay_per_popup' => '3000',
             );
 
             $json_style_data = json_encode($style_data);
@@ -206,6 +209,7 @@ function insert_img_callback() {
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
         $id_img = array_map('absint' ,$_POST['id_img']);
         $delay_popup = absint($_POST['delay_popup']);
+        $delay_per_popup = absint($_POST['delay_per_popup']);
         $popup_style = absint($_POST['popup_style']);
         
         // Proses form kedua (CSS)
@@ -257,6 +261,9 @@ function insert_img_callback() {
         $mg_left_btn = sanitize_text_field($_POST['mg_left_btn']);
 
         $border_radius = sanitize_text_field($_POST['border_radius']);
+        $close_btn_color = sanitize_text_field($_POST['close_btn_color']);
+        $close_btn_size = sanitize_text_field($_POST['close_btn_size']);
+
         // ---
 
         $get_id_css = isset($_POST['get_id_css']) ? $_POST['get_id_css'] : null;
@@ -305,6 +312,8 @@ function insert_img_callback() {
             'mg_right_btn' => $mg_right_btn,
             'mg_left_btn' => $mg_left_btn,
             'border_radius' => $border_radius,
+            'close_btn_color' => $close_btn_color,
+            'close_btn_size' => $close_btn_size,
         );
 
         // Konversi data CSS menjadi JSON
@@ -348,6 +357,12 @@ function insert_img_callback() {
 
         $popup_style = "UPDATE $table_smt_slider
                             SET popup_style = $popup_style
+                            WHERE id = $edit_id;
+        ";
+        $wpdb->query($popup_style);
+
+        $popup_style = "UPDATE $table_smt_slider
+                            SET delay_per_popup = $delay_per_popup
                             WHERE id = $edit_id;
         ";
         $wpdb->query($popup_style);

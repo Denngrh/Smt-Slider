@@ -8,7 +8,11 @@
                             <div class="text-wrapper-1">
                             <<?php echo $css_data['title_size']; ?>> Lorem Ipsum Dolor Sit Amet! </<?php echo $css_data['title_size']; ?>>
                             </div>
-                            <div class="text-wrapper-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos perspiciatis iste unde eligendi inventore dicta, quo eius quidem consequuntur suscipit repellat animi culpa, incidunt officiis tempore pariatur ratione vel odio!</div>
+                            <div class="text-wrapper-2">
+                                <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos perspiciatis iste unde eligendi inventore dicta, quo eius quidem consequuntur suscipit repellat animi culpa, incidunt officiis tempore pariatur ratione vel odio!
+                                </p>
+                            </div>
                         </div>
                         <div class="link" data-id="0" data-image="https://img.freepik.com/premium-vector/white-gray-geometric-pattern-background-vector_53876-170008.jpg?w=740">
                             <a href="https://google.com" target="_blank" rel="noopener noreferrer">
@@ -20,7 +24,11 @@
                             <div class="text-wrapper-1">
                             <<?php echo $css_data['title_size']; ?>> Example Title Here </<?php echo $css_data['title_size']; ?>>
                             </div>
-                            <div class="text-wrapper-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos perspiciatis iste unde eligendi inventore dicta, quo eius quidem consequuntur suscipit repellat animi culpa, incidunt officiis tempore pariatur ratione vel odio!</div>
+                            <div class="text-wrapper-2">
+                                <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos perspiciatis iste unde eligendi inventore dicta, quo eius quidem consequuntur suscipit repellat animi culpa, incidunt officiis tempore pariatur ratione vel odio!
+                                </p>
+                            </div>
                         </div>
                         <div class="link" data-id="0" data-image="https://img.freepik.com/free-photo/botanical-product-backdrop-palm-leaves_53876-147933.jpg?w=740&t=st=1695696336~exp=1695696936~hmac=161b4be6b2ee9a55de270dcee1cfcd86b5ce137a48af115866c46626b014acdc">
                             <a href="https://example.com" target="_blank" rel="noopener noreferrer">

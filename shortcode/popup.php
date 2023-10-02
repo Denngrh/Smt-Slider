@@ -1,5 +1,3 @@
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +47,7 @@
     <script>
         jQuery(document).ready(function($) {
             let slideIndex = 0;
+            let delayPerPopup = <?php echo $smt_slider->delay_per_popup ?>;
             showSlides(slideIndex);
 
             $(".caret-left").click(function() {
@@ -66,6 +65,15 @@
                 console.log(dot_num);
                 currentSlide(dot_num);
             });
+
+            function autoSlide() {
+                plusSlides(1);
+            }
+
+            if (delayPerPopup != 0 ) {
+                setInterval(autoSlide, delayPerPopup);
+            }
+
 
             function plusSlides(n) {
                 showSlides(slideIndex += n);
@@ -122,9 +130,7 @@
     $style3 = 'popup_component/css/popup_css_style_3.php';
 
     if (!empty($latest_data)){
-        if ($smt_slider->popup_style == 1){
-            include $style1;
-        } else if ($smt_slider->popup_style == 2){
+        if ($smt_slider->popup_style == 2){
             include $style2;
         } else if ($smt_slider->popup_style == 3) {
             include $style3;
@@ -134,7 +140,7 @@
     } else if ($smt_slider->popup_style == 2){
         include $style2;
     } else if ($smt_slider->popup_style == 3){
-        include '';
+        include $style3;
     } else {
         include 'popup_component/css/popup_css_style_1.php';
     }
@@ -148,19 +154,17 @@
     $html3 = 'popup_component/html/popup_html_style_3.php';
 
     if (!empty($latest_data)){
-        if ($smt_slider->popup_style == 1){
-            include $html1;
-        } else if ($smt_slider->popup_style == 2){
+        if ($smt_slider->popup_style == 2){
             include $html2;
         } else if ($smt_slider->popup_style == 3) {
             include $html3;
         } else {
-        include 'popup_component/default/style_1.php';
+            include $html1;
         }
     } else if ($smt_slider->popup_style == 2) {
         include 'popup_component/default/style_2.php';
     } else if ($smt_slider->popup_style == 3){
-        include '';
+        include 'popup_component/default/style_3.php';
     } else {
         include 'popup_component/default/style_1.php';
     }

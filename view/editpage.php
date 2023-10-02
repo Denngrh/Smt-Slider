@@ -63,12 +63,16 @@
                             <input readonly class="form-control-plaintext" id="type_text" type="text" value="<?php echo $data->type; ?>" style="width:70%;height:5px;">
                         </div>
                         <div id="delay_popup_div" class="form-group mt-3 d-flex justify-content-between" >
-                            <label class="ms-md-2"> Delay Popup</label>
-                            <input class="form-control" type="text" name="delay_popup" value="1000" style="width:70%;height:5px;">
+                            <label class="ms-md-2" title="Delay popup when user enter the page" >Delay Popup Show</label>
+                            <input class="form-control" type="text" name="delay_popup" value="1000" style="width:50%;height:5px;" title="Delay popup when user enter the page in milisecond">
+                        </div>
+                        <div id="delay_per_popup" class="form-group mt-3 d-flex justify-content-between" >
+                            <label class="ms-md-2" title="Delay popup from each popup" >Delay Per Popup</label>
+                            <input class="form-control" type="text" name="delay_per_popup" value="3000" style="width:50%;height:5px;" title="Delay popup from each popup in milisecond">
                         </div>
                         <div id="popup_style_div" class="form-group mt-3 d-flex justify-content-between" >
                             <label class="ms-md-2">Popup Style</label>
-                            <select name="popup_style">
+                            <select name="popup_style" style="width: 50%;">
                                 <option value="1">Style Pertama</option>
                                 <option value="2">Style Kedua</option>
                                 <option value="3">Style Ketiga</option>
@@ -80,9 +84,11 @@
                                 if (slider_type != 'Popup') {
                                     $('#delay_popup_div').remove();
                                     $('#popup_style_div').remove();
+                                    $('#delay_per_popup').remove();
                                 }
 
                                 $('#settingImageForm').find("input[name='delay_popup']").val(<?php echo ($data->delay_popup == 0) ? 1000 : $data->delay_popup ?>);
+                                $('#settingImageForm').find("input[name='delay_per_popup']").val(<?php echo $data->delay_per_popup ?>);
                                 $('#settingImageForm').find("select[name='popup_style']").val(<?php echo ($data->popup_style == 0) ? 1 : $data->popup_style ?>);
 
                             });
@@ -338,10 +344,17 @@
                             });
                             document.addEventListener("DOMContentLoaded", function () {
                             const sliderType = "<?php echo $datas->type; ?>"; // Mengambil jenis slider dari PHP
+                            const popupStyle = <?php echo $datas->popup_style; ?>;
 
                             // Mengambil elemen form border
                             var borderForm = document.getElementById("border_form");
-                            var tpye_popup = document.getElementById("border_form");
+                            var popupFrame = document.getElementById('accordionPanelsStayOpenExample6');
+                            var indicatorDots = document.getElementById('accordionPanelsStayOpenExample4')
+                            var buttonControl = document.getElementById('accordionPanelsStayOpenExample5');
+                            var btn_ctrl_bg = document.getElementById('btn_ctrl_bg');
+                            var bgcontrolinput = document.getElementById('bg_control_input');
+                            var bgcontrollabel = document.getElementById('bg_control_label');
+
 
                             // Fungsi untuk menampilkan atau menyembunyikan elemen form border
                             function toggleBorderForm() {
@@ -353,9 +366,18 @@
 
                                 // di bawah ini untuk type kondisi type popup
                                 if (sliderType === "Popup") {
-                                    tpye_popup.style.display = "none"; // sembunyikan elemen jika type popup
+                                    borderForm.style.display = "none"; // sembunyikan elemen jika type popup
+                                    bgcontrolinput.style.display = "none";
+                                    bgcontrollabel.style.display = "none";
+                                    btn_ctrl_bg.style.display = "none";
+                                    popupFrame.style.display = "block";
+                                    if (popupStyle !== 1){
+                                        indicatorDots.style.display = "none";
+                                        buttonControl.style.display = "none";
+                                    }
                                 } else {
-                                    tpye_popup.style.display = "block"; // tamilkan jika selain type popup
+                                    borderForm.style.display = "block"; // tamilkan jika selain type popup
+                                    popupFrame.style.display = "none";
                                 }
                             }
 
@@ -503,7 +525,7 @@
                                 <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse3" aria-expanded="false" aria-controls="panelsStayOpen-collapse3">
-                                    Button Text
+                                    CTA Button
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapse3" class="accordion-collapse collapse show">
@@ -618,7 +640,7 @@
                                             <label> Color </label>
                                             <input class="form-control" type="color" name ="control_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['control_color']; ?>">
                                         </div>
-                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" id="btn_ctrl_bg" >
                                             <label id="bg_control_label"> Background  </label>
                                             <input class="form-control" type="color" name ="control_bg" id="bg_control_input" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['control_bg']; ?>">
                                         </div>
@@ -638,6 +660,27 @@
                                         <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
                                             <label id="bg_control_label"> Border Radius  </label>
                                             <input class="form-control" type="input" name ="border_radius" id="bg_control_input" placeholder="color" style="width:40%;height:25px;" value="<?php echo $css_data['border_radius']; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="accordion my-3" id="accordionPanelsStayOpenExample7">
+                                <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse7" aria-expanded="false" aria-controls="panelsStayOpen-collapse7">
+                                    Close Button
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapse7" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                            <label> Color  </label>
+                                            <input class="form-control" type="color" name="close_btn_color" placeholder="color" style="width:40%;height:25px;" value="<?php echo $css_data['close_btn_color'] ?>">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                            <label> Size </label>
+                                            <input class="form-control" type="input" name="close_btn_size" placeholder="... px" style="width:40%;height:25px;" value="<?php echo $css_data['close_btn_size'] ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -1332,6 +1375,13 @@
     </script>
 
     <script>
+    <?php
+    // global $wpdb;
+    // $table_smt_css = $wpdb->prefix . 'smt_style';
+    // $data = $wpdb->get_row("SELECT * FROM $table_smt_css WHERE id_slider = $id ");
+    // $css_data = json_decode($data->style_data, true);
+    ?>
+
     document.addEventListener("DOMContentLoaded", function () {
         const borderOption = "<?php echo $css_data['border']; ?>";
 

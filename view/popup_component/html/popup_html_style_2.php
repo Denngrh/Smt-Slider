@@ -10,7 +10,9 @@
                             <<?php echo $css_data['title_size']; ?>><?php echo $data->title ?></<?php echo $css_data['title_size']; ?>>
                             </div>
                             <div class="text-wrapper-2">
+                                <p>
                                 <?php echo $data->desc ?>
+                                </p>
                             </div>
                         </div>
                         <div class="link" data-id="0" data-image="<?php echo wp_get_attachment_url($data->img);  ?>">

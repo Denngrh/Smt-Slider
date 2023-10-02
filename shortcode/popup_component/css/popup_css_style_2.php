@@ -6,12 +6,9 @@ $css_data = json_decode($data->style_data, true); {
 ?>
 
     <style>
-        .visibility {
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s ease;
+        p {
+            font-size: 16px !important;
         }
-
         .custom-popup {
             position: fixed;
             top: 0;
@@ -25,6 +22,9 @@ $css_data = json_decode($data->style_data, true); {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            opacity: 0;
+            transition: 0.3s ease;
         }
 
         .popup-content {
@@ -41,6 +41,7 @@ $css_data = json_decode($data->style_data, true); {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: row;
+            border-radius: <?php echo $css_data['border_radius'] ?>;
         }
 
         .percobaan {
@@ -70,7 +71,7 @@ $css_data = json_decode($data->style_data, true); {
             position: absolute;
             cursor: pointer;
             top: 16px;
-            left: 94%;
+            left: 90%;
             height: 24px;
             width: 24px;
             font-size: 24px;
@@ -83,8 +84,13 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
         }
 
+        .close-button > svg {
+            width: <?php echo $css_data['close_btn_size']?>;
+            height: <?php echo $css_data['close_btn_size']?>;
+        }
+
         .close-button>svg>path {
-            fill: <?php echo $css_data['control_color'] ?>;
+            fill: <?php echo $css_data['close_btn_color'] ?>;
         }
 
         .close-button:hover {
@@ -114,6 +120,15 @@ $css_data = json_decode($data->style_data, true); {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            padding-top: <?php echo $css_data['pd_top_btn'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_btn'] ?>;
+            padding-right: <?php echo $css_data['pd_right_btn'] ?>;
+            padding-left: <?php echo $css_data['pd_left_btn'] ?>;
+            margin-top: <?php echo $css_data['mg_top_btn'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_btn'] ?>;
+            margin-right: <?php echo $css_data['mg_right_btn'] ?>;
+            margin-left: <?php echo $css_data['mg_left_btn'] ?>;
         }
 
         .tombol:hover {
@@ -190,27 +205,48 @@ $css_data = json_decode($data->style_data, true); {
             padding: 8px 0;
         }
 
-        .text-wrapper-1 {
-            font-family: <?php echo $css_data['title_fam'] ?>;
-            color: <?php echo $css_data['title_color'] ?>;
-            font-size: 38px;
+        .text-wrapper-1 :first-child{
+            font-family: <?php echo $css_data['title_fam'] ?> !important;
+            color: <?php echo $css_data['title_color'] ?> !important;
+            font-size: <?php if ($css_data['title_size'] == 'h1') {
+                echo '32px';
+            } else if ($css_data['title_size']  == 'h2') {
+                echo '24px';
+            } else if ($css_data['title_size'] == 'h3') {
+                echo '18.72px';
+            } else if ($css_data['title_size']  == 'h4') {
+                echo '16px';
+            } else if ($css_data['title_size']  == 'h5') {
+                echo '13.28px';
+            } else {
+                echo '10.72px';
+            }
+            ?>;
             font-weight: 800;
-            padding: 8px 0;
+            padding-top: <?php echo $css_data['pd_top_title'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>;
+            padding-right: <?php echo $css_data['pd_right_title'] ?>;
+            padding-left: <?php echo $css_data['pd_left_title'] ?>;
+            margin-top: <?php echo $css_data['mg_top_title'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_title'] ?>;
+            margin-right: <?php echo $css_data['mg_right_title'] ?>;
+            margin-left: <?php echo $css_data['mg_left_title'] ?>;
         }
 
-        .text-wrapper-1 > :first-child {
-            line-height: normal !important;
-            margin: 0;
-
-        }
-
-        .text-wrapper-2 {
-            font-family: <?php echo $css_data['desc_fam'] ?>;
-            color: <?php echo $css_data['desc_color'] ?>;
+        .text-wrapper-2 :first-child {
+            font-family: <?php echo $css_data['desc_fam'] ?> !important;
+            color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
             font-size: 11px;
             overflow: hidden;
-
+            padding-top: <?php echo $css_data['pd_top_desc'] ?>;
+            padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?>;
+            padding-right: <?php echo $css_data['pd_right_desc'] ?>;
+            padding-left: <?php echo $css_data['pd_left_desc'] ?>;
+            margin-top: <?php echo $css_data['mg_top_desc'] ?>;
+            margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?>;
+            margin-right: <?php echo $css_data['mg_right_desc'] ?>;
+            margin-left: <?php echo $css_data['mg_left_desc'] ?>;
         }
 
         .dot {
@@ -257,12 +293,16 @@ $css_data = json_decode($data->style_data, true); {
             }
             .popup-text-container {
                 text-align: center;
-                top: 50%;
+                top: 40%;
             }
             .tombol {
                 position: relative;
                 width: 25%;
-                left: 30%;
+                left: 35%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .caret-right {
@@ -294,12 +334,43 @@ $css_data = json_decode($data->style_data, true); {
                 top: 16px;
             }
 
-            .text-wrapper-1 {
-                font-size: 24px;
-                padding-bottom: 8px;
+            .text-wrapper-1 :first-child{
+                padding-top: <?php echo $css_data['pd_top_title'] ?> !important;
+                padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>!important;
+                padding-right: <?php echo $css_data['pd_right_title'] ?> !important;
+                padding-left: <?php echo $css_data['pd_left_title'] ?> !important;
+                margin-top: <?php echo $css_data['mg_top_title'] ?> !important;
+                margin-bottom: <?php echo $css_data['mg_bottom_title'] ?> !important;
+                margin-right: <?php echo $css_data['mg_right_title'] ?> !important;
+                margin-left: <?php echo $css_data['mg_left_title'] ?> !important;
+                font-size: <?php if ($css_data['title_size'] == 'h1') {
+                    echo '32px';
+                } else if ($css_data['title_size']  == 'h2') {
+                    echo '24px';
+                } else if ($css_data['title_size'] == 'h3') {
+                    echo '18.72px';
+                } else if ($css_data['title_size']  == 'h4') {
+                    echo '16px';
+                } else if ($css_data['title_size']  == 'h5') {
+                    echo '13.28px';
+                } else {
+                    echo '10.72px';
+                }
+                ?>;
+
             }
-            .text-wrapper-1 {
-                padding-bottom: 8px;
+
+            .text-wrapper-2 {
+                padding-top: <?php echo $css_data['pd_top_desc'] ?> !important;
+                padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?> !important;
+                padding-right: <?php echo $css_data['pd_right_desc'] ?> !important;
+                padding-left: <?php echo $css_data['pd_left_desc'] ?> !important;
+                margin-top: <?php echo $css_data['mg_top_desc'] ?> !important;
+                margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?> !important;
+                margin-right: <?php echo $css_data['mg_right_desc'] ?> !important;
+                margin-left: <?php echo $css_data['mg_left_desc'] ?> !important;
+                height: 100px;
+                overflow: scroll;
             }
         }
     </style>

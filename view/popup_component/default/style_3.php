@@ -9,12 +9,12 @@
                             <<?php echo $css_data['title_size']; ?>>Temporibus maxime explicabo</<?php echo $css_data['title_size']; ?>>
                             </div>
                             <div class="text-wrapper-2">
-                                <p> 
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis maxime rerum non ex dolorum, consequuntur cumque praesentium natus eveniet distinctio possimus nostrum reiciendis repudiandae libero iure consequatur aperiam. Nobis, quia.
+                                <p>
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis maxime rerum non ex dolorum, consequuntur cumque praesentium natus eveniet distinctio possimus nostrum reiciendis repudiandae libero iure consequatur aperiam. Nobis, quia.
                                 </p>
                             </div>
                         </div>
-                        <div class="link" data-id="0" data-image="https://img.freepik.com/free-photo/central-park-autumn-midtown-skyline-lake-manhattan-new-york-city_649448-151.jpg?w=740&t=st=1695886354~exp=1695886954~hmac=6a3080cf12d9bd9c9f3115d1f8fe8718ee498ad170a8a0bbaa2316f13d34cd83">
+                        <div class="link" data-id="0" data-image="https://img.freepik.com/free-vector/bright-background-with-dots_1055-3132.jpg?w=740&t=st=1695916368~exp=1695916968~hmac=520325eacf9e3b0345f8bc82d8322d2302761afb6df204a181107383105999e2">
                             <a href="https://example.com" target="_blank" rel="noopener noreferrer">
                                 <div type="button" class="tombol">Click Here!</div>
                             </a>

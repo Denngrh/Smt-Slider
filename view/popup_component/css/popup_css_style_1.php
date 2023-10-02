@@ -7,6 +7,9 @@ $css_data = json_decode($data->style_data, true); {
 
     <style>
 
+        p {
+            font-size: 16px !important;
+        }
         .visibility {
             visibility: visible;
             transition: 0.3s ease;
@@ -76,8 +79,13 @@ $css_data = json_decode($data->style_data, true); {
             z-index: 10;
         }
 
+        .close-button > svg {
+            width: <?php echo $css_data['close_btn_size']?>;
+            height: <?php echo $css_data['close_btn_size']?>;
+        }
+
         .close-button>svg>path {
-            fill: <?php echo $css_data['control_color'] ?>;
+            fill: <?php echo $css_data['close_btn_color'] ?>;
         }
 
         .close-button:hover {
@@ -191,10 +199,9 @@ $css_data = json_decode($data->style_data, true); {
             padding: 8px 0;
         }
 
-        .text-wrapper-1 {
+        .text-wrapper-1 :first-child{
             font-family: <?php echo $css_data['title_fam'] ?> !important;
             color: <?php echo $css_data['title_color'] ?> !important;
-            font-size: 38px;
             font-weight: 800;
             padding-top: <?php echo $css_data['pd_top_title'] ?>;
             padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>;
@@ -204,13 +211,26 @@ $css_data = json_decode($data->style_data, true); {
             margin-bottom: <?php echo $css_data['mg_bottom_title'] ?>;
             margin-right: <?php echo $css_data['mg_right_title'] ?>;
             margin-left: <?php echo $css_data['mg_left_title'] ?>;
+            font-size: <?php if ($css_data['title_size'] == 'h1') {
+                echo '32px';
+            } else if ($css_data['title_size']  == 'h2') {
+                echo '24px';
+            } else if ($css_data['title_size'] == 'h3') {
+                echo '18.72px';
+            } else if ($css_data['title_size']  == 'h4') {
+                echo '16px';
+            } else if ($css_data['title_size']  == 'h5') {
+                echo '13.28px';
+            } else {
+                echo '10.72px';
+            }
+            ?>;
         }
 
-        .text-wrapper-2 {
+        .text-wrapper-2 :first-child{
             font-family: <?php echo $css_data['desc_fam'] ?> !important;
             color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
-            font-size: 11px;
             overflow: hidden;
             padding-top: <?php echo $css_data['pd_top_desc'] ?>;
             padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?>;
