@@ -17,7 +17,7 @@ $css_data = json_decode($data->style_data, true); {
 
         .custom-popup {
             position: relative;
-            top: 40%;
+            top: 30%;
             width: 100%;
             margin-left: auto;
             margin-right: auto;
@@ -72,8 +72,6 @@ $css_data = json_decode($data->style_data, true); {
             cursor: pointer;
             top: 16px;
             left: 90%;
-            /* height: 24px;
-            width: 24px; */
             font-size: 24px;
             background: none;
             border: none;
@@ -102,22 +100,17 @@ $css_data = json_decode($data->style_data, true); {
             font-family: <?php echo $css_data['btn_fam'] ?>;
             color: <?php echo $css_data['btn_color'] ?>;
             background-color: <?php echo $css_data['btn_bg'] ?>;
-            /* width: 59px;
-                height: 23px; */
             transition: 0.4s ease;
             font-weight: 400;
             border-radius: 4px;
             font-size: 11px;
-            width: 20%;
+            width: 5vw;
             height: 10%;
             text-align: center;
             letter-spacing: normal;
             line-height: normal;
             gap: 10px;
 
-            /* padding: 4px 12px;
-            margin-top: 1px; */
-            
             display: flex;
             justify-content: center;
             align-items: center;
@@ -298,7 +291,11 @@ $css_data = json_decode($data->style_data, true); {
             .tombol {
                 position: relative;
                 width: 25%;
-                left: 30%;
+                left: 35%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .caret-right {
@@ -330,12 +327,43 @@ $css_data = json_decode($data->style_data, true); {
                 top: 16px;
             }
 
-            .text-wrapper-1 {
-                font-size: 24px;
-                padding-bottom: 8px;
+            .text-wrapper-1 :first-child{
+                padding-top: <?php echo $css_data['pd_top_title'] ?> !important;
+                padding-bottom: <?php echo $css_data['pd_bottom_title'] ?>!important;
+                padding-right: <?php echo $css_data['pd_right_title'] ?> !important;
+                padding-left: <?php echo $css_data['pd_left_title'] ?> !important;
+                margin-top: <?php echo $css_data['mg_top_title'] ?> !important;
+                margin-bottom: <?php echo $css_data['mg_bottom_title'] ?> !important;
+                margin-right: <?php echo $css_data['mg_right_title'] ?> !important;
+                margin-left: <?php echo $css_data['mg_left_title'] ?> !important;
+                font-size: <?php if ($css_data['title_size'] == 'h1') {
+                    echo '32px';
+                } else if ($css_data['title_size']  == 'h2') {
+                    echo '24px';
+                } else if ($css_data['title_size'] == 'h3') {
+                    echo '18.72px';
+                } else if ($css_data['title_size']  == 'h4') {
+                    echo '16px';
+                } else if ($css_data['title_size']  == 'h5') {
+                    echo '13.28px';
+                } else {
+                    echo '10.72px';
+                }
+                ?>;
+
             }
-            .text-wrapper-1 {
-                padding-bottom: 8px;
+
+            .text-wrapper-2 :first-child {
+                padding-top: <?php echo $css_data['pd_top_desc'] ?> !important;
+                padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?> !important;
+                padding-right: <?php echo $css_data['pd_right_desc'] ?> !important;
+                padding-left: <?php echo $css_data['pd_left_desc'] ?> !important;
+                margin-top: <?php echo $css_data['mg_top_desc'] ?> !important;
+                margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?> !important;
+                margin-right: <?php echo $css_data['mg_right_desc'] ?> !important;
+                margin-left: <?php echo $css_data['mg_left_desc'] ?> !important;
+                height: 100px;
+                overflow: scroll;
             }
         }
     </style>

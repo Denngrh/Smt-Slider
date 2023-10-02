@@ -237,11 +237,10 @@ $css_data = json_decode($data->style_data, true); {
             ?>;
         }
 
-        .text-wrapper- :first-child {
+        .text-wrapper-2 :first-child {
             font-family: <?php echo $css_data['desc_fam'] ?> !important;
             color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
-            overflow: hidden;
             padding-top: <?php echo $css_data['pd_top_desc'] ?>;
             padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?>;
             padding-right: <?php echo $css_data['pd_right_desc'] ?>;
@@ -361,7 +360,7 @@ $css_data = json_decode($data->style_data, true); {
 
             }
 
-            .text-wrapper-2 {
+            .text-wrapper-2 :first-child {
                 padding-top: <?php echo $css_data['pd_top_desc'] ?> !important;
                 padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?> !important;
                 padding-right: <?php echo $css_data['pd_right_desc'] ?> !important;

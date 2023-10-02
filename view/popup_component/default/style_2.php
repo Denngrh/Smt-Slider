@@ -10,7 +10,7 @@
                             </div>
                             <div class="text-wrapper-2">
                                 <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis maxime rerum non ex dolorum, consequuntur cumque praesentium natus eveniet distinctio possimus nostrum reiciendis repudiandae libero iure consequatur aperiam. Nobis, quia.
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis maxime rerum non ex dolorum, consequuntur cumque praesentium natus eveniet distinctio possimus nostrum 
                                 </p>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             </div>
                             <div class="text-wrapper-2">
                                 <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum molestiae eligendi numquam dolore voluptas et repellendus velit quam voluptatum explicabo dignissimos aut quia eius fugit, deserunt blanditiis expedita porro autem.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum molestiae eligendi numquam dolore voluptas et repellendus velit quam voluptatum explicabo dignissimos aut
                                 </p>
                             </div>
                         </div>

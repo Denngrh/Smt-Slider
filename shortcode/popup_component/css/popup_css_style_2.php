@@ -102,16 +102,15 @@ $css_data = json_decode($data->style_data, true); {
             font-family: <?php echo $css_data['btn_fam'] ?>;
             color: <?php echo $css_data['btn_color'] ?>;
             background-color: <?php echo $css_data['btn_bg'] ?>;
-            /* width: 59px;
-                height: 23px; */
+
             transition: 0.4s ease;
             font-weight: 400;
-            padding: 4px 12px;
+
             border-radius: 4px;
             font-size: 11px;
-            width: 15%;
+            width: 5vw;
             height: 10%;
-            margin-top: 1px;
+
             text-align: center;
             letter-spacing: normal;
             line-height: normal;
@@ -237,8 +236,6 @@ $css_data = json_decode($data->style_data, true); {
             font-family: <?php echo $css_data['desc_fam'] ?> !important;
             color: <?php echo $css_data['desc_color'] ?> !important;
             line-height: normal;
-            font-size: 11px;
-            overflow: hidden;
             padding-top: <?php echo $css_data['pd_top_desc'] ?>;
             padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?>;
             padding-right: <?php echo $css_data['pd_right_desc'] ?>;
@@ -247,6 +244,7 @@ $css_data = json_decode($data->style_data, true); {
             margin-bottom: <?php echo $css_data['mg_bottom_desc'] ?>;
             margin-right: <?php echo $css_data['mg_right_desc'] ?>;
             margin-left: <?php echo $css_data['mg_left_desc'] ?>;
+            
         }
 
         .dot {
@@ -360,7 +358,7 @@ $css_data = json_decode($data->style_data, true); {
 
             }
 
-            .text-wrapper-2 {
+            .text-wrapper-2 :first-child {
                 padding-top: <?php echo $css_data['pd_top_desc'] ?> !important;
                 padding-bottom: <?php echo $css_data['pd_bottom_desc'] ?> !important;
                 padding-right: <?php echo $css_data['pd_right_desc'] ?> !important;
