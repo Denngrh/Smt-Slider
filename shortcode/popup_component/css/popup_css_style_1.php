@@ -111,7 +111,7 @@ $css_data = json_decode($data->style_data, true); {
             font-weight: 400;
             padding: 4px 12px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: <?php echo $css_data['btn_font_size']; ?>;
             width: 15%;
             margin-top: 1px;
             text-align: center;

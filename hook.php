@@ -103,10 +103,10 @@ function insert_slide_callback()
                 'mg_bottom_desc' => '0',
                 'mg_right_desc' => '0',
                 'mg_left_desc' => '0',
-                'pd_top_btn' => '0',
-                'pd_bottom_btn' => '0',
-                'pd_right_btn' => '0',
-                'pd_left_btn' => '0',
+                'pd_top_btn' => '6px',
+                'pd_bottom_btn' => '6px',
+                'pd_right_btn' => '6px',
+                'pd_left_btn' => '6px',
                 'mg_top_btn' => '0',
                 'mg_bottom_btn' => '0',
                 'mg_right_btn' => '0',
@@ -115,6 +115,7 @@ function insert_slide_callback()
                 'close_btn_color' => '#030303',
                 'close_btn_size' => '16px',
                 'delay_per_popup' => '3000',
+                'btn_font_size' => '12px',
             );
 
             $json_style_data = json_encode($style_data);
@@ -264,6 +265,8 @@ function insert_img_callback() {
         $close_btn_color = sanitize_text_field($_POST['close_btn_color']);
         $close_btn_size = sanitize_text_field($_POST['close_btn_size']);
 
+        $btn_font_size = sanitize_text_field($_POST['btn_font_size']);
+
         // ---
 
         $get_id_css = isset($_POST['get_id_css']) ? $_POST['get_id_css'] : null;
@@ -314,6 +317,7 @@ function insert_img_callback() {
             'border_radius' => $border_radius,
             'close_btn_color' => $close_btn_color,
             'close_btn_size' => $close_btn_size,
+            'btn_font_size' => $btn_font_size,
         );
 
         // Konversi data CSS menjadi JSON

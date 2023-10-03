@@ -103,8 +103,8 @@ $css_data = json_decode($data->style_data, true); {
             transition: 0.4s ease;
             font-weight: 400;
             border-radius: 4px;
-            font-size: 11px;
-            width: 5vw;
+            font-size: <?php echo $css_data['btn_font_size']; ?>;
+            width: fit-content;
             height: 10%;
             text-align: center;
             letter-spacing: normal;

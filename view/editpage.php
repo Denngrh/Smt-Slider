@@ -541,6 +541,10 @@
                                             </select>
                                         </div>
                                         <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
+                                            <label>  Font Size </label>
+                                            <input class="form-control" type="input" name="btn_font_size" style="width:50%;height:25px;" value="<?php echo $css_data['btn_font_size']; ?>">
+                                        </div>
+                                        <div class="form-group px-md-4 px-4  mt-2 d-flex justify-content-between" >
                                             <label>  Color </label>
                                             <input class="form-control" type="color" name ="btn_color" placeholder="color" style="width:50%;height:25px;" value="<?php echo $css_data['btn_color']; ?>">
                                         </div>
